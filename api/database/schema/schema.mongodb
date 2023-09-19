@@ -1,0 +1,518 @@
+use("db_campus_Library");
+db.createCollection("counters");
+db.counters.insertMany([
+    {_id : "UserId", sequence_value : 0},
+    {_id : "ProductId", sequence_value : 0},
+    {_id : "AdminId", sequence_value : 0},
+    {_id : "Super_AdminId", sequence_value : 0},
+    {_id : "RolsId", sequence_value : 0},
+
+]);
+/**
+ * ! rols
+ */
+use("db_campus_Library");
+db.createCollection("Rols", {
+    capped: true,
+    size: 3000,
+    max: 10,
+    validator:{
+        $jsonSchema:{
+            bsonType: "object",
+            additionalProperties: false,
+            required : ['_id', 'name_rol','rol_access'],
+            properties:{
+                _id:{
+                    bsonType: 'int',
+                    description : "El ID_ROL es un parametro obligatorio y debe ser un entero"
+                },
+                name_rol:{  
+                    bsonType: 'string',
+                    description : "El NOMBRE_ROL es un parametro obligatorio y debe ser un string"
+                },
+                description_rol:{  
+                    bsonType: 'string',
+                    description : "El DESCRIPCION_ROL es un parametro obligatorio y debe ser un string"
+                },
+                rol_access:{  
+                    bsonType: 'object',
+                    description: "Ingrese los endpoints a los que tiene acceso, este debe ser un objeto de parametros string",
+                    properties:{
+                        "endpoint":{
+                            bsonType: 'object',
+                            description: "Ingrese los metodos este debe ser un objeto de parametros string",
+                            properties:{
+                                "method":{
+                                    bsonType: "array",
+                                    description: "Ingrese las versiones permitidos por este rol, debe ser un array de string con el numero de la version",
+                                    items: {
+                                        bsonType: "string",
+                                        description: "Ingrese la version autorizada, este debe ser de tipo string",
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+})
+/**
+ * ! admin
+ */
+use("db_campus_Library");
+db.createCollection("Admin", {
+    capped: true,
+    size: 4000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'full_name', 'identification', 'email', 'password'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del admin"
+                },
+                full_name: {
+                    bsonType: 'string',
+                    minLength: 3,
+                    description: "el nombre debe contener minimo 3 caracteres, y es obligatorio"
+                },
+                identification: {
+                    bsonType: 'string',
+                    description: "la identificacion es obligatoria"
+                },
+                email: {
+                    bsonType: 'string',
+                    description: 'El email es obligatorio y debe ser válido',
+                    pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                },
+                password: {
+                    bsonType: 'string',
+                    minLength: 5,
+                    description: "la contraseña debe contener minimo 5 caracteres, y es obligatorio"
+                },
+                rol : {
+                    bsonType: 'number',
+                    description: 'el rol es obligatorio'
+                }
+            }
+        }
+    }
+})
+/**
+ * ! User
+ */
+use("db_campus_Library");
+db.createCollection("User", {
+    capped: true,
+    size: 6000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'username', 'identification', 'email', 'password','phone', 'team', 'rol'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del usuario"
+                },
+                username: {
+                    bsonType: 'string',
+                    minLength: 3,
+                    description: "el nombre debe contener minimo 3 caracteres, y es obligatorio"
+                },
+                identification : {
+                    bsonType: 'string',
+                    description: "el numero de identificacion es obligatorio"
+                },
+                email: {
+                    bsonType: 'string',
+                    description: 'El email es obligatorio y debe ser válido',
+                    pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                }
+                ,
+                password: {
+                    bsonType: 'string',
+                    minLength: 5,
+                    description: "la contraseña debe contener minimo 5 caracteres, y es obligatorio"
+                },
+                phone: {
+                    "bsonType": "string",
+                    "description": "El teléfono es obligatorio y debe cumplir con ciertas restricciones",
+                    "pattern": "[+\\-0-9\\s]+$"
+                },
+                team : {
+                    "bsonType" : "string",
+                    "description" : "el team al que pertenece es obligatorio"
+                },
+                rol : {
+                    bsonType: 'number',
+                    description: 'el rol es obligatorio'
+                }
+            }
+        }
+    }
+});
+/**
+ * ! Super_Admin
+ */
+use("db_campus_Library");
+db.createCollection("Super_Admin", {
+    capped: true,
+    size: 6000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'full_name', 'identification', 'email', 'password','rol'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del super admin"
+                },
+                full_name: {
+                    bsonType: 'string',
+                    minLength: 3,
+                    description: "el nombre debe contener minimo 3 caracteres, y es obligatorio"
+                },
+                identification : {
+                    bsonType: 'string',
+                    description: "el numero de identificacion es obligatorio"
+                },
+                email: {
+                    bsonType: 'string',
+                    description: 'El email es obligatorio y debe ser válido',
+                    pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                }
+                ,
+                password: {
+                    bsonType: 'string',
+                    minLength: 5,
+                    description: "la contraseña debe contener minimo 5 caracteres, y es obligatorio"
+                },
+                rol : {
+                    bsonType: 'number',
+                    description: 'el rol es obligatorio'
+                }
+            }
+        }
+    }
+});
+/**
+ * ! Product
+ */
+use("db_campus_Library");
+db.createCollection("Product", {
+    capped: true,
+    size: 8000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'title', 'description', 'type', 'status'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del producto"
+                },
+                title: {
+                    bsonType: 'string',
+                    minLength: 3,
+                    description: "el titulo debe contener minimo 3 caracteres, y es obligatorio"
+                },
+                description : {
+                    bsonType: 'string',
+                    description: "la descripcion es obligatoria"
+                },
+                type: {
+                    bsonType: "string",
+                    items: {
+                        "enum": ["libros", "audifonos"]
+                    },
+                    description: "El tipo debe ser 'libros' o 'audifonos'"
+                },
+                status: {
+                    bsonType: 'string',
+                    description: "el estado del producto es obligatorio"
+                },
+                start_date : {
+                    bsonType: 'string',
+                    description: 'debe ser en formato fecha'
+                },
+                final_date : {
+                    bsonType: 'string',
+                    description: 'debe ser en formato fecha'
+                },
+                user_identification : {
+                    bsonType: 'int',
+                    description: 'id del usuario referenciado'
+                }
+            }
+        }
+    }
+});
+
+
+
+
+
+
+/**
+ * ? encontrar los productos que esten disponibles
+ */
+use("db_campus_Library");
+db.Product.aggregate([
+    {
+        $match: {
+            status : 'disponible'
+        }
+    }
+])
+/**
+ * ? encontrar los productos que esten disponibles de la categoria libros
+ */
+use("db_campus_Library");
+db.Product.find({
+    status: "disponible",
+    type: "libros"
+})
+
+/**
+ * ? encontrar los productos que esten prestados con la informacion del usuario
+ */
+use("db_campus_Library");
+db.Product.aggregate([
+    {
+    $match: {
+        status: "prestado",
+    }
+    },
+    {
+    $lookup: {
+        from: "User",
+        localField: "user_identification",
+        foreignField: "_id",
+        as: "user"
+    }
+    },
+    {
+    $project: {
+        _id: 1,
+        title: 1,
+        description: 1,
+        type: 1,
+        status: 1,
+        user_identification: 1,
+        start_date : 1,
+        final_date : 1,
+        user: {
+        username: 1,
+        identification: 1,
+        email : 1,
+        phone : 1,
+        team : 1
+        }
+    }
+    }
+])
+/**
+ * ? insertar un nuevo producto
+ */
+use("db_campus_Library");
+db.Product.insertOne({
+    _id: Number(siguienteId("Product")),
+    title: "libro nuevo",
+    description: "libro en excelentes condiciones",
+    type: "libros",
+    status: "disponible"
+})
+use("db_campus_Library");
+function siguienteId(coleccion) {
+    const sequenceDocument = db.counters.findOneAndUpdate(
+        { _id: `${coleccion}Id` },
+        { $inc: { sequence_value: 1 } },
+        { returnDocument: "after" }
+    );
+    return sequenceDocument.sequence_value;
+};
+/**
+ * ? insertar un nuevo producto en condicion de prestado
+ */
+use("db_campus_Library");
+const user_id = "1096065071"
+db.Product.insertOne({
+    _id: Number(siguienteId("Product")),
+    title: "libro nuevo prestado 5",
+    description: "libro en excelentes condiciones",
+    type: "libros",
+    status: "prestado",
+    start_date : '2023-09-20',
+    final_date : '2023-10-30',
+    user_identification: Number(db.User.findOne({
+        identification: user_id
+    })._id)
+})
+/**
+ * ? listar el historial de productos prestados por un usuario en especifico de la fecha mas reciente hacia atras
+ */
+use("db_campus_Library");
+const user_id2 = "1096065071"
+db.Product.aggregate([
+    {
+        $match: {
+            status: "prestado",
+            user_identification: Number(db.User.findOne({
+                identification: user_id2
+            })._id)
+        }
+    },
+    {
+        $lookup: {
+            from: "User",
+            localField: "user_identification",
+            foreignField: "_id",
+            as: "user"
+        }
+    },
+    {
+        $sort: {
+            "final_date": -1
+        }
+    },
+    {
+        $project: {
+            _id: 1,
+            title: 1,
+            description: 1,
+            type: 1,
+            status: 1,
+            user_identification: 1,
+            start_date : 1,
+            final_date : 1,
+            user: {
+            username: 1,
+            identification: 1,
+            email : 1,
+            phone : 1,
+            team : 1
+            }
+        }
+    }
+])
+/**
+ * ? encontrar los productos con final_date mas cercanos a la fecha actual con la informacion del user
+ */
+use("db_campus_Library");
+db.Product.aggregate([
+    {
+        $match: {
+            status: "prestado"
+        }
+    },
+    {
+        $sort: {
+            final_date: -1
+        }   
+    },
+    {
+        $lookup: {
+            from: "User",
+            localField: "user_identification",
+            foreignField: "_id",
+            as: "user"
+        }
+    },
+    {
+        $project: {
+            _id: 1,
+            title: 1,
+            description: 1,
+            type: 1,
+            status: 1,
+            user_identification: 1,
+            start_date : 1,
+            final_date : 1,
+            user: {
+            username: 1,
+            identification: 1,
+            email : 1,
+            phone : 1,
+            team : 1
+            }
+        }
+    },
+    {
+        $limit: 5
+    }
+])
+/**
+ * ? actualizar un status de producto de prestado a entregado por medio del id
+ */
+use("db_campus_Library");
+const product_id = 5;
+db.Product.updateOne({
+    _id: product_id
+}, {
+    $set: {
+        status: "entregado"
+    }
+});
+/**
+ * ? actualizar un status de producto de disponible a agotado por medio del _id
+ */
+use("db_campus_Library");
+const product_id2 = 4;
+db.Product.updateOne({
+    _id: product_id2
+}, {
+    $set: {
+        status: "agotado"
+    }
+});
+/**
+ * ? listar los productos libros con status entregado
+ */
+use("db_campus_Library");
+db.Product.find({
+    status: "entregado",
+    type: "libros"
+})
+/**
+ * ? agregar un nuevo Admin
+ */
+use("db_campus_Library");
+db.Admin.insertOne(
+    {
+        _id: Number(siguienteId("Admin")),
+        full_name: "admin nuevo",
+        identification : "2222222",
+        email: "adminnuevo@gmail.com",
+        password: "jose1005",
+        rol : 1
+    }
+)
+/**
+ * ? eliminar un Admin por medio de la cedula
+ */
+use("db_campus_Library");
+const deleteId = "2222222"
+const admin = db.Admin.findOneAndDelete({
+    identification: deleteId
+})
+/**
+ * ? listar todos los users
+ */
+use("db_campus_Library");
+db.User.find().projection({
+    rol : 0
+})
+/**
+ * ? listar user por medio del la cedula
+ */
+use("db_campus_Library");
+db.User.find({ identification: "1096065071" });
