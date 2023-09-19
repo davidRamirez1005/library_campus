@@ -1,0 +1,186 @@
+/**
+ * ? funcion para auto incremento del Id
+*/
+use("db_campus_Library");
+function siguienteId(coleccion) {
+    const sequenceDocument = db.counters.findOneAndUpdate(
+        { _id: `${coleccion}Id` },
+        { $inc: { sequence_value: 1 } },
+        { returnDocument: "after" }
+    );
+    return sequenceDocument.sequence_value;
+};
+/**
+ * ! rols
+ */
+use("db_campus_Library");
+db.Rols.insertMany([{
+    _id: Number(siguienteId("Rols")),
+    name_rol: "Admin",
+    description_rol: "Rol de administrador con acceso a usuarios y productos, puede agregar nuevo producto",
+    rol_access:{
+        "User": {
+            "get":["1.0.0", "1.1.0"],
+            "post": ["1.0.0"]
+        },
+        "Product": {
+            "get":["1.0.0","1.1.0","1.0.1","1.2.0"],
+            "post": ["1.0.0"]
+        },
+    }
+    },
+    {
+    _id: Number(siguienteId("Rols")),
+    name_rol: "User",
+    description_rol: "Rol de usuario con acceso a la coleccion producto",
+    rol_access: {
+        "User": {
+            "post": ["1.0.0"]
+        },
+        "Product": {
+            "get": ["1.1.0","1.0.0"],
+            "post": ["1..0"]
+        }
+    }
+    },
+    {
+    _id: Number(siguienteId("Rols")),
+    name_rol: "Super_Admin",
+    description_rol: "Rol con acceso a todas las consultas y puede agregar, actualizar y eliminar'",
+    rol_access: {
+        "User": {
+            "get": ["1.0.0", "1.1.0"],
+            "post": ["1.0.0"]
+        },
+        "Product":{
+            "get": ["1.0.0","1.1.0","1.0.1","1.2.0"],
+            "post": ["1.0.0", "1.1.0" ,"1.2.0"],
+            "put": ["1.0.0","1.1.0"],
+            "delete": ["1.0.0"]
+        },
+        "Admin": {
+            "post": ["1.0.0"],
+            "delete" : ["1.0.0"]
+        },
+    }
+}]);
+/**
+ * ! Super Admin
+ */
+use("db_campus_Library");
+db.Super_Admin.insertMany([
+    {
+        _id: Number(siguienteId("Super_Admin")),
+        full_name: "jose david ramirez",
+        identification : "1097910199",
+        email: "JDavidRamirez@gmail.com",
+        password: "jose@1005",
+        rol : 3
+    },
+    {
+        _id: Number(siguienteId("Super_Admin")),
+        full_name: "Campuslands",
+        identification : "123456789",
+        email: "campusland@gmail.com",
+        password: "campus2023",
+        rol : 3
+    }
+]);
+/**
+ * ! admin
+ */
+use("db_campus_Library");
+db.Admin.insertMany([
+    {
+        _id: Number(siguienteId("Admin")),
+        full_name: "miguel",
+        identification : "98765432",
+        email: "miguel@gmail.com",
+        password: "admin1",
+        rol : 1
+    },
+    {
+        _id: Number(siguienteId("Admin")),
+        full_name: "pedro",
+        identification : "109890890",
+        email: "pedro@gmail.com",
+        password: "admin2",
+        rol : 1
+    }
+]);
+/**
+ * ! User
+ */
+use("db_campus_Library");
+db.User.insertMany([
+    {
+        _id: Number(siguienteId("User")),
+        username: "juan diego ramirez",
+        identification : "1096065071",
+        email: "juandiegod@example.com",
+        password: "secreto",
+        phone: "306051789",
+        team: "M3",
+        rol : 2
+    },
+        {
+        _id: Number(siguienteId("User")),
+        username: "pepito perez",
+        identification : "1098234098",
+        email: "pepito@example.com",
+        password: "pepito123",
+        phone: "314051789",
+        team: "M3",
+        rol : 2
+    },
+    {
+        _id: Number(siguienteId("User")),
+        username: "maria gonzalez",
+        identification : "1097890678",
+        email: "maria@example.com",
+        password: "contraseña123",
+        phone: "310051789",
+        team: "M1",
+        rol : 2
+    }
+]);
+/**
+ * ! Product
+ */
+use("db_campus_Library");
+db.Product.insertMany([
+    {
+        _id: Number(siguienteId("Product")),
+        title: "libro camino al exito",
+        description : 'libro nuevo',
+        type: "libros",
+        status: "disponible"
+    },
+        {
+        _id: Number(siguienteId("Product")),
+        title: "libro emprendedor",
+        description : 'libro en excelentes condiciones',
+        type: "libros",
+        status: "prestado",
+        start_date : ('2023-09-16'),
+        final_date : ('2023-09-20'),
+        user_identification : 1   
+    },
+    {
+        _id: Number(siguienteId("Product")),
+        title: "libro emprendedor 2",
+        description : 'libro en excelentes condiciones',
+        type: "libros",
+        status: "reservado",
+        start_date : ('2023-09-18'),
+        final_date : ('2023-09-23'),
+        user_identification : 3   
+    },
+    {
+        _id: Number(siguienteId("Product")),
+        title: "libro camino al exito 2",
+        description : 'libro nuevo 2',
+        type: "libros",
+        status: "disponible"
+    }
+]);
