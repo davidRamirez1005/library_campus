@@ -1,8 +1,33 @@
-# React + Vite
+{
+    "ROL": "Super_Admin",
+    "ROL_EMAIL": "JDavidRamirez@gmail.com",
+    "ROL_PASSWORD":  "jose@1005"
+}
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+{
+        "full_name": "admin nuevo",
+        "identification" : "2222222",
+        "email": "adminnuevo@gmail.com",
+        "password": "jose1005",
+        "rol" : 1
+}
 
-Currently, two official plugins are available:
+{
+        "username": "usuario nuevo",
+        "identification" : "44444444",
+        "email": "nuevo@example.com",
+        "password": "secreto",
+        "phone": "3214567890",
+        "team": "J2",
+        "rol" : 2
+}
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+{
+        "title": "libro emprendedor 2",
+        "description" : "en excelentes condiciones",
+        "type": "libros",
+        "status": "prestado",
+        "start_date" : "2023-09-16",
+        "final_date" : "2023-09-20",
+        "user_identification" : "1098234098"   
+}
