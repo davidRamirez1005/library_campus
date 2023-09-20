@@ -10,7 +10,6 @@ export default function Login() {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    let [ROL, getRol] = useState('Super_Admin');
     let [ROL_EMAIL, getMail] = useState('JDavidRamirez@gmail.com');
     let [ROL_PASSWORD, getCon] = useState('jose@1005');
     let [token, setToken] = useState('');
@@ -26,7 +25,7 @@ const login = async () => {
         const response = await fetch('http://127.10.10.10:5050/login', {
         method: 'POST',
         headers: header,
-        body: JSON.stringify({ ROL, ROL_EMAIL, ROL_PASSWORD }),
+        body: JSON.stringify({ ROL_EMAIL, ROL_PASSWORD }),
         });
 
         if (!response.ok) {
@@ -57,12 +56,6 @@ return (
 <div>
     <Menu />
     <br /><br />
-    <input
-        type="text"
-        value={ROL}
-        onChange={(e) => getRol(e.target.value)}
-        placeholder="rol"
-    />
     <input
         type="text"
         value={ROL_EMAIL}
