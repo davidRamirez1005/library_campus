@@ -26,7 +26,7 @@ const validationAdmin = [
     ];
 
 const validationLogin = [
-    check('ROL').isIn(["Super_Admin", "Admin", "User"]).withMessage("Debe ser un estado valido es decir, 'Super_Admin', 'Admin', 'User'"),
+    // check('ROL').isIn(["Super_Admin", "Admin", "User"]).withMessage("Debe ser un estado valido es decir, 'Super_Admin', 'Admin', 'User'"),
     check('ROL_EMAIL').isEmail().withMessage('el ROL_EMAIL es obligatorio y debe ser string ademas debe cumplir las caracteristicas de un e-mail'),
     check('ROL_PASSWORD').isString().withMessage('la ROL_PASSWORD es obligatoria y debe ser string'),
 ];
