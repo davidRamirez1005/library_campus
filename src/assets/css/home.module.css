@@ -1,0 +1,14 @@
+.container {
+    background-color: #fff;
+    padding: 10px;
+  }
+  
+  .titulo {
+    color: red;
+    font-size: 20px;
+  }
+  
+  p {
+    color: blue;
+    font-size: 16px;
+  }
