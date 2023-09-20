@@ -5,7 +5,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': '/src'
+      '@': '/src',
+      'react-bootstrap': 'react-bootstrap/esm'
     }
   }
 });
