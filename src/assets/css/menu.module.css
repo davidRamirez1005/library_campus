@@ -1,0 +1,30 @@
+.container{
+    background-color: #144272;
+    z-index: 1000;
+    height: 6vh;
+}
+
+ul{
+    margin : 0 !important;
+    display: flex;
+    flex-direction: row;
+    right: 0;
+    align-items: center;
+    justify-content: flex-end;
+    gap : 3.2rem;
+    padding-right: 6%;
+}
+.logo{
+    display: flex;
+    padding-left: 3% !important;
+    padding-top: 0.5% !important;
+}
+li {
+    display: flex;
+    padding: 0.5rem;
+    align-self: center;
+    font-weight: bolder;
+    color: #070530;
+    text-decoration: none;
+
+}
