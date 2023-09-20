@@ -32,7 +32,7 @@ const generateToken = async(req, res) => {
         .setIssuedAt()
         .setExpirationTime('5h')
         .sign(encoder.encode(process.env.JWT_SECRET));
-    res.send({"Token":jwtConstructor});
+    res.send({"Token":jwtConstructor, "result": result});
 }
     
 const validateToken = async (token) => {
