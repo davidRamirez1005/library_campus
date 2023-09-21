@@ -5,14 +5,13 @@ import styles from './assets/css/container.module.css'
 import rocket from './assets/img/rocket.png'
 import planet from './assets/img/planet4.png'
 
-
 export default function Index() {
   return (
     <div style={{ height: '100%' }}>
-      <div className="row">
       <Menu />
+      <div className="row" >
       <br />
-        <div className="col-4">
+        <div className="col-4" style={{display:"flex", justifyContent : "center", marginTop : "4rem"}}>
           <div className="form">
             <Login/>
           </div>

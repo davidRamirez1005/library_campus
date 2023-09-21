@@ -11,8 +11,8 @@ function Menu() {
         <nav className={`container-fluid ${menu.container} nav`}>
             <div className="row">
                 <div className={`col-3 ${menu.logo}`}>
-                    <a href="https://vitejs.dev" target="_blank">
-                        <img src={CampusLogo}  alt="campus logo" style={{ width: 100 }}/>
+                    <a href="https://vitejs.dev" target="_blank" style={{display : "flex", alignItems : "center"}}>
+                        <img src={CampusLogo}  alt="campus logo" style={{ width: 100}}/>
                     </a>
                 </div>
                 <div className="col-9">

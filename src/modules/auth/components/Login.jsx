@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import Loading from '@/shared/Loading';
 import { useAuth } from '../context/auth';
-
+import style from '../assets/css/login.module.css'
 
 
 export default function Login() {
@@ -55,33 +55,37 @@ const login = async () => {
 return (
 <div>
     <br /><br />
-    <input
-        type="text"
-        value={ROL_EMAIL}
-        onChange={(e) => getMail(e.target.value)}
-        placeholder="email"
-    />
-    <input
-        type="text"
-        value={ROL_PASSWORD}
-        onChange={(e) => getCon(e.target.value)}
-        placeholder="contraseña"
-    />
-
-    <br />
-    <br />
-    <button value="login" onClick={login} >
-        ENVIAR
-    </button>
-    {isLoading && <Loading />}
-    <div className="row">
-        <div className="col">
-
-        </div>
-        <div className="col">
-
-        </div>
+    
+<div className={style.form}>
+    <div className={style.form_title}><span>Inicia sesión</span></div>
+    <div className={style.title_2}><span>CAMPUS</span></div>
+    <div className={style.input_container}>
+        <input className={style.input_email} type="email" value={ROL_EMAIL}
+        onChange={(e) => getMail(e.target.value)} placeholder="Email" />
+        <span> </span>
     </div>
+
+    <section className={style.bg_stars}>
+        <span className={style.star}></span>
+        <span className={style.star}></span>
+        <span className={style.star}></span>
+        <span className={style.star}></span>
+    </section>
+
+    <div className={style.input_container}>
+        <input className={style.input_pwd} type="password" value={ROL_PASSWORD}
+        onChange={(e) => getCon(e.target.value)} placeholder="contraseña" />
+    </div>
+    <button  className={style.submit} value="login" onClick={login}>
+        <span className={style.sign_text}>ENVIAR</span>
+    </button>
+    <p className={style.signup_link}>
+        No registrado?
+        <a href="" className={style.up}> Registrarse!</a>
+    </p>
+</div>
+{isLoading && <Loading />}
+
 
 </div>
 );

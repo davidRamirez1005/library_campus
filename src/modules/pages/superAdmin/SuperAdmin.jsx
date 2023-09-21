@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../../auth/context/auth';
+import { useAuth } from '../../auth/context/auth';
 import { Menu } from '@/shared/Menu';
 
 

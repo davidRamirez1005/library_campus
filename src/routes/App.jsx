@@ -4,7 +4,7 @@ import NotFound from '@/modules/auth/components/NotFound';
 import { AuthProvider, AuthRoute } from '@/modules/auth/context/auth'
 import { Logout } from '@/modules/auth/components/Logout';
 import Home from '../modules/home/Home';
-import SuperAdmin from '../modules/pages/superAdmin/components/SuperAdmin';
+import SuperAdmin from '../modules/pages/superAdmin/SuperAdmin';
 import Index from '../modules/auth/Index';
 
 function App() {
