@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
-import { Menu } from '@/shared/Menu';
 import Loading from '@/shared/Loading';
 import { useAuth } from '../context/auth';
 
@@ -44,6 +43,7 @@ const login = async () => {
             navigate('/SuperAdmin');
         }
         } catch (error) {
+            alert('Verifica los datos ingresados');
             error
         } finally {
             setIsLoading(false);
@@ -54,7 +54,6 @@ const login = async () => {
     // }
 return (
 <div>
-    <Menu />
     <br /><br />
     <input
         type="text"
@@ -75,6 +74,14 @@ return (
         ENVIAR
     </button>
     {isLoading && <Loading />}
+    <div className="row">
+        <div className="col">
+
+        </div>
+        <div className="col">
+
+        </div>
+    </div>
 
 </div>
 );

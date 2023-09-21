@@ -20,7 +20,6 @@ const generateToken = async(req, res) => {
     const coleccionSuper = await genCollection("Super_Admin")
     const coleccionAdmin = await genCollection("Admin")
 
-    console.log({"coleccion": coleccion_name});
     const result = await coleccionSuper.findOne({"email":email, "password": psw }) || await coleccionUser.findOne({"email":email, "password": psw }) || await coleccionAdmin.findOne({"email":email, "password": psw }) 
     console.log({"result": result});
     if(!result){return res.send({"status": 404, "message":`Usuario no encontrado en la base de datos: ${coleccion_name}`})}

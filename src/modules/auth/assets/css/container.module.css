@@ -1,0 +1,29 @@
+
+.relleno {
+    height: 100vh;
+    overflow: hidden;
+    background-color:#B1D0E0;
+    background-size: cover;
+    background-color: #afc2f4;
+    position: relative;
+}
+.img1{
+    animation: floating 4.5s ease-in-out infinite;
+    position: relative;
+    left: 5em;
+    top: 4em;
+}
+.img2 {
+    position: relative;
+    left: 1em;
+    top: 6em;
+
+}
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px); /* Altura de la animación */
+    }
+}

@@ -2,6 +2,9 @@
     background-color: #144272;
     z-index: 1000;
     height: 6vh;
+    max-width: 100% !important;
+    margin: 0 auto;
+    position: fixed;
 }
 
 ul{
@@ -17,7 +20,6 @@ ul{
 .logo{
     display: flex;
     padding-left: 3% !important;
-    padding-top: 0.5% !important;
 }
 li {
     display: flex;
