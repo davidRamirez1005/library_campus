@@ -1,19 +1,19 @@
 
 .relleno {
-    height: 100vh;
+    height: 94vh;
     overflow: hidden;
     background-color:#B1D0E0;
     background-size: cover;
     background-color: #afc2f4;
-    position: relative;
 }
 .img1{
-    animation: floating 4.5s ease-in-out infinite;
+    animation: floating 3.0s ease-in-out infinite;
     position: relative;
     left: 5em;
     top: 4em;
 }
 .img2 {
+    animation: floating 5.5s ease-in-out infinite;
     position: relative;
     left: 1em;
     top: 6em;

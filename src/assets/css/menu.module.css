@@ -4,11 +4,12 @@
     height: 6vh;
     max-width: 100% !important;
     margin: 0 auto;
-    position: fixed;
+    position: sticky;
+    /* position: fixed; */
 }
 
 ul{
-    margin : 0 !important;
+    margin : 8px !important;
     display: flex;
     flex-direction: row;
     right: 0;
