@@ -1,6 +1,6 @@
 
 .relleno {
-    height: 94vh;
+    height: 93vh;
     overflow: hidden;
     background-color:#B1D0E0;
     background-size: cover;
@@ -25,5 +25,37 @@
     }
     50% {
         transform: translateY(-15px); /* Altura de la animación */
+    }
+}
+.imgPhone{
+    display: none;
+}
+@media (max-width: 1074px) {
+    .relleno {
+    display: none;
+    }
+    .col_4 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .form{
+        display: flex;
+        position: absolute;
+        top: 8rem;
+        left: 0;
+        justify-content: center;
+        /* left: 2rem; */
+        width: 100%;
+    }
+    .imgPhone{
+        display: flex;
+        animation: floating 3.0s ease-in-out infinite;
+        position: relative;
+        z-index: -1;
+        left: 7em;
+        top: 7em;
+        opacity: 0.6;
     }
 }

@@ -12,6 +12,7 @@
     overflow: hidden;
     z-index: +1;
     border-radius: 10px;
+    top: -3rem;
 }
 
 /*------input and submit section-------*/
@@ -120,8 +121,12 @@
     line-height: 1.25rem;
     text-align: center;
 }
-
-.signup_link a {
+.btn2{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.signup_link .btn2 {
     color: #fff;
     text-decoration: none;
 }

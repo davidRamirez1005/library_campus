@@ -1,11 +1,10 @@
 .container{
     background-color: #144272;
     z-index: 1000;
-    height: 6vh;
+    height: auto;
     max-width: 100% !important;
-    margin: 0 auto;
-    position: sticky;
-    /* position: fixed; */
+    margin-top: 0;
+    position: fixed;
 }
 
 ul{
