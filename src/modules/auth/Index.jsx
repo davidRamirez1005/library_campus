@@ -7,13 +7,17 @@ import planet from './assets/img/planet4.png'
 
 export default function Index() {
   return (
-    <div style={{ height: '100%' }}>
+    <>
       <Menu />
+      <br /><br />
       <div className="row" >
       <br />
-        <div className="col-4" style={{display:"flex", justifyContent : "center", marginTop : "4rem"}}>
-          <div className="form">
+        <div className={`col-4 ${styles.col_4}`} style={{display:"flex", justifyContent : "center", marginTop : "4rem"}}>
+          <div className={styles.form}>
             <Login/>
+          </div>
+          <div className={styles.imgPhone}>
+              <img src={rocket} alt=""  />
           </div>
         </div>
         <div className="col-8">
@@ -33,6 +37,6 @@ export default function Index() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

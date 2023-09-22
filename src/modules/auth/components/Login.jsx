@@ -21,7 +21,7 @@ const login = async () => {
         header.set('Content-Type', 'application/json');
         header.set('Authorization', `Bearer ${token}` );
 
-        const response = await fetch('http://127.10.10.10:5050/login', {
+        const response = await fetch('http://192.168.1.25:5053/login', {
         method: 'POST',
         headers: header,
         body: JSON.stringify({ ROL_EMAIL, ROL_PASSWORD }),
@@ -35,12 +35,26 @@ const login = async () => {
         setToken(data.Token);
         console.log(data);
         const NAME = data.result.full_name
+        const USERNAME = data.result.username
+        const ROL = data.result.rol
 
         if (!data.Token) {
-            alert('Verifica los datos ingresados');
+            console.log('Verifica los datos ingresados');
         } else {
-            auth.logins({ username: ROL_EMAIL, name : NAME });
-            navigate('/SuperAdmin');
+            auth.logins({ email: ROL_EMAIL, name : NAME , rol : ROL, username : USERNAME});
+            switch (data.result.rol) {
+                case 1:
+                    navigate('/Admin');
+                    break;
+                case 2:
+                    navigate('/Client');
+                    break;
+                case 3:
+                    navigate('/SuperAdmin');
+                    break;
+                default:
+                    break;
+            }
         }
         } catch (error) {
             alert('Verifica los datos ingresados');
@@ -52,6 +66,9 @@ const login = async () => {
     // if (!auth.user) {
     //     return <Navigate to='/Login' />
     // }
+    const handleRegisterClick = () => {
+        navigate('/Registrer');
+    };
 return (
 <div>
     <br /><br />
@@ -80,8 +97,10 @@ return (
         <span className={style.sign_text}>ENVIAR</span>
     </button>
     <p className={style.signup_link}>
-        No registrado?
-        <a href="" className={style.up}> Registrarse!</a>
+        No registrado? 
+        <button className={style.btn2} value="registrer" onClick={handleRegisterClick}>
+            Registrarse!
+        </button>
     </p>
 </div>
 {isLoading && <Loading />}

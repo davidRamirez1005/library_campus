@@ -8,6 +8,8 @@ export default function SuperAdmin() {
   return (
     <>
     <Menu />
+    <br /><br /><br />
+
       <h1>Perfil Super Admin</h1>
       <p>Hola, {auth.user.name}</p>
     </>

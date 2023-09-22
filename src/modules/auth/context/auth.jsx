@@ -8,9 +8,8 @@ function AuthProvider({ children }) {
     const navigate = useNavigate();
     const [user, setUser] = React.useState(null);
 
-    const logins = ({ username, name }) => {
-        setUser({ username, name });
-        navigate("/SuperAdmin");
+    const logins = ({ email, name, rol, username}) => {
+        setUser({ email, name, rol, username });
 };
 const logout = () => {
     setUser(null);

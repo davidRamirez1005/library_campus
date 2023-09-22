@@ -6,12 +6,64 @@ import CampusLogo from '@/assets/img/logoCampus.png'
 
 function Menu() {
     const auth = useAuth();
-    
+    const routes = [];
+
+
+    if (auth.user) {
+        routes.push({
+            to: '/',
+            text: 'Inicio',
+            private: false
+        });
+
+        if (auth.user.rol === 3) {
+            routes.push({
+                to: '/SuperAdmin',
+                text: 'Administracion',
+                private: true,
+            });
+        } else if (auth.user.rol === 1) {
+            routes.push({
+                to: '/Admin',
+                text: 'Empleado',
+                private: true,
+            });
+        } else if (auth.user.rol === 2) {
+            routes.push({
+                to: '/Client',
+                text: 'cliente',
+                private: true,
+            });
+        }
+        routes.push({
+            to: '/logout',
+            text: 'Salir',
+            private: true,
+        });
+    } else {
+        routes.push({
+            to: '/',
+            text: 'Inicio',
+            private: false
+        });
+        routes.push({
+            to: '/Registrarse',
+            text: 'Registrarse',
+            private: true
+        });
+        routes.push({
+            to: '/Login',
+            text: 'Entrar',
+            private: false,
+            publicOnly: true,
+        });
+    }
+
     return (
         <nav className={`container-fluid ${menu.container} nav`}>
             <div className="row">
                 <div className={`col-3 ${menu.logo}`}>
-                    <a href="https://vitejs.dev" target="_blank" style={{display : "flex", alignItems : "center"}}>
+                    <a href="" target="_blank" style={{display : "flex", alignItems : "center"}}>
                         <img src={CampusLogo}  alt="campus logo" style={{ width: 100}}/>
                     </a>
                 </div>
@@ -41,28 +93,5 @@ function Menu() {
         </nav>
     );
 }
-
-const routes = [];
-routes.push({
-    to: '/',
-    text: 'Home',
-    private: false
-});
-routes.push({
-    to: '/SuperAdmin',
-    text: 'Administracion',
-    private: true,
-});
-routes.push({
-    to: '/Login',
-    text: 'Login',
-    private: false,
-    publicOnly: true,
-});
-routes.push({
-    to: '/logout',
-    text: 'Logout',
-    private: true,
-});
 
 export { Menu };
