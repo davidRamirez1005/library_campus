@@ -25,6 +25,7 @@ appExpress.use(cors(corsOptions));
 appExpress.use('/login', appLogin);
 appExpress.use('/Product', passport.authenticate('bearer', { session: false }),validatePermissions, appProduct);
 appExpress.use('/User', passport.authenticate('bearer', { session: false }),validatePermissions, appUser);
+appExpress.use('/newUser',appUser);
 appExpress.use('/Admin', passport.authenticate('bearer', { session: false }),validatePermissions, appAdmin);
 
 

@@ -8,6 +8,8 @@ import Index from '../modules/auth/Index';
 import Admin from '../modules/pages/admin/Admin';
 import Client from '../modules/pages/client/Client';
 import Registrer from '../modules/auth/components/Registrer';
+import NewAdmin from '../modules/pages/superAdmin/components/NewAdmin';
+
 
 function App() {
   return (
@@ -53,6 +55,14 @@ function App() {
               path="/Registrer"
               element={
                   <Registrer />
+              }
+            />
+                        <Route
+              path="/RegistrerAdmin"
+              element={
+                <AuthRoute>
+                  <NewAdmin />
+                </AuthRoute>
               }
             />
               <Route path="*" element={<NotFound />} />

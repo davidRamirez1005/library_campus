@@ -8,8 +8,8 @@ function AuthProvider({ children }) {
     const navigate = useNavigate();
     const [user, setUser] = React.useState(null);
 
-    const logins = ({ email, name, rol, username}) => {
-        setUser({ email, name, rol, username });
+    const logins = ({ email, name, rol, username, bearer}) => {
+        setUser({ email, name, rol, username, bearer });
 };
 const logout = () => {
     setUser(null);

@@ -15,10 +15,10 @@ export default function SuperAdmin() {
 
       <h1>Perfil Super Admin</h1>
       <p>Hola, {auth.user.name}</p>
-      <button value="ir" onClick={() => {
-            navigate('/Registrer')
+      <button value="registrar" onClick={() => {
+            navigate('/RegistrerAdmin')
             }}>
-            ir
+            registrar nuevo Admin
       </button>
     </>
   )

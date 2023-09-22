@@ -33,7 +33,8 @@ const login = async () => {
         
         const data = await response.json();
         setToken(data.Token);
-        console.log(data);
+        // console.log(data.Token)
+        const TOKEN = data.Token
         const NAME = data.result.full_name
         const USERNAME = data.result.username
         const ROL = data.result.rol
@@ -41,7 +42,7 @@ const login = async () => {
         if (!data.Token) {
             console.log('Verifica los datos ingresados');
         } else {
-            auth.logins({ email: ROL_EMAIL, name : NAME , rol : ROL, username : USERNAME});
+            auth.logins({ email: ROL_EMAIL, name : NAME , rol : ROL, username : USERNAME, bearer : TOKEN});
             switch (data.result.rol) {
                 case 1:
                     navigate('/Admin');
