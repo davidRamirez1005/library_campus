@@ -1,12 +1,10 @@
-import dotenv from "dotenv";
 import {MongoClient} from "mongodb"
+import {loadEnv} from 'vite'
 
-dotenv.config("../src/");
-
-console.log(process.env.ATLAS_USER);
+let env = loadEnv('development', process.cwd(), "ATLAS");
 export async function con(){
     try {
-        const URI = `mongodb+srv://${process.env.ATLAS_USER}:${process.env.ATLAS_PASSWORD}@cluster0.xuq9yaf.mongodb.net/${process.env.ATLAS_DB}`;
+        const URI = `mongodb+srv://${env.ATLAS_USER}:${env.ATLAS_PASSWORD}@cluster0.xuq9yaf.mongodb.net/${env.ATLAS_DB}`;
         const client = await MongoClient.connect(URI);
         return client.db()
     } catch (error) {

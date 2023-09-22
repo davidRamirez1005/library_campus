@@ -1,5 +1,4 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors'
 import passport from './Auth/passport.js';
 import { validatePermissions } from './Auth/permissions.js';
@@ -7,10 +6,10 @@ import appLogin from './routers/login.js';
 import appProduct from './routers/product.js';
 import appUser from './routers/user.js';
 import appAdmin from './routers/admin.js';
+import {loadEnv} from 'vite'
 
 
-dotenv.config()
-
+const env = loadEnv('development', process.cwd(), "VITE");
 const appExpress = express();
 
 appExpress.use(express.json());
@@ -30,9 +29,10 @@ appExpress.use('/Admin', passport.authenticate('bearer', { session: false }),val
 
 
 
-
-
-let config = JSON.parse(process.env.MY_SERVER);
+const config = {
+    port: env.VITE_PORT_BACKEND,
+    hostname: env.VITE_HOSTNAME
+}
 appExpress.listen(config, () =>{
     console.log(`listening on http://${config.hostname}:${config.port}`);
 })

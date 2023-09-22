@@ -2,7 +2,9 @@ import genCollection from "../helpers/db.js";
 import { SignJWT, jwtVerify } from "jose";
 import { validationLogin } from "../validator/validation.js";
 import { validationResult } from 'express-validator';
+import {loadEnv} from 'vite'
 
+const env = loadEnv('development', process.cwd(), "JWT");
 
 const generateToken = async(req, res) => {
     await Promise.all(validationLogin.map(rule => rule.run(req)));
@@ -33,7 +35,7 @@ const generateToken = async(req, res) => {
         .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
         .setIssuedAt()
         .setExpirationTime('5h')
-        .sign(encoder.encode(process.env.JWT_SECRET));
+        .sign(encoder.encode(env.JWT_SECRET));
     res.send({"Token":jwtConstructor, "result": result});
 }
     
@@ -42,7 +44,7 @@ const validateToken = async (token) => {
         const encoder = new TextEncoder();
         const jwtData = await jwtVerify(
             token,
-            encoder.encode(process.env.JWT_SECRET)
+            encoder.encode(env.JWT_SECRET)
         );
         const coleccion = await genCollection("Rols")
         return await coleccion.findOne({"_id": jwtData.payload.id});
