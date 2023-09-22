@@ -21,7 +21,7 @@ const login = async () => {
         header.set('Content-Type', 'application/json');
         header.set('Authorization', `Bearer ${token}` );
 
-        const response = await fetch('http://192.168.1.25:5053/login', {
+        const response = await fetch('http://127.10.10.1:5051/login', {
         method: 'POST',
         headers: header,
         body: JSON.stringify({ ROL_EMAIL, ROL_PASSWORD }),

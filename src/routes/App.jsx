@@ -52,9 +52,7 @@ function App() {
             <Route
               path="/Registrer"
               element={
-                <AuthRoute>
                   <Registrer />
-                </AuthRoute>
               }
             />
               <Route path="*" element={<NotFound />} />
