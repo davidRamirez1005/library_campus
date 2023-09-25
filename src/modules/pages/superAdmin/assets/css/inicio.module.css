@@ -1,0 +1,75 @@
+.btnRegistrer{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.5rem;
+    gap: 1rem;
+}
+.btnstyle{
+    background-color: #B1D0E0;
+    height: 5vh;
+    padding: 1em;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-style: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #0A2647;
+}
+.buttonAside{
+    display: flex;
+    margin-left: 1.5rem;
+    align-items: center;
+    background-color: #001c2a;
+    width: max-content;
+    padding: 1rem;
+}
+.button_aggregate {
+    font-size: 1rem;
+    background: #5a5b5c;
+    color: white;
+    fill: rgb(155, 153, 153);
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 15px;
+    font-weight: 1000;
+}
+
+.button_aggregate span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+
+.button_aggregate svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.button_aggregate:hover {
+    background: #000;
+}
+
+.button_aggregate:hover .svg_wrapper {
+    transform: scale(1.25);
+    transition: .5s linear;
+}
+
+.button_aggregate:hover svg {
+    transform: translateX(1.2em) scale(1.1);
+    fill: #fff;
+}
+
+.button_aggregate:hover span {
+    opacity: 0;
+    transition: .5s linear;
+}
+
+.button_aggregate:active {
+    transform: scale(0.95);
+}

@@ -5,6 +5,9 @@
     max-width: 100% !important;
     margin-top: 0;
     position: fixed;
+    filter: drop-shadow(2px 3px 6px rgba(0, 0, 0, 0.74));
+    border-bottom-left-radius: 34px;
+    border-bottom-right-radius: 34px;
 }
 
 ul{
@@ -19,7 +22,7 @@ ul{
 }
 .logo{
     display: flex;
-    padding-left: 3% !important;
+    padding-left: 5% !important;
 }
 li {
     display: flex;
@@ -28,5 +31,18 @@ li {
     font-weight: bolder;
     color: #070530;
     text-decoration: none;
+
+}
+.respoBurguer{
+    display: none;
+}
+@media (max-width: 767px) {
+    /* Estilos para dispositivos móviles */
+    .respo{
+        display: none;
+    }
+    .respoBurguer{
+        display: flex;
+    }
 
 }

@@ -2,9 +2,9 @@
 .relleno {
     height: 95vh;
     overflow: hidden;
-    background-color:#B1D0E0;
+    background: linear-gradient(14deg, rgb(165 228 254 / 80%) 0%, rgb(14 55 81 / 68%) 66%, rgb(15 47 87) 100%), radial-gradient(circle, rgba(2,0,36, 0.5) 0%, rgba(32, 15, 53, 0.2) 65%, rgba(14, 29, 28, 0.9) 100%);
     background-size: cover;
-    background-color: #afc2f4;
+    border-left-style: outset;
 }
 .img1{
     animation: floating 3.0s ease-in-out infinite;
@@ -13,7 +13,7 @@
     top: 4em;
 }
 .img2 {
-    animation: floating 5.5s ease-in-out infinite;
+    animation: floating 6.5s ease-in-out infinite;
     position: relative;
     left: 1em;
     top: 6em;
@@ -22,9 +22,12 @@
 @keyframes floating {
     0%, 100% {
         transform: translateY(0);
+        transform: translatex(15px);
+
     }
     50% {
-        transform: translateY(-15px); /* Altura de la animación */
+        transform: translateY(-15px);
+
     }
 }
 .imgPhone{

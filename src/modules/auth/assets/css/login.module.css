@@ -37,7 +37,16 @@
     width: 250px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
-
+.input_container select {
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #0A2647;
+    padding: 6px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 250px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
 .input_email:focus::placeholder {
     opacity: 0;
     transition: opacity .9s;
@@ -54,7 +63,7 @@
     display: block;
     padding: 8px;
     background-color: #c0c0c0;
-    color: #ffffff;
+    color: #0A2647;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -304,8 +313,6 @@
     animation-delay: 1.6s;
     animation-duration: 1.6s;
 }
-
-
 
 
 
