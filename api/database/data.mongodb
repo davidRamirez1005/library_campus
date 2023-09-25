@@ -39,7 +39,7 @@ db.Rols.insertMany([{
         },
         "Product": {
             "get": ["1.1.0","1.0.0"],
-            "post": ["1..0"]
+            "post": ["1.0.0"]
         }
     }
     },
