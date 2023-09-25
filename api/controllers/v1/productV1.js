@@ -31,7 +31,8 @@ export const getBorrowed = async(req, res) =>{
     let coleccion = await genCollection('Product')
     let result = await coleccion.aggregate(findBorrowed).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
-}
+    console.log(...result)
+  }
 /**
  * * listar el historial de productos prestados por un usuario en especifico de la fecha mas reciente hacia atras
  */

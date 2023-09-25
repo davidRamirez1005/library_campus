@@ -8,6 +8,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaShoppingBasket } from "react-icons/fa";
 import GetProducts from './components/GetProducts';
 import GetBooks from './components/GetBoooks';
+import GetBorrowed from './components/GetBorrowed';
 
 export default function SuperAdmin() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function SuperAdmin() {
 
   const [showProducts, setShowProducts] = useState(false);
   const [showBooks, setShowBooks] = useState(false);
+  const [showBorrowed, setShowBorrowed] = useState(false);
+
 
   const handleShowProducts = () => {
     setShowProducts(!showProducts);
@@ -22,6 +25,10 @@ export default function SuperAdmin() {
   
   const handleShowBooks = () => {
     setShowBooks(!showBooks);
+  };
+
+  const handleShowBorrowed = () => {
+    setShowBorrowed(!showBorrowed);
   };
 
   return (
@@ -74,6 +81,14 @@ export default function SuperAdmin() {
       </div>
       <div className="col">
         {showBooks && <GetBooks />}
+      </div>
+    </div>
+    <div className="row">
+      <div className={`col-2 ${style.buttonAside}`}>
+        <button className={style.btnstyle} onClick={handleShowBorrowed}>Listar Libros prestados</button>
+      </div>
+      <div className="col">
+        {showBorrowed && <GetBorrowed />}
       </div>
     </div>
     </>
