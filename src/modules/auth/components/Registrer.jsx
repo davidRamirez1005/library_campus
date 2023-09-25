@@ -1,7 +1,14 @@
+import axios from 'axios';
 import { Menu } from '@/shared/Menu';
 import React, { useState } from 'react';
 import Loading from '@/shared/Loading';
+import style from '../assets/css/registrer.module.css'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 
+
+let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
 export default function Registrer() {
 
@@ -13,28 +20,35 @@ export default function Registrer() {
     let [team, setTeam] = useState('')
     let [rol, setRol] = useState(2)
     let [isLoading, setIsLoading] = useState(false);
+    let [isError, setIsError] = useState(false);
+    let [isTrue, setIsTrue] = useState(false);
+
+
 
     const sesion = async () => {
         setIsLoading(true);
         try {
-            let header = new Headers();
-            header.set('Content-Type', 'application/json');
-            header.set('Accept-Version', '1.0.0' );
-    
-            const response = await fetch('http://127.10.10.1:5051/newUser/agregar/user', {
-            method: 'POST',
-            headers: header,
-            body: JSON.stringify({ username, identification, email, password, phone, team, rol }),
+            const response = await axios.post(`http://${backendUrl}/newUser/agregar/user`, {
+                username,
+                identification,
+                email,
+                password,
+                phone,
+                team,
+                rol
+            }, 
+            {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept-Version' : '1.0.0'
+            },
             });
-    
-            if (!response.ok) {
-            throw new Error('Error en la solicitud');
+            if (response.status != 201) {
+                throw new Error('Error en la solicitud');
             }
-            alert("nuevo usuario creado con exito")
-
+            setIsTrue(true)
             } catch (error) {
-                alert('Verifica los datos ingresados');
-                error
+                setIsError(true)
             } finally {
                 setIsLoading(false);
             }
@@ -43,6 +57,7 @@ export default function Registrer() {
 return (
     <>
         <Menu />
+        <br /><br />
         <br /><br />
         
         {/* 
@@ -55,24 +70,63 @@ return (
         "rol" : 2 
         */}
 
-        <h1>Registrarse</h1>
+        <div className={style.title_2}><span>Registrarse</span></div>
+        <br /><br />
+        <div>
+        { isError  &&  <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert sx={{ zIndex: '999' }} severity="error">
+                <AlertTitle>Error</AlertTitle>
+                <strong>Revisa los datos ingresados</strong>
+            </Alert>
+        </Stack>}
+        { isTrue  &&  <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
+            Usuario creado con exito!
+        </Alert>
+        </Stack>}
+        </div>
         <br />
-        <input type="text"  value={username} placeholder='nombre' onChange={(e) => setName(e.target.value)} />
-        <input type="text" value={identification} placeholder='identificacion' onChange={(e) => setIdentification(e.target.value)} />
-        <input type="password" value={email} placeholder='email' onChange={(e) => setEmail(e.target.value)} />
-        <input type="text" value={password} placeholder='telefono' onChange={(e) => setPassword(e.target.value)}/>
-        <input type="text" value={phone} placeholder='telefono' onChange={(e) => setPhone(e.target.value)}/>
-        {/* <input type="text" value={team} placeholder='team' onChange={(e) => setTeam(e.target.value)} /> */}
-        <select name="team" placeholder="Ingrese team" onChange={(e) => setTeam(e.target.value)}>
-            <option value="seleccionar">Selecciona un Team</option>
-            <option value="M3">M3</option>
-            <option value="M1">M1</option>
-        </select>
+        <div className={style.formContainer}>
+        <div className={style.form}>
+            <section className={style.bg_stars}>
+                <span className={style.star}></span>
+                <span className={style.star}></span>
+                <span className={style.star}></span>
+                <span className={style.star}></span>
+            </section>
+            <div className={style.inputsContainer}>
+            <div className={style.input_container}>
+                <input className={style.input_pwd}  type="text"  value={username} placeholder='nombre' onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div className={style.input_container}>
+                <input className={style.input_pwd}  type="text" value={identification} placeholder='identificacion' onChange={(e) => setIdentification(e.target.value)} />
+            </div>
+            <div className={style.input_container}>
+                <input className={style.input_email} type="email" value={email} placeholder='email' onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div className={style.input_container}>
+                <input className={style.input_pwd} type="password" value={password} placeholder='contraseña' onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <div className={style.input_container}>
+            <input className={style.input_pwd}  type="text" value={phone} placeholder='telefono' onChange={(e) => setPhone(e.target.value)}/>
+            </div>
+            <div className={style.input_container}>
+                <select className={style.input_pwd}  name="team" placeholder="Ingrese team" onChange={(e) => setTeam(e.target.value)}>
+                    <option value="seleccionar">Selecciona un Team</option>
+                    <option value="M3">M3</option>
+                    <option value="M1">M1</option>
+                </select>
+            </div>  
+            </div>
+        
         <input type="hidden" value={rol} onChange={(e) => setRol(e.target.value)}/>
         <br />
-        <button value="login" onClick={sesion}>Enviar</button>
+        <button className={style.submit} value="login" onClick={sesion}>Enviar</button>
+        </div>
         <br /><br />
         {isLoading && <Loading />}
+        </div>
+        
 
 
     </>

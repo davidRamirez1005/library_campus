@@ -11,8 +11,8 @@ appProduct.use(limitget());
 //Headers 'Accept-Version: 1.0.0' 
 
 appProduct.get('/listar',  version({
-    "1.0.0": getProductAvailable,
-    "1.1.0": getAvaliableBooks
+    "~1.0.0": getProductAvailable,
+    "~1.1.0": getAvaliableBooks
 }))
 appProduct.get('/listar/prestados/:user_id2?',  version({
     "1.0.1": getBorrowed,
@@ -26,7 +26,7 @@ appProduct.get('/listar/reservados',  version({
     "1.0.0": getBooksReserved,
 }))
 
-appProduct.post('/agregar/producto/', version({
+appProduct.post('/agregar/producto', version({
     "~1.0.0": aggregateNewProduct,
     // "~1.1.0": aggregaProductBorrowed 
 }))

@@ -9,6 +9,7 @@ import Admin from '../modules/pages/admin/Admin';
 import Client from '../modules/pages/client/Client';
 import Registrer from '../modules/auth/components/Registrer';
 import NewAdmin from '../modules/pages/superAdmin/components/NewAdmin';
+import NewProduct from '../modules/pages/superAdmin/components/NewProduct';
 
 
 function App() {
@@ -57,11 +58,19 @@ function App() {
                   <Registrer />
               }
             />
-                        <Route
+            <Route
               path="/RegistrerAdmin"
               element={
                 <AuthRoute>
                   <NewAdmin />
+                </AuthRoute>
+              }
+            />
+                        <Route
+              path="/RegistrerProduct"
+              element={
+                <AuthRoute>
+                  <NewProduct />
                 </AuthRoute>
               }
             />
