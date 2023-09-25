@@ -33,38 +33,6 @@ export const aggregateNewProduct = async(req, res) =>{
     }
 }
 /**
- * * insertar un nuevo producto en condicion de prestado o reservado
- */
-// export const aggregaProductBorrowed = async (req, res) => {
-//     if (!req.rateLimit) return;
-
-//     try {
-//         let newId = await siguienteId("Product");
-//         const user_id = req.params.user_id;
-//         const userID = Number(await genCollection('User').find({ identification: user_id })._id);
-
-//         await Promise.all(validationProduct.map(rule => rule.run(req)));
-
-//         const errors = validationResult(req);
-//         if (!errors.isEmpty()) {
-//             return res.status(400).json({ errors: errors.array() });
-//         }
-
-//         let coleccion = await genCollection('Product')
-        
-//         const newDocument = {
-//             _id: newId,
-//             ...req.body,
-//             user_identification: userID,
-//         };
-//         let result = await coleccion.insertOne(newDocument);
-//         res.status(201).send({ status: 201, message: 'documento creado con exito' });
-//     } catch (error) {
-//         console.log(error);
-//         res.status(406).send('no se ha podido crear el documento');
-//     }
-// }
-/**
  * * actualizar un status de producto de prestado a entregado por medio del id
  */
 export const updateStatusDelivery = async (req, res) => {

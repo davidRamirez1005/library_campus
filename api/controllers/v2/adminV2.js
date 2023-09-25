@@ -4,6 +4,7 @@ import {validationAdmin} from '../../validator/validation.js'
 import genCollection from '../../helpers/db.js';
 
 
+
 /**
  * * agregar un nuevo Admin
  */

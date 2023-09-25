@@ -5,7 +5,7 @@
     max-width: 100% !important;
     margin-top: 0;
     position: fixed;
-    filter: drop-shadow(2px 3px 6px rgba(0, 0, 0, 0.74));
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.74));
     border-bottom-left-radius: 34px;
     border-bottom-right-radius: 34px;
 }
