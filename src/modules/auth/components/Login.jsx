@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
 import Loading from '@/shared/Loading';
 import { useAuth } from '../context/auth';
 import style from '../assets/css/login.module.css'
+import spinner from '../../../assets/css/loading.module.css'
 
+
+
+let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
 export default function Login() {
     const navigate = useNavigate();
@@ -14,26 +19,46 @@ export default function Login() {
     let [token, setToken] = useState('');
     let [isLoading, setIsLoading] = useState(false);
 
+
 const login = async () => {
     setIsLoading(true);
     try {
-        let header = new Headers();
-        header.set('Content-Type', 'application/json');
-        header.set('Authorization', `Bearer ${token}` );
+        /**
+         * ? usando fetch
+         */
+        // let header = new Headers();
+        // header.set('Content-Type', 'application/json');
+        // header.set('Authorization', `Bearer ${token}` );
 
-        const response = await fetch('http://127.10.10.1:5051/login', {
-        method: 'POST',
-        headers: header,
-        body: JSON.stringify({ ROL_EMAIL, ROL_PASSWORD }),
+        // const response = await fetch('http://192.168.1.25:5051/login', {
+        // method: 'POST',
+        // headers: header,
+        // body: JSON.stringify({ ROL_EMAIL, ROL_PASSWORD }),
+        // });
+
+        // if (!response.ok) {
+        // throw new Error('Error en la solicitud');
+        // }
+        //const data = await response.json();
+        /**
+         * ? usando axios
+         */
+        const response = await axios.post(`http://${backendUrl}/login`, {
+        ROL_EMAIL,
+        ROL_PASSWORD,
+        }, 
+        {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
         });
-
-        if (!response.ok) {
-        throw new Error('Error en la solicitud');
+        if (response.status != 200) {
+            throw new Error('Error en la solicitud');
         }
-        
-        const data = await response.json();
+        const data = response.data;
         setToken(data.Token);
-        // console.log(data.Token)
+        console.log(data.Token)
         const TOKEN = data.Token
         const NAME = data.result.full_name
         const USERNAME = data.result.username
@@ -104,7 +129,9 @@ return (
         </button>
     </p>
 </div>
+<div className={spinner.spinnerLoader}>
 {isLoading && <Loading />}
+</div>
 
 
 </div>
