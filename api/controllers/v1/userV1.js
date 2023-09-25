@@ -12,6 +12,7 @@ export const getUsers = async(req, res) =>{
     }).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
 }
+
 /**
  * * listar user por medio del la cedula
  */
