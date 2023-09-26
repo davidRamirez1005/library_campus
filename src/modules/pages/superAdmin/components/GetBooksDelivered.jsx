@@ -6,8 +6,7 @@ import LoadingQuery from '../../../../shared/LoadingQuery';
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
-
-export default function GetBorrowed() {
+export default function GetBooksDelivered() {
     const auth = useAuth();
 
     let[isLoading, setIsloading] = useState(false)
@@ -17,10 +16,10 @@ export default function GetBorrowed() {
     const listar = async () => {
         setIsloading(true)
         try {
-            const response = await axios.get(`http://${backendUrl}/Product/listar/prestados`, {
+            const response = await axios.get(`http://${backendUrl}/Product/listar/entregados`, {
                 headers : {
                     'Content-Type': 'application/json',
-                    'Accept-Version': '1.2.0',
+                    'Accept-Version': '1.0.0',
                     'Authorization': `Bearer ${auth.user.bearer}`,
                 }
             })
@@ -40,6 +39,7 @@ export default function GetBorrowed() {
     useEffect(()=>{
         listar()
     }, [])
+    console.log(books)
     return (
         <>
     {showTable && (

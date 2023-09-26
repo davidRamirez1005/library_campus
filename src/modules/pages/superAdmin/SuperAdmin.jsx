@@ -10,14 +10,12 @@ import GetProducts from './components/GetProducts';
 import GetBooks from './components/GetBoooks';
 import GetBorrowed from './components/GetBorrowed';
 import GetHistoryUser from './components/GetHistoryUser';
+import GetBooksDelivered from './components/GetBooksDelivered';
 
 export default function SuperAdmin() {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  // const [showProducts, setShowProducts] = useState(false);
-  // const [showBooks, setShowBooks] = useState(false);
-  // const [showBorrowed, setShowBorrowed] = useState(false);
   const [showGetHistory, setShowGetHistory] = useState(false);
   const [activeComponent, setActiveComponent] = useState(null);
 
@@ -31,6 +29,10 @@ export default function SuperAdmin() {
 
   const handleShowBorrowed = () => {
     setActiveComponent('borrowed');
+  };
+
+  const handleShowDelivered = () => {
+    setActiveComponent('delivered');
   };
 
   const handleShowGetHistory = () => {
@@ -92,14 +94,15 @@ export default function SuperAdmin() {
       <div className={`col ${style.divButton}`}>
       <button className={style.btnstyle} onClick={handleShowBorrowed}>Libros prestados</button>
       </div>
-      {/* <div className={`col ${style.divButton}`}>
-        <button className={style.btnstyle} onClick={handleShowGetHistory}>historal usuario</button> 
-      </div> */}
+      <div className={`col ${style.divButton}`}>
+        <button className={style.btnstyle} onClick={handleShowDelivered}>Libros entregados</button> 
+      </div>
     </div>
     <div className="row">
         {activeComponent === 'products' && <GetProducts />}
         {activeComponent === 'books' && <GetBooks />}
         {activeComponent === 'borrowed' && <GetBorrowed />}
+        {activeComponent === 'delivered' && <GetBooksDelivered />}
     </div>
     </>
   )
