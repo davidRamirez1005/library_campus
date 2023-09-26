@@ -78,7 +78,7 @@ export const updateStatusSpend = async (req, res) => {
         const result = await coleccion.updateOne(filter, update);
 
         if (result.modifiedCount === 1) {
-            res.send('Estado del producto actualizado con éxito');
+            res.status(202).send('Estado del producto actualizado con éxito');
         } else {
             res.send('Estado del producto no actualizado');
         }

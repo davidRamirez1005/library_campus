@@ -184,3 +184,14 @@ db.Product.insertMany([
         status: "disponible"
     }
 ]);
+use("db_campus_Library");
+db.Product.insertOne({
+    _id: Number(siguienteId("Product")),
+    title: "libro sobre javascript",
+    description : 'libro en excelentes condiciones y es azul',
+    type: "libros",
+    status: "reservado",
+    start_date : ('2023-10-26'),
+    final_date : ('2023-10-30'),
+    user_identification : 1  
+})

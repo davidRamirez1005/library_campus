@@ -23,7 +23,7 @@ appProduct.get('/listar/entregados',  version({
     "1.0.0": getBooksDelivered,
 }))
 appProduct.get('/listar/reservados',  version({
-    "1.0.0": getBooksReserved,
+    "~1.0.0": getBooksReserved,
 }))
 
 appProduct.post('/agregar/producto', version({
@@ -35,8 +35,8 @@ appProduct.post('/agregar/producto', version({
 // }))
 
 appProduct.put('/actualizar/producto/:product_id?', version({
-    "1.0.0": updateStatusDelivery,
-    "1.1.0": updateStatusSpend
+    "~1.0.0": updateStatusDelivery,
+    "~1.1.0": updateStatusSpend
 }))
 
 // appProduct.delete('/eliminar/admin', version({
