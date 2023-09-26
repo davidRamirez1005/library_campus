@@ -48,9 +48,13 @@ export const getHistoryUser = async (req, res) => {
     const coleccionUser = await genCollection("User");
     
     const cursor = await coleccionUser.aggregate([...findIdUser(user_id2)]);
+    const users = await cursor.toArray();
+
+    if (users.length === 0) {
+      return res.status(404).send({ status: 404, message: "Usuario no encontrado" });
+    }
     
-    let userIdentification = (await cursor.toArray())[0]._id;
-    
+    const userIdentification = users[0]._id;
     const cursor2 = await coleccion.aggregate([...aggregateProduct(userIdentification)]);
     
     const results = await cursor2.toArray();

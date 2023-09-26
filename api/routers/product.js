@@ -15,7 +15,7 @@ appProduct.get('/listar',  version({
     "~1.1.0": getAvaliableBooks
 }))
 appProduct.get('/listar/prestados/:user_id2?',  version({
-    "1.0.1": getBorrowed,
+    "1.01.1.0.1": getBorrowed,
     "1.1.0": getHistoryUser,
     "^1.2.0": getProductCloseDate
 }))
