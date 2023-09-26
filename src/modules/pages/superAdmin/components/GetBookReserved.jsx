@@ -6,7 +6,7 @@ import LoadingQuery from '../../../../shared/LoadingQuery';
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
-export default function GetBooksDelivered() {
+export default function GetBookReserved() {
     const auth = useAuth();
 
     let[isLoading, setIsloading] = useState(false)
@@ -16,7 +16,7 @@ export default function GetBooksDelivered() {
     const listar = async () => {
         setIsloading(true)
         try {
-            const response = await axios.get(`http://${backendUrl}/Product/listar/entregados`, {
+            const response = await axios.get(`http://${backendUrl}/Product/listar/reservados`, {
                 headers : {
                     'Content-Type': 'application/json',
                     'Accept-Version': '1.0.0',
@@ -41,7 +41,7 @@ export default function GetBooksDelivered() {
     }, [])
     return (
         <>
-    {showTable && (
+            {showTable && (
             <div className={styleTable.tableContainer}>
                 <table className={styleTable.table}>
                 <thead>
@@ -80,9 +80,9 @@ export default function GetBooksDelivered() {
                 </table>
             </div>
         )}
-    <div className={styleTable.loadinQuery}>
-        {isLoading && <LoadingQuery />}
-    </div>
+        <div className={styleTable.loadinQuery}>
+            {isLoading && <LoadingQuery />}
+        </div>
         </>
     )
 }
