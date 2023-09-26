@@ -97,7 +97,7 @@ const login = async () => {
     };
 return (
 <div>
-    <br /><br />
+    <br />
     
 <div className={style.form}>
     <div className={style.form_title}><span>Inicia sesión</span></div>

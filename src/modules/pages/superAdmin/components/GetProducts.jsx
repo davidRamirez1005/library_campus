@@ -30,7 +30,7 @@ export default function GetProducts() {
         const productsData = response.data;
         setProducts(productsData);
         } catch (error) {
-            alert('error en la consulta');
+            return alert('error en la consulta');
         } finally {
         setIsLoading(false);
         }

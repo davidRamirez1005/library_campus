@@ -8,20 +8,35 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaShoppingBasket } from "react-icons/fa";
 import GetProducts from './components/GetProducts';
 import GetBooks from './components/GetBoooks';
+import GetBorrowed from './components/GetBorrowed';
+import GetHistoryUser from './components/GetHistoryUser';
+import GetBooksDelivered from './components/GetBooksDelivered';
 
 export default function SuperAdmin() {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  const [showProducts, setShowProducts] = useState(false);
-  const [showBooks, setShowBooks] = useState(false);
+  const [showGetHistory, setShowGetHistory] = useState(false);
+  const [activeComponent, setActiveComponent] = useState(null);
 
   const handleShowProducts = () => {
-    setShowProducts(!showProducts);
+    setActiveComponent('products');
   };
   
   const handleShowBooks = () => {
-    setShowBooks(!showBooks);
+    setActiveComponent('books');
+  };
+
+  const handleShowBorrowed = () => {
+    setActiveComponent('borrowed');
+  };
+
+  const handleShowDelivered = () => {
+    setActiveComponent('delivered');
+  };
+
+  const handleShowGetHistory = () => {
+    setShowGetHistory(!showGetHistory);
   };
 
   return (
@@ -61,20 +76,33 @@ export default function SuperAdmin() {
 
     <br /><br />
     <div className="row">
-      <div className={`col-2 ${style.buttonAside}`}>
+
+    <div className="col">
+        <button className={style.btnstyle} onClick={handleShowGetHistory} style={{marginLeft :"2rem"}}>Historal usuario</button> 
+        <br />
+        {showGetHistory && <GetHistoryUser />}
+    <br /><br />
+    </div>
+    </div>
+    <div className={`row ${style.sectionNav}`}>
+      <div className={`col ${style.divButton}`}>
         <button className={style.btnstyle} onClick={handleShowProducts}>Listar productos</button>
       </div>
-      <div className="col">
-        {showProducts && <GetProducts />}
+      <div className={`col ${style.divButton}`}>
+      <button className={style.btnstyle} onClick={handleShowBooks}>Libros</button>
+      </div>
+      <div className={`col ${style.divButton}`}>
+      <button className={style.btnstyle} onClick={handleShowBorrowed}>Libros prestados</button>
+      </div>
+      <div className={`col ${style.divButton}`}>
+        <button className={style.btnstyle} onClick={handleShowDelivered}>Libros entregados</button> 
       </div>
     </div>
     <div className="row">
-      <div className={`col-2 ${style.buttonAside}`}>
-        <button className={style.btnstyle} onClick={handleShowBooks}>Listar Libros</button>
-      </div>
-      <div className="col">
-        {showBooks && <GetBooks />}
-      </div>
+        {activeComponent === 'products' && <GetProducts />}
+        {activeComponent === 'books' && <GetBooks />}
+        {activeComponent === 'borrowed' && <GetBorrowed />}
+        {activeComponent === 'delivered' && <GetBooksDelivered />}
     </div>
     </>
   )

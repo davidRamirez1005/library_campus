@@ -158,7 +158,7 @@ export const findProductCloseDate = [
         }
     },
     {
-        $limit: 5
+        $limit: 30
     }
 ]
 /**
@@ -170,6 +170,36 @@ export const findBooksDelivered = [
             status: "entregado",
             type: "libros"
         }
+    },
+    {
+        $lookup: {
+            from: "User",
+            localField: "user_identification",
+            foreignField: "_id",
+            as: "user"
+        }
+    },
+    {
+        $project: {
+            _id: 1,
+            title: 1,
+            description: 1,
+            type: 1,
+            status: 1,
+            user_identification: 1,
+            start_date : 1,
+            final_date : 1,
+            user: {
+            username: 1,
+            identification: 1,
+            email : 1,
+            phone : 1,
+            team : 1
+            }
+        }
+    },
+    {
+        $limit: 30
     }
 ]
 /**

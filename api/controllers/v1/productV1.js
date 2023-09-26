@@ -31,7 +31,8 @@ export const getBorrowed = async(req, res) =>{
     let coleccion = await genCollection('Product')
     let result = await coleccion.aggregate(findBorrowed).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
-}
+    console.log(...result)
+  }
 /**
  * * listar el historial de productos prestados por un usuario en especifico de la fecha mas reciente hacia atras
  */
@@ -47,9 +48,13 @@ export const getHistoryUser = async (req, res) => {
     const coleccionUser = await genCollection("User");
     
     const cursor = await coleccionUser.aggregate([...findIdUser(user_id2)]);
+    const users = await cursor.toArray();
+
+    if (users.length === 0) {
+      return res.status(404).send({ status: 404, message: "Usuario no encontrado" });
+    }
     
-    let userIdentification = (await cursor.toArray())[0]._id;
-    
+    const userIdentification = users[0]._id;
     const cursor2 = await coleccion.aggregate([...aggregateProduct(userIdentification)]);
     
     const results = await cursor2.toArray();
@@ -79,6 +84,7 @@ export const getBooksDelivered = async(req, res) =>{
     let coleccion = await genCollection('Product')
     let result = await coleccion.aggregate(findBooksDelivered).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+    console.log(result);
 }
 /**
  * * listar los productos libros con status reservado
