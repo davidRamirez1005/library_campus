@@ -40,8 +40,6 @@ export default function GetBorrowed() {
     useEffect(()=>{
         listar()
     }, [])
-    let {...bookssd} = books
-    console.log("hola ",bookssd)
     return (
         <>
     {showTable && (
@@ -64,7 +62,7 @@ export default function GetBorrowed() {
                     </tr>
                 </thead>
                 <tbody>
-                    {bookssd.map((product) => (
+                    {books.map((product) => (
                     <tr key={product._id}>
                         <td>{product.title}</td>
                         <td>{product.description}</td>
@@ -72,11 +70,11 @@ export default function GetBorrowed() {
                         <td>{product.status}</td>
                         <td>{product.start_date}</td>
                         <td>{product.final_date}</td>
-                        <td>{product.user.username}</td>
-                        <td>{product.user.identification}</td>
-                        <td>{product.user.email}</td>
-                        <td>{product.user.phone}</td>
-                        <td>{product.user.team}</td>
+                        <td>{product.user[0].username}</td>
+                        <td>{product.user[0].identification}</td>
+                        <td>{product.user[0].email}</td>
+                        <td>{product.user[0].phone}</td>
+                        <td>{product.user[0].team}</td>
                     </tr>
                     ))}
                 </tbody>

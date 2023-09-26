@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <>
       <Menu />
-      <br /><br />
+      <br />
       <div className="row" >
       <br />
         <div className={`col-4 ${styles.col_4}`} style={{display:"flex", justifyContent : "center", marginTop : "4rem"}}>
