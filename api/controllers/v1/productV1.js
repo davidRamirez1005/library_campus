@@ -84,6 +84,7 @@ export const getBooksDelivered = async(req, res) =>{
     let coleccion = await genCollection('Product')
     let result = await coleccion.aggregate(findBooksDelivered).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+    console.log(result);
 }
 /**
  * * listar los productos libros con status reservado
