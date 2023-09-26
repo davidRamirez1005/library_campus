@@ -1,9 +1,10 @@
 .tableContainer{
-    margin: 3%;
+    margin: 1%;
 }
 .table {
     border-collapse: collapse;
-    width: 100%;
+    width: 98%;
+    display: table;
 }
 
 .table th,
