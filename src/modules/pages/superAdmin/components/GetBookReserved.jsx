@@ -8,8 +8,7 @@ import Stack from '@mui/material/Stack';
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
-
-export default function GetBorrowed() {
+export default function GetBookReserved() {
     const auth = useAuth();
 
     let[isLoading, setIsloading] = useState(false)
@@ -21,10 +20,10 @@ export default function GetBorrowed() {
     const listar = async () => {
         setIsloading(true)
         try {
-            const response = await axios.get(`http://${backendUrl}/Product/listar/prestados`, {
+            const response = await axios.get(`http://${backendUrl}/Product/listar/reservados`, {
                 headers : {
                     'Content-Type': 'application/json',
-                    'Accept-Version': '1.2.0',
+                    'Accept-Version': '1.0.0',
                     'Authorization': `Bearer ${bearerAuth}`,
                 }
             })
@@ -46,7 +45,7 @@ export default function GetBorrowed() {
             const response2 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept-Version': '1.0.0',
+                    'Accept-Version': '1.3.0',
                     'Authorization': `Bearer ${bearerAuth}`,
                 },
             });
@@ -66,12 +65,12 @@ export default function GetBorrowed() {
     }, [])
     return (
         <>
-        { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
-        <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
-            producto en estado entregado con exito!
-        </Alert>
-        </Stack>}
-    {showTable && (
+            { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
+            <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
+                producto en estado prestado con exito!
+            </Alert>
+            </Stack>}
+            {showTable && (
             <div className={styleTable.tableContainer}>
                 <table className={styleTable.table}>
                 <thead>
@@ -105,7 +104,7 @@ export default function GetBorrowed() {
                         <td>{product.user[0].phone}</td>
                         <td>{product.user[0].team}</td>
                         <td>
-                            <button  style={{padding : "1%"}} onClick={() => update(product._id)}>entregado</button>
+                            <button style={{padding : "1%"}} onClick={() => update(product._id)}>prestado</button>
                         </td>
                     </tr>
                     ))}
@@ -113,9 +112,9 @@ export default function GetBorrowed() {
                 </table>
             </div>
         )}
-    <div className={styleTable.loadinQuery}>
-        {isLoading && <LoadingQuery />}
-    </div>
+        <div className={styleTable.loadinQuery}>
+            {isLoading && <LoadingQuery />}
+        </div>
         </>
     )
 }

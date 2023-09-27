@@ -38,7 +38,7 @@ export default function GetHistoryUser() {
             }
         } catch (error) {
             console.error(error);
-            setUserNotFound(true);
+            return setUserNotFound(true);
         } finally {
             setIsLoading(false);
         }
@@ -48,19 +48,22 @@ export default function GetHistoryUser() {
     return (
         <>
             <input
-                style={{ marginLeft: "1rem" }}
+                className={styleTable.inputCedula}
                 type="text"
                 placeholder="Ingrese la cédula"
                 value={cedula}
                 onChange={(e) => setCedula(e.target.value)}
             />
-            <button onClick={listar}>Buscar</button>
+            <button className={styleTable.buttonBuscar} onClick={listar}>Buscar</button>
             
             {userNotFound && (
-                <h2 style={{ color: 'red', marginLeft : "2rem" }}>Usuario no encontrado</h2>
+                <div>
+                    <br />
+                    <h3 style={{ color: 'red', marginLeft : "3rem" }} >Usuario no encontrado</h3>
+                </div>
+                
             )}
 
-            {/* Verificar si se debe mostrar la tabla */}
             {showTable && (
                 <div className={styleTable.tableContainer}>
                     <table className={styleTable.table}>

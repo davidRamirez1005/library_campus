@@ -44,3 +44,24 @@
     display: flex;
     justify-content: center;
 }
+.inputCedula{
+    margin-left: 2rem;
+    background-color: white;
+    margin-right: 1rem;
+    padding: 0.2rem;
+    font-size: inherit;
+    color: black;
+    border-color: transparent;
+    border-radius: 5px;
+}
+.buttonBuscar{
+        padding: 0.2rem;
+        font-size: inherit;
+        border-radius: 6px;
+        border-color: transparent;
+        cursor: pointer;
+    }
+.buttonOpcion{
+    margin: 3%;
+    padding: 1%;
+}

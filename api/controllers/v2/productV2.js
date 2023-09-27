@@ -49,7 +49,7 @@ export const updateStatusDelivery = async (req, res) => {
         let result = await coleccion.updateOne(filter, update);
 
         if (result.modifiedCount === 1) {
-            res.send('Estado del producto actualizado con éxito');
+            res.status(202).send('Estado del producto actualizado con éxito');
         } else {
             res.send('Estado del producto no actualizado');
         }
@@ -78,7 +78,7 @@ export const updateStatusSpend = async (req, res) => {
         const result = await coleccion.updateOne(filter, update);
 
         if (result.modifiedCount === 1) {
-            res.send('Estado del producto actualizado con éxito');
+            res.status(202).send('Estado del producto actualizado con éxito');
         } else {
             res.send('Estado del producto no actualizado');
         }
@@ -90,5 +90,96 @@ export const updateStatusSpend = async (req, res) => {
         console.error('Actualización utilizada:', update);
 
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+/**
+ * * actualizar un status de producto de entregado a disponible por medio del _id
+ */
+export const updateStatusAvailable = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id3 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const filter = { _id: product_id3 };
+        const update = { $set: { status: "disponible" } };
+
+        const result = await coleccion.updateOne(filter, update);
+
+        if (result.modifiedCount === 1) {
+            res.status(202).send('Estado del producto actualizado con éxito');
+        } else {
+            res.send('Estado del producto no actualizado');
+        }
+    } catch (err) {
+        console.error(err);
+
+        console.error('Error al actualizar el estado del producto:', err.message);
+        console.error('Filtro utilizado:', filter);
+        console.error('Actualización utilizada:', update);
+
+        res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+/**
+ * * actualizar un status de producto de entregado a disponible por medio del _id
+ */
+export const updateStatusBorrowed = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id3 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const filter = { _id: product_id3 };
+        const update = { $set: { status: "prestado" } };
+
+        const result = await coleccion.updateOne(filter, update);
+
+        if (result.modifiedCount === 1) {
+            res.status(202).send('Estado del producto actualizado con éxito');
+        } else {
+            res.send('Estado del producto no actualizado');
+        }
+    } catch (err) {
+        console.error(err);
+
+        console.error('Error al actualizar el estado del producto:', err.message);
+        console.error('Filtro utilizado:', filter);
+        console.error('Actualización utilizada:', update);
+
+        res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+/**
+ * * eliminar un producto por medio del _id
+ */
+export const deleteProduct = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id4 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const filter = { _id: product_id4 };
+
+        const result = await coleccion.deleteOne(filter);
+
+        if (result.deletedCount === 1) {
+            res.status(202).send('Producto eliminado con éxito');
+        } else {
+            res.send('Producto no eliminado');
+        }
+    } catch (err) {
+        console.error(err);
+
+        console.error('Error al eliminar el producto:', err.message);
+        console.error('Filtro utilizado:', filter);
+
+        res.status(500).send('Error al eliminar el producto en la base de datos.');
     }
 }

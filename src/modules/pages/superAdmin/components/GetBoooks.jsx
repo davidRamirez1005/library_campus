@@ -12,6 +12,8 @@ export default function GetBooks() {
     let [isLoading, setIsLoading] = useState(false);
     let [products, setProducts] = useState([]);
     let [showTable, setShowTable] = useState(false);
+    let [isTrue, setIsTrue] = useState(false);
+    let bearerAuth = auth.user.bearer
     
 
     const listar = async () => {
@@ -21,7 +23,7 @@ export default function GetBooks() {
             headers: {
             'Content-Type': 'application/json',
             'Accept-Version': '1.1.0',
-            'Authorization': `Bearer ${auth.user.bearer}`,
+            'Authorization': `Bearer ${bearerAuth}`,
             },
         });
         if (response.status != 200) {
@@ -37,13 +39,38 @@ export default function GetBooks() {
         setShowTable(!showTable);
     };
 
+    const lend = async (idProduct) => {
+        try {
+            const response2 = await axios.post(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.3.0',
+                    'Authorization': `Bearer ${bearerAuth}`,
+                },
+            });
+        if (response2.status != 202) {
+            throw new Error('Error en la solicitud');
+        }
+        setIsTrue(true)
+        } catch (error) {
+            console.log(error);
+            return alert('error en la consulta');
+        } finally {
+        }
+    };
+
     useEffect(() => {
         listar();
     }, []);
 
     return (
     <>
-    {showTable && (
+        { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
+        <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
+            producto en estado prestado con exito!
+        </Alert>
+        </Stack>}
+        {showTable && (
             <div className={styleTable.tableContainer}>
                 <table className={styleTable.table}>
                 <thead>
@@ -52,6 +79,7 @@ export default function GetBooks() {
                     <th>Descripción</th>
                     <th>Tipo</th>
                     <th>Estado</th>
+                    <th>opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +89,9 @@ export default function GetBooks() {
                         <td>{product.description}</td>
                         <td>{product.type}</td>
                         <td>{product.status}</td>
+                        <td>
+                            <button style={{padding : "1%"}} onClick={() => lend(product._id)}>prestar</button>
+                        </td>
                     </tr>
                     ))}
                 </tbody>

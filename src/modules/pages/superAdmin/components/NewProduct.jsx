@@ -109,8 +109,14 @@ export default function NewProduct() {
                             </select>
                         </div>  
                         <div className={style.input_container}>
-                            <input className={style.input_pwd} type="text" value={status} placeholder='estado' onChange={(e) => setStatus(e.target.value)}/>
-                        </div>
+                            <select className={style.input_pwd}  name="status" placeholder="Ingrese estado" onChange={(e) => setStatus(e.target.value)}>
+                                <option value="estado">estado</option>
+                                <option value="disponible">disponible</option>
+                                <option value="agotado">agotado</option>
+                                <option value="proximo">proximo</option>
+
+                            </select>
+                        </div>  
                         {/* <div className={style.input_container}>
                             <input className={style.input_pwd} type="text" value={start_date} placeholder='fecha inicio' onChange={(e) => setStart(e.target.value)}/>
                         </div>

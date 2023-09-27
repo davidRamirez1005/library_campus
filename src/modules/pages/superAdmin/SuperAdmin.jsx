@@ -11,6 +11,8 @@ import GetBooks from './components/GetBoooks';
 import GetBorrowed from './components/GetBorrowed';
 import GetHistoryUser from './components/GetHistoryUser';
 import GetBooksDelivered from './components/GetBooksDelivered';
+import GetBookReserved from './components/GetBookReserved';
+// import PutProductStatus from './components/PutProductStatus';
 
 export default function SuperAdmin() {
   const navigate = useNavigate();
@@ -35,6 +37,10 @@ export default function SuperAdmin() {
     setActiveComponent('delivered');
   };
 
+  const handleShowReserved = () => {
+    setActiveComponent('reserved');
+  };
+
   const handleShowGetHistory = () => {
     setShowGetHistory(!showGetHistory);
   };
@@ -44,6 +50,7 @@ export default function SuperAdmin() {
     <Menu />
     <br /><br /><br /><br />
 
+    <div>
     <div className={styleContext.title_2}><span>Perfil Super Admin</span></div>
     <br />
     <div className={styleContext.form_title}><span>Hola, {auth.user.name}</span></div>
@@ -71,18 +78,22 @@ export default function SuperAdmin() {
       </button>
     </div>
     <br /><br />
+    </div>
 
     <hr />
 
+          {/* <PutProductStatus /> */}
     <br /><br />
     <div className="row">
+      <div className="col">
+          <button className={style.btnstyle} onClick={handleShowGetHistory} style={{marginLeft :"2rem"}}>Historal usuario</button> 
+          <br />
+          {showGetHistory && <GetHistoryUser />}
 
-    <div className="col">
-        <button className={style.btnstyle} onClick={handleShowGetHistory} style={{marginLeft :"2rem"}}>Historal usuario</button> 
-        <br />
-        {showGetHistory && <GetHistoryUser />}
-    <br /><br />
-    </div>
+          
+
+        <br /><br />
+      </div>
     </div>
     <div className={`row ${style.sectionNav}`}>
       <div className={`col ${style.divButton}`}>
@@ -97,12 +108,16 @@ export default function SuperAdmin() {
       <div className={`col ${style.divButton}`}>
         <button className={style.btnstyle} onClick={handleShowDelivered}>Libros entregados</button> 
       </div>
+      <div className={`col ${style.divButton}`}>
+        <button className={style.btnstyle} onClick={handleShowReserved}>Libros reservados</button> 
+      </div>
     </div>
     <div className="row">
         {activeComponent === 'products' && <GetProducts />}
         {activeComponent === 'books' && <GetBooks />}
         {activeComponent === 'borrowed' && <GetBorrowed />}
         {activeComponent === 'delivered' && <GetBooksDelivered />}
+        {activeComponent === 'reserved' && <GetBookReserved />}
     </div>
     </>
   )
