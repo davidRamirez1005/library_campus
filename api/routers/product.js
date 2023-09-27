@@ -2,7 +2,7 @@ import {limitget} from '../config/configLimit.js'
 import Routes from 'express';
 import routesVersioning  from 'express-routes-versioning';
 import {getProductAvailable, getAvaliableBooks, getBorrowed, getHistoryUser, getProductCloseDate, getBooksDelivered, getBooksReserved} from '../controllers/v1/productV1.js'
-import {aggregateNewProduct, updateStatusDelivery, updateStatusSpend} from '../controllers/v2/productV2.js'
+import {aggregateNewProduct, updateStatusDelivery, updateStatusSpend, updateStatusAvailable, updateStatusBorrowed, deleteProduct} from '../controllers/v2/productV2.js'
 // import {aggregateNewAdmin, deleteAdmin} from '../controllers/v2/adminV2.js'
 
 const appProduct = Routes();
@@ -36,12 +36,15 @@ appProduct.post('/agregar/producto', version({
 
 appProduct.put('/actualizar/producto/:product_id?', version({
     "~1.0.0": updateStatusDelivery,
-    "~1.1.0": updateStatusSpend
+    "~1.1.0": updateStatusSpend,
+    "~1.2.0": updateStatusAvailable,
+    "~1.3.0": updateStatusBorrowed
 }))
 
-// appProduct.delete('/eliminar/admin', version({
-//     "^1.0.0": deleteAdmin
-// }))
+appProduct.delete('/eliminar/producto/:product_id?', version({
+    "~1.1.0" : deleteProduct
+    
+}))
 
 
 export default appProduct;
