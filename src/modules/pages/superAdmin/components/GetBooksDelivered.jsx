@@ -59,7 +59,9 @@ export default function GetBooksDelivered() {
         } finally {
         }
     };
-
+    setTimeout(() => {
+        setIsTrue(false);
+    }, 10000);
     useEffect(()=>{
         listar()
     }, [])
@@ -104,7 +106,7 @@ export default function GetBooksDelivered() {
                         <td>{product.user[0].phone}</td>
                         <td>{product.user[0].team}</td>
                         <td>
-                            <button style={{padding : "1%"}} onClick={() => update(product._id)}>disponible</button>
+                            <button className={styleTable.buttonOpcion} onClick={() => update(product._id)}>Disponible</button>
                         </td>
                     </tr>
                     ))}

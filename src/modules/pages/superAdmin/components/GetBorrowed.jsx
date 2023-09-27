@@ -60,7 +60,9 @@ export default function GetBorrowed() {
         } finally {
         }
     };
-
+    setTimeout(() => {
+        setIsTrue(false);
+    }, 10000);
     useEffect(()=>{
         listar()
     }, [])
@@ -105,7 +107,7 @@ export default function GetBorrowed() {
                         <td>{product.user[0].phone}</td>
                         <td>{product.user[0].team}</td>
                         <td>
-                            <button  style={{padding : "1%"}} onClick={() => update(product._id)}>entregado</button>
+                            <button  className={styleTable.buttonOpcion} onClick={() => update(product._id)}>Entregado</button>
                         </td>
                     </tr>
                     ))}

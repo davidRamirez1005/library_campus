@@ -5,6 +5,8 @@ import styleTable from '../../../../assets/css/table.module.css'
 import LoadingQuery from '../../../../shared/LoadingQuery';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
@@ -15,6 +17,7 @@ export default function GetProducts() {
     let [products, setProducts] = useState([]);
     let [showTable, setShowTable] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
+    let [open, setOpen] = React.useState(false);
     
 
     let bearerAuth = auth.user.bearer
@@ -59,8 +62,8 @@ export default function GetProducts() {
         } finally {
         }
     };
-
     const deleteProduct = async (idProduct) => {
+        
         try {
             const response3 = await axios.delete(`http://${backendUrl}/Product/eliminar/producto/${idProduct}`,{
                 headers: {
@@ -72,24 +75,32 @@ export default function GetProducts() {
         if (response3.status != 202) {
             throw new Error('Error en la solicitud');
         }
-        console.log("eliminado bien")
+        setOpen(true)
         } catch (error) {
             console.log(error);
             return alert('error en la consulta');
         } finally {
         }
     };
-
+    setTimeout(() => {
+        setIsTrue(false);
+    }, 10000);
     useEffect(() => {
         listar();
     }, []);
     return (
     <>
-    { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
-            <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
+    { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} autoHideDuration={6000} spacing={2}>
+            <Alert autoHideDuration={6000}  sx={{ zIndex: '999' }} variant="filled" severity="success">
                 producto en estado agotado con exito!
             </Alert>
         </Stack>}
+    { open && <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '20%' }}>
+            Producto eliminado con exito
+        </Alert>
+        </Snackbar>
+    }
     {showTable && (
             <div className={styleTable.tableContainer}>
                 <table className={styleTable.table}>
@@ -112,9 +123,9 @@ export default function GetProducts() {
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            <button className={styleTable.buttonOpcion} onClick={() => updateExhaust(product._id)}>Actualizar</button>
-                            <button className={styleTable.buttonOpcion} onClick={() => updateExhaust(product._id)}>Agotar</button>
-                            <button className={styleTable.buttonOpcion} onClick={() => deleteProduct(product._id)}>Eliminar</button>
+                            <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Actualizar</button>
+                            <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Agotar</button>
+                            <button className={styleTable.buttonOpcion2} onClick={() => deleteProduct(product._id)}>Eliminar</button>
                         </td>
                     </tr>
                     ))}

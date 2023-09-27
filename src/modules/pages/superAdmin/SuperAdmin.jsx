@@ -51,9 +51,9 @@ export default function SuperAdmin() {
     <br /><br /><br /><br />
 
     <div>
-    <div className={styleContext.title_2}><span>Perfil Super Admin</span></div>
+    <div className={styleContext.title_2}><span>ADMINISTRACIÓN</span></div>
     <br />
-    <div className={styleContext.form_title}><span>Hola, {auth.user.name}</span></div>
+    <div className={styleContext.form_title}><span>Hola, {auth.user.name} 🚀</span></div>
     <br /><br />
     <div className={style.btnRegistrer}>
       <button className={style.button_aggregate} value="registrar" onClick={() => {

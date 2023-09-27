@@ -54,7 +54,12 @@ export default function NewProduct() {
                 setIsLoading(false);
             }
         };
-
+        setTimeout(() => {
+            setIsTrue(false);
+        }, 2000);
+        setTimeout(() => {
+            setIsError(false);
+        }, 10000);
 
     return (
         <>

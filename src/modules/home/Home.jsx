@@ -31,7 +31,7 @@ function Home() {
             <div className={style.background}></div>
             <img src={book} className={style.book} alt="book"  width={300}/>
         </div>
-        <h1 className={style.tittleHome}>LIBRERIA</h1>
+        <h1 className={style.tittleHome}>LIBRERIA CAMPUS</h1>
         <Wave />
         <div className={style.container}>
             <div className="row">
@@ -51,6 +51,8 @@ function Home() {
                 <div className="col" style={{display : "flex", justifyContent : "center"}}>
                 <img src={rocket} className={style.rocket} alt="rocket"  width={400}/>
                 </div>
+            </div>
+            <div className={`row ${style.sectionInfo}`}>
             </div>
             <BasicSpeedDial />
         </div>

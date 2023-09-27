@@ -53,7 +53,12 @@ export default function Registrer() {
                 setIsLoading(false);
             }
         };
-        
+        setTimeout(() => {
+            setIsTrue(false);
+        }, 20000);
+        setTimeout(() => {
+            setIsError(false);
+        }, 10000);
 return (
     <>
         <Menu />
@@ -70,7 +75,7 @@ return (
         "rol" : 2 
         */}
 
-        <div className={style.title_2}><span>Registrarse</span></div>
+        <div className={style.title_2}><span>REGISTRARSE</span></div>
         <br /><br />
         <div>
         { isError  &&  <Stack sx={{ width: '100%' }} spacing={2}>

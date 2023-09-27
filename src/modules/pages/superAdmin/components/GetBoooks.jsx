@@ -58,7 +58,9 @@ export default function GetBooks() {
         } finally {
         }
     };
-
+    setTimeout(() => {
+        setIsTrue(false);
+    }, 10000);
     useEffect(() => {
         listar();
     }, []);
@@ -90,7 +92,7 @@ export default function GetBooks() {
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            <button style={{padding : "1%"}} onClick={() => lend(product._id)}>prestar</button>
+                            <button style={{padding : "3%"}} className={styleTable.buttonOpcion} onClick={() => lend(product._id)}>Prestar</button>
                         </td>
                     </tr>
                     ))}

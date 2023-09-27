@@ -17,7 +17,7 @@ export default function NewAdmin() {
     let [identification, setIdentification] = useState('123654788')
     let [email, setEmail] = useState('nuevo@example.com')
     let [password, setPassword] = useState('secreto')
-    let [rol, setRol] = useState(1)
+    let [rol, setRol] = useState(3)
     let [isLoading, setIsLoading] = useState(false);
     let [isError, setIsError] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
@@ -63,6 +63,12 @@ export default function NewAdmin() {
                 setIsLoading(false);
             }
         };
+        setTimeout(() => {
+            setIsTrue(false);
+        }, 20000);
+        setTimeout(() => {
+            setIsError(false);
+        }, 10000);
     return (
         <>
             <Menu />
