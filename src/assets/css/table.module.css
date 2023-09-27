@@ -61,3 +61,7 @@
         border-color: transparent;
         cursor: pointer;
     }
+.buttonOpcion{
+    margin: 3%;
+    padding: 1%;
+}
