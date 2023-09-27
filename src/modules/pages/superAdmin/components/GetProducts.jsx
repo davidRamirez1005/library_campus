@@ -4,7 +4,6 @@ import { useAuth } from '../../../auth/context/auth';
 import styleTable from '../../../../assets/css/table.module.css'
 import LoadingQuery from '../../../../shared/LoadingQuery';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
@@ -15,7 +14,6 @@ export default function GetProducts() {
     let [isLoading, setIsLoading] = useState(false);
     let [products, setProducts] = useState([]);
     let [showTable, setShowTable] = useState(false);
-    let [idProduct, setIdProduct] = useState(0);
     let [isTrue, setIsTrue] = useState(false);
     
 
@@ -42,7 +40,7 @@ export default function GetProducts() {
         }
         setShowTable(!showTable);
     };
-    const update = async (idProduct) => {
+    const updateExhaust = async (idProduct) => {
         try {
             const response2 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
                 headers: {
@@ -55,6 +53,26 @@ export default function GetProducts() {
             throw new Error('Error en la solicitud');
         }
         setIsTrue(true)
+        } catch (error) {
+            console.log(error);
+            return alert('error en la consulta');
+        } finally {
+        }
+    };
+
+    const deleteProduct = async (idProduct) => {
+        try {
+            const response3 = await axios.delete(`http://${backendUrl}/Product/eliminar/producto/${idProduct}`,{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.1.0',
+                    'Authorization': `Bearer ${bearerAuth}`,
+                },
+            });
+        if (response3.status != 202) {
+            throw new Error('Error en la solicitud');
+        }
+        console.log("eliminado bien")
         } catch (error) {
             console.log(error);
             return alert('error en la consulta');
@@ -94,9 +112,9 @@ export default function GetProducts() {
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            <button onClick={() => update(product._id)}>Actualizar</button>
-                            <button onClick={() => update(product._id)}>Agotar</button>
-                            <button onClick={() => update(product._id)}>Eliminar</button>
+                            <button className={styleTable.buttonOpcion} onClick={() => updateExhaust(product._id)}>Actualizar</button>
+                            <button className={styleTable.buttonOpcion} onClick={() => updateExhaust(product._id)}>Agotar</button>
+                            <button className={styleTable.buttonOpcion} onClick={() => deleteProduct(product._id)}>Eliminar</button>
                         </td>
                     </tr>
                     ))}

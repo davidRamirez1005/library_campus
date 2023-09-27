@@ -50,6 +50,7 @@ export default function SuperAdmin() {
     <Menu />
     <br /><br /><br /><br />
 
+    <div>
     <div className={styleContext.title_2}><span>Perfil Super Admin</span></div>
     <br />
     <div className={styleContext.form_title}><span>Hola, {auth.user.name}</span></div>
@@ -77,6 +78,7 @@ export default function SuperAdmin() {
       </button>
     </div>
     <br /><br />
+    </div>
 
     <hr />
 
