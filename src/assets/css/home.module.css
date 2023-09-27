@@ -17,7 +17,7 @@
 }
 .tittleHome {
     color: #ffffff;
-    font-size: clamp(2.5rem, 4vw, 5rem);
+    font-size: clamp(2.5rem, 4vw, 4rem);
     display: flex;
     justify-content: center;
     margin-bottom: -8vh;
@@ -52,13 +52,18 @@ h3{
   justify-content: center;
   margin-bottom: 4vh;
 }
+.sectionInfo{
+  background-color: #7ea1bf;
+  border-radius: 40% 40% 0 0;
+  height: 75vh;
+}
 .starContainer{
   display: flex;
   justify-content: end;
 }
 @media (max-width: 1000px) {
   .imgBook img{
-    width: 50%;
+    width: 36%;
   }
   .tittleHome {
     margin-bottom: 2vh;

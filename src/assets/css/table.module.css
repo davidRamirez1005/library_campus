@@ -62,6 +62,25 @@
         cursor: pointer;
     }
 .buttonOpcion{
+    padding: 6%;
+    border-radius: 15px;
+    font-weight: 900;
+    border: transparent;
+    display: flex;
+    justify-content: center;
+}
+.buttonOpcion:hover{
+    background-color: #B1D0E0;
+    color: #0A2647;
+}
+.buttonOpcion2{
+    border-radius: 15px;
+    font-weight: 900;
+    border: transparent;
     margin: 3%;
-    padding: 1%;
+    padding: 2%;
+}
+.buttonOpcion2:hover{
+    background-color: #B1D0E0;
+    color: #0A2647;
 }

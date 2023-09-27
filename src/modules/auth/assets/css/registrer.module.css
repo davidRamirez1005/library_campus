@@ -1,6 +1,5 @@
 .form {
     position: relative;
-    display: block;
     margin-top: -0.5rem;
     text-align: center;
     padding: 4.2rem;
@@ -15,7 +14,7 @@
     top: -3rem;
 }
 .formContainer{
-    display: flex;
+    display: grid;
     justify-content: center;
     flex-wrap: wrap;
 
@@ -33,7 +32,7 @@
 .carga{
     display: flex;
     position: relative;
-    left: 4%;
+    left: 6%;
 }
 /*------input and submit section-------*/
 
