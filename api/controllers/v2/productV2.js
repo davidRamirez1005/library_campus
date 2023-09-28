@@ -124,7 +124,7 @@ export const updateStatusAvailable = async (req, res) => {
     }
 }
 /**
- * * actualizar un status de producto de entregado a disponible por medio del _id
+ * * actualizar un status de producto a prestado por medio del _id
  */
 export const updateStatusBorrowed = async (req, res) => {
     if (!req.rateLimit) return;
@@ -151,6 +151,68 @@ export const updateStatusBorrowed = async (req, res) => {
         console.error('Filtro utilizado:', filter);
         console.error('Actualización utilizada:', update);
 
+        res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+/**
+ * * actualizar un libro a prestado con los datos del usuario
+ */
+export const updateBookUser = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id3 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const filter = { _id: product_id3 };
+        const update = { $set: { 
+            status: "prestado",
+            start_date: req.body.start_date,
+            final_date: req.body.final_date,
+            user_identification: Number(req.body.user_identification)
+        } };
+
+        const result = await coleccion.updateOne(filter, update);
+
+        if (result.modifiedCount === 1) {
+            res.status(202).send('Estado del producto actualizado con éxito');
+        } else {
+            res.send('Estado del producto no actualizado');
+        }
+    } catch (err) {
+        console.error('Error al actualizar el estado del producto:', err.message);
+        res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+/**
+ * * actualizar un libro a prestado con los datos del usuario
+ */
+export const updateBookUserReserved = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id3 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const filter = { _id: product_id3 };
+        const update = { $set: { 
+            status: "reservado",
+            start_date: req.body.start_date,
+            final_date: req.body.final_date,
+            user_identification: Number(req.body.user_identification)
+        } };
+
+        const result = await coleccion.updateOne(filter, update);
+
+        if (result.modifiedCount === 1) {
+            res.status(202).send('Estado del producto actualizado con éxito');
+        } else {
+            res.send('Estado del producto no actualizado');
+        }
+    } catch (err) {
+        console.error('Error al actualizar el estado del producto:', err.message);
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
 }
