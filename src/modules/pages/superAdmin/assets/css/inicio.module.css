@@ -84,3 +84,7 @@
 .button_aggregate:active {
     transform: scale(0.95);
 }
+.containerUsers{
+    margin-left: 1%;
+    margin-right: 1%;
+}

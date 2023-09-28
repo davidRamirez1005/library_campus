@@ -118,18 +118,12 @@ export default function SuperAdmin() {
     </div>
     <br /><br />
     <div className="row">
-      <h2>listar todos los usuarios registrados</h2>
-      <br /><br />
-
-
-
-        <button>sdsa</button>
-        <h1>dfsdf</h1>
-        <GetUsers />
-
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
+      <div className={style.containerUsers}>
+      <h2>Listar todos los usuarios registrados:</h2> 
+      <span> <GetUsers /> </span>
+      </div>
     </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </>
   )
 }
