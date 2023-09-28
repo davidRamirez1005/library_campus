@@ -55,11 +55,10 @@
     border-radius: 5px;
 }
 .buttonBuscar{
-        padding: 0.2rem;
-        font-size: inherit;
-        border-radius: 6px;
-        border-color: transparent;
-        cursor: pointer;
+    padding: 0.2rem;
+    font-size: inherit;
+    border-radius: 6px;
+    border-color: transparent;
     }
 .buttonOpcion{
     padding: 6%;
@@ -68,6 +67,7 @@
     border: transparent;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 .buttonOpcion:hover{
     background-color: #B1D0E0;
@@ -79,6 +79,7 @@
     border: transparent;
     margin: 3%;
     padding: 2%;
+    cursor: pointer;
 }
 .buttonOpcion2:hover{
     background-color: #B1D0E0;

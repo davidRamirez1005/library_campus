@@ -17,7 +17,7 @@
 }
 .tittleHome {
     color: #ffffff;
-    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-size: clamp(2.5rem, 3vw, 4rem);
     display: flex;
     justify-content: center;
     margin-bottom: -8vh;
