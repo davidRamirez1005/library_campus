@@ -62,7 +62,7 @@ export default function GetBorrowed() {
     };
     setTimeout(() => {
         setIsTrue(false);
-    }, 10000);
+    }, 12000);
     useEffect(()=>{
         listar()
     }, [])

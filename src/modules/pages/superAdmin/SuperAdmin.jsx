@@ -119,6 +119,10 @@ export default function SuperAdmin() {
         {activeComponent === 'delivered' && <GetBooksDelivered />}
         {activeComponent === 'reserved' && <GetBookReserved />}
     </div>
+    <br /><br />
+    <div className="row">
+      <h2>listar todos los usuarios registrados</h2>
+    </div>
     </>
   )
 }

@@ -58,6 +58,25 @@ export default function GetBooks() {
         } finally {
         }
     };
+    const post = async (idProduct) => {
+        try {
+            const response2 = await axios.post(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.3.0',
+                    'Authorization': `Bearer ${bearerAuth}`,
+                },
+            });
+        if (response2.status != 202) {
+            throw new Error('Error en la solicitud');
+        }
+        setIsTrue(true)
+        } catch (error) {
+            console.log(error);
+            return alert('error en la consulta');
+        } finally {
+        }
+    };
     setTimeout(() => {
         setIsTrue(false);
     }, 10000);
@@ -77,6 +96,7 @@ export default function GetBooks() {
                 <table className={styleTable.table}>
                 <thead>
                     <tr>
+                    <th>ID</th>
                     <th>Título</th>
                     <th>Descripción</th>
                     <th>Tipo</th>
@@ -87,12 +107,14 @@ export default function GetBooks() {
                 <tbody>
                     {products.map((product) => (
                     <tr key={product._id}>
+                        <td>{product._id}</td>
                         <td>{product.title}</td>
                         <td>{product.description}</td>
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            <button style={{padding : "3%"}} className={styleTable.buttonOpcion} onClick={() => lend(product._id)}>Prestar</button>
+                            <button style={{padding : "3%"}} className={styleTable.buttonOpcion2} onClick={() => lend(product._id)}>Prestar</button>
+                            <button style={{padding : "3%"}} className={styleTable.buttonOpcion2} onClick={() => lend(product._id)}>Reservar</button>
                         </td>
                     </tr>
                     ))}
