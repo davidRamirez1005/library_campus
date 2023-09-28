@@ -12,7 +12,7 @@ import GetBorrowed from './components/GetBorrowed';
 import GetHistoryUser from './components/GetHistoryUser';
 import GetBooksDelivered from './components/GetBooksDelivered';
 import GetBookReserved from './components/GetBookReserved';
-// import PutProductStatus from './components/PutProductStatus';
+import GetUsers from './components/GetUsers';
 
 export default function SuperAdmin() {
   const navigate = useNavigate();
@@ -89,9 +89,6 @@ export default function SuperAdmin() {
           <button className={style.btnstyle} onClick={handleShowGetHistory} style={{marginLeft :"2rem"}}>Historal usuario</button> 
           <br />
           {showGetHistory && <GetHistoryUser />}
-
-          
-
         <br /><br />
       </div>
     </div>
@@ -122,6 +119,16 @@ export default function SuperAdmin() {
     <br /><br />
     <div className="row">
       <h2>listar todos los usuarios registrados</h2>
+      <br /><br />
+
+
+
+        <button>sdsa</button>
+        <h1>dfsdf</h1>
+        <GetUsers />
+
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     </div>
     </>
   )
