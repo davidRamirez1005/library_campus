@@ -182,7 +182,16 @@ export const updateBookUser = async (req, res) => {
                 user_identification: userDoc._id
             }
         };
+        // Valida que la fecha final sea mayor a la fecha inicial
+        if (req.body.final_date <= req.body.start_date) {
+            return res.status(400).send('La fecha final debe ser mayor a la fecha inicial');
+        }
 
+        // Valida que la fecha final no supere 5 días
+        const delta = req.body.final_date - req.body.start_date;
+        if (delta.days > 5) {
+            return res.status(400).send('La reserva no puede ser mayor a 5 días');
+        }
         const result = await coleccion.updateOne(filter, update);
 
         if (result.modifiedCount === 1) {
@@ -226,6 +235,16 @@ export const updateBookUserReserved = async (req, res) => {
                 user_identification: userDoc._id
             }
         };
+        // Valida que la fecha final sea mayor a la fecha inicial
+        if (req.body.final_date <= req.body.start_date) {
+            return res.status(400).send('La fecha final debe ser mayor a la fecha inicial');
+        }
+
+        // Valida que la fecha final no supere 5 días
+        const delta = req.body.final_date - req.body.start_date;
+        if (delta.days > 5) {
+            return res.status(400).send('La reserva no puede ser mayor a 5 días');
+        }
 
         const result = await coleccion.updateOne(filter, update);
 
