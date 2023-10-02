@@ -14,8 +14,8 @@ export default function Login() {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    let [ROL_EMAIL, getMail] = useState('juandiegod@example.com');
-    let [ROL_PASSWORD, getCon] = useState('secreto');
+    let [ROL_EMAIL, getMail] = useState('JDavidRamirez@gmail.com');
+    let [ROL_PASSWORD, getCon] = useState('jose@1005');
     let [token, setToken] = useState('');
     let [isLoading, setIsLoading] = useState(false);
 
@@ -53,9 +53,13 @@ const login = async () => {
             'Authorization': `Bearer ${token}`,
         },
         });
+
+        
+        
         if (response.status != 200) {
             throw new Error('Error en la solicitud');
         }
+        localStorage.setItem('token', token, { expires: 1 }); 
         const data = response.data;
         setToken(data.Token);
         console.log(data.Token)

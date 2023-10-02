@@ -4,6 +4,9 @@ import { useAuth } from '../../../auth/context/auth';
 import styleTable from '../../../../assets/css/table.module.css'
 import LoadingQuery from '../../../../shared/LoadingQuery';
 import Alert from '@mui/material/Alert';
+import Dropdown from '@mui/joy/Dropdown';
+import Menu from '@mui/joy/Menu';
+import MenuButton from '@mui/joy/MenuButton';
 import Stack from '@mui/material/Stack';
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
@@ -83,13 +86,8 @@ export default function GetBorrowed() {
                     <th>Descripción</th>
                     <th>Tipo</th>
                     <th>Estado</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
-                    <th>nombre</th>
-                    <th>cc</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Team</th>
+                    <th>Fechas</th>
+                    <th>Usuario</th>
                     <th>opciones</th>
                     </tr>
                 </thead>
@@ -101,13 +99,29 @@ export default function GetBorrowed() {
                         <td>{product.description}</td>
                         <td>{product.type}</td>
                         <td>{product.status}</td>
-                        <td>{product.start_date}</td>
-                        <td>{product.final_date}</td>
-                        <td>{product.user[0].username}</td>
-                        <td>{product.user[0].identification}</td>
-                        <td>{product.user[0].email}</td>
-                        <td>{product.user[0].phone}</td>
-                        <td>{product.user[0].team}</td>
+                        <td>
+                            <Dropdown >
+                                <MenuButton style={{backgroundColor : "aliceblue", color: "#0A2647", borderRadius: "27px"}}>Ver</MenuButton>
+                                <Menu>
+                                    <h4 style={{color : "#0A2647"}}>fecha Inicio</h4>
+                                    <h4>{product.start_date}</h4>
+                                    <h4 style={{color : "#0A2647"}}>fecha entrega</h4>
+                                    <h4>{product.final_date}</h4>
+                                </Menu>
+                            </Dropdown>
+                        </td>
+                        <td>
+                            <Dropdown >
+                                <MenuButton style={{backgroundColor : "aliceblue", color: "#0A2647", borderRadius: "27px"}}>Informacion...</MenuButton>
+                                <Menu>
+                                    <h4>{product.user[0].username}</h4>
+                                    <h4>{product.user[0].email}</h4>
+                                    <h4>C.C :{product.user[0].identification}</h4>
+                                    <h4> Tel : {product.user[0].phone}</h4>
+                                    <h4>Team : {product.user[0].team}</h4>
+                                </Menu>
+                            </Dropdown>
+                        </td>
                         <td>
                             <button  className={styleTable.buttonOpcion} onClick={() => update(product._id)}>Entregado</button>
                         </td>
@@ -115,6 +129,7 @@ export default function GetBorrowed() {
                     ))}
                 </tbody>
                 </table>
+
             </div>
         )}
     <div className={styleTable.loadinQuery}>

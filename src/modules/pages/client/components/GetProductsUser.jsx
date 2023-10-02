@@ -41,14 +41,23 @@ export default function GetProductsUser() {
             'Authorization': `Bearer ${bearerAuth}`,
             },
         });
-        if (response.status != 200) {
+        if (response3.status === 404) {
+            return alert('usuario no registrado');
+        } else if (response3.status === 400) {
+            return alert('la fecha final no puede ser menor a la fecha de inicio');
+        } else if (response3.status !== 202) {
             throw new Error('Error en la solicitud');
         }
-        const productsData = response.data;
-        setProducts(productsData);
-        } catch (error) {
-            return alert('error en la consulta');
-        } finally {
+        setIsTrue(true)
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            return alert('usuario no registrado');
+        }else if (error.response && error.response.status === 400){
+            return alert('la fecha final no puede ser menor a la fecha de inicio');
+        }
+        console.log(error);
+        return alert('error en la consulta');
+    } finally {
         setIsLoading(false);
         }
         setShowTable(!showTable);

@@ -58,7 +58,7 @@ function Home() {
                 <div style={{display : "flex", justifyContent : "center",width: "-webkit-fill-available"}}>
                     <img className={style.phone} src={phone} alt="phone"/>
                 </div>
-                <div className="col">
+                <div style={{display : "flex", justifyContent : "center", alignContent : "center", flexDirection : "column", alignItems : "center"}} className="col">
                 <br /><br /><br />
                     <h3 style={{justifyContent : "center", display : "flex"}}>¿Cómo Solicitar una RESERVA?</h3>
                     <br />
@@ -72,7 +72,7 @@ function Home() {
                     </ol>
                     <p>¡Listo! Tu solicitud de reserva se procesará y lo podrás reclamar con el encargado de libros.</p>
                 </div>
-                <div className="col">
+                <div style={{display : "flex", justifyContent : "center", alignContent : "center", flexDirection : "column", alignItems : "center"}} className="col">
                 <br /><br /><br />
                     <h3 style={{justifyContent : "center", display : "flex"}}>¿Cómo Solicitar un PRESTAMO?</h3>
                     <br />
