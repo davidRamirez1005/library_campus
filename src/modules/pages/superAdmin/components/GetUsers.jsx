@@ -9,18 +9,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import style from '../assets/css/get.module.css'
 
 export default function GetUsers() {
+    
     const auth = useAuth();
     let bearerAuth = auth.user.bearer;
     const [isLoading, setIsLoading] = useState(false);
     const [checked, setChecked] = React.useState(false);
-    const [users, setUsers] = useState([]); // Nuevo estado para almacenar los usuarios
-
+    const [users, setUsers] = useState([]);
+    const [sigui, setUSigui] = useState(false);
+    
     const backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
-
+    
     const handleChange = () => {
         setChecked((prev) => !prev);
+        setUSigui((estado) => !estado);
     };
-
+    
+    // setUSigui(false)
     const listar = async () => {
         setIsLoading(true);
         try {
@@ -37,7 +41,8 @@ export default function GetUsers() {
             const usersData = response.data;
             setUsers(usersData);
         } catch (error) {
-            alert('Error en la consulta');
+            return alert('Error en la consulta');
+            
         } finally {
             setIsLoading(false);
         }
@@ -62,9 +67,18 @@ export default function GetUsers() {
                             {...(checked ? { timeout: 1000 } : {})}
                             key={user._id}
                         >
-                            <div style={{ backgroundColor: "red", color: "white", padding: "0.5%" }} className="card">
-                                <ul>
-                                    <li style={{display:"grid", rowGap : "1rem"}}>
+                            <div className={style.contentUser}>
+                            <div className={style.tools}>
+                                <span className={style.red}></span>
+                                <div className={style.circle}>
+                                <span  className={style.yellow}></span>
+                                </div>
+                                <div className={style.circle}>
+                                <span  className={style.green}></span>
+                                </div>
+                            </div>
+                                <ul style={{paddingRight : 0}}>
+                                    <li style={{display:"grid", rowGap : "1rem", color : "white"}}>
                                         <div>{user.username}</div>
                                         <div>{user.identification}</div>
                                         <div>{user.email}</div>
@@ -74,9 +88,18 @@ export default function GetUsers() {
                                 </ul>
                             </div>
                         </Grow>
-                    ))}
+                        
+                        ))}
                 </Box>
+                <br />
+                <div style={{display : "flex", justifyContent : "center", }}>
+                {sigui && <div style={{display : "flex", gap : "1rem"}}>
+                    <button style={{borderRadius : "10px", border : "transparent", padding : "2px",cursor : "pointer"}} >atras</button>
+                    <button style={{borderRadius : "10px", border : "transparent", padding : "2px",cursor : "pointer"}} >siguiente</button>
+                </div> } 
+                </div>
             </Box>
+            
         </>
     );
 }
