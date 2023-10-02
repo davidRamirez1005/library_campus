@@ -1,5 +1,5 @@
 import genCollection from '../../helpers/db.js';
-import { findAvailable, findAvaliableBooks, findBorrowed, findProductCloseDate, findBooksDelivered, findBooksReserved, aggregateProduct, findIdUser } from '../../data/querys.js'
+import { findAvailable, findAvaliableBooks, findBorrowed, findProductCloseDate, findBooksDelivered, findBooksReserved, aggregateProduct, findIdUser, productFavorite, userHistoryCompleted } from '../../data/querys.js'
 
 
 /**
@@ -93,6 +93,27 @@ export const getBooksReserved = async(req, res) =>{
 
     let coleccion = await genCollection('Product')
     let result = await coleccion.aggregate(findBooksReserved).toArray();
+    (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+}
+/**
+ * * obtener historial de un usuario en especifico por medio de la identificacion
+ */
+export const historyUser = async(req, res) =>{
+    if(!req.rateLimit) return;
+    const id_user = req.params.id_user
+
+    let coleccion = await genCollection('History')
+    let result = await coleccion.aggregate(userHistoryCompleted(id_user)).toArray();
+    (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+}
+/**
+ * * obtener el producto mas prestado
+ */
+export const favoriteProduct = async(req, res) =>{
+    if(!req.rateLimit) return;
+
+    let coleccion = await genCollection('History')
+    let result = await coleccion.aggregate(productFavorite).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
 }
 
