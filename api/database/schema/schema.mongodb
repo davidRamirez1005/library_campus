@@ -6,7 +6,7 @@ db.counters.insertMany([
     {_id : "AdminId", sequence_value : 0},
     {_id : "Super_AdminId", sequence_value : 0},
     {_id : "RolsId", sequence_value : 0},
-
+    {_id : "HistoryId", sequence_value : 0}
 ]);
 /**
  * ! rols
