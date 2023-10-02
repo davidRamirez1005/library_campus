@@ -17,7 +17,7 @@
 }
 .tittleHome {
     color: #ffffff;
-    font-size: clamp(2.5rem, 4vw, 5rem);
+    font-size: clamp(2.5rem, 3vw, 4rem);
     display: flex;
     justify-content: center;
     margin-bottom: -8vh;
@@ -52,13 +52,24 @@ h3{
   justify-content: center;
   margin-bottom: 4vh;
 }
+.sectionInfo{
+  background-color: #7ea1bf;
+  border-radius: 40% 40% 0 0;
+  height: auto;
+  padding: 2%;
+  padding-bottom: 5% !important;
+}
 .starContainer{
   display: flex;
   justify-content: end;
 }
+.phone{
+  width: 30%;
+  display: flex;
+}
 @media (max-width: 1000px) {
   .imgBook img{
-    width: 50%;
+    width: 36%;
   }
   .tittleHome {
     margin-bottom: 2vh;
@@ -69,6 +80,13 @@ h3{
   .h3Container{
     flex-wrap: wrap;
     margin-bottom: 5vh;
+  }
+  .sectionInfo{
+    border-radius: 150px 150px 0 0;
+  }
+  .phone{
+    width: 50%;
+    display: flex;
   }
   
 }

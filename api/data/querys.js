@@ -254,6 +254,16 @@ export const findUsers = {
     rol : 0
 }
 /**
+ *  * obtener el historial por usuario especificado por medio de la identificacion
+ */
+export const userHistoryCompleted = (id_user) => [
+    {
+        $match: {
+            user_identification: id_user
+        }
+    },
+]
+/**
  * ! POST
  */
 /**
@@ -290,6 +300,34 @@ export const insertNewAdmin = {
     password: "jose1005",
     rol : 3
 }
+/**
+ * * obtener el producto favorito, el mas prestado
+*/
+export const productFavorite = [
+    {
+    $match: {
+        type: "libros"
+    }
+    },
+    {
+    $group: {
+        _id: {
+        title: "$title"
+        },
+        count: {
+        $sum: 1
+        }
+    }
+    },
+    {
+    $sort: {
+        count: -1
+    }
+    },
+    {
+    $limit: 1
+    }
+]
 /**
  * ! PUT
  */

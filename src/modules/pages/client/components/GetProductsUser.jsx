@@ -5,23 +5,32 @@ import styleTable from '../../../../assets/css/table.module.css'
 import LoadingQuery from '../../../../shared/LoadingQuery';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-
+import Button from '@mui/joy/Button';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Input from '@mui/joy/Input';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import DialogTitle from '@mui/joy/DialogTitle';
+import DialogContent from '@mui/joy/DialogContent';
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
-export default function GetProducts() {
+export default function GetProductsUser() {
     const auth = useAuth();
 
     let [isLoading, setIsLoading] = useState(false);
     let [products, setProducts] = useState([]);
     let [showTable, setShowTable] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
-    let [isAvaliable, setIsAvaliable] = useState(false);
     let [open, setOpen] = useState(false);
+    let[start_date, setStart] = useState('')
+    let[final_date, setFinal] = useState('')
+    let[identification, setIdentification] = useState(auth.user.identification)
+    let[productId, setIProductId] = useState(0)
+    let bearerAuth = auth.user.bearer
     
 
-    let bearerAuth = auth.user.bearer
     const listar = async () => {
         setIsLoading(true);
         try {
@@ -44,12 +53,18 @@ export default function GetProducts() {
         }
         setShowTable(!showTable);
     };
-    const updateExhaust = async (idProduct) => {
+
+    const reserve = async (idProduct, idUser) => {
         try {
-            const response2 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
+            const response2 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}/${idUser}`, {
+                start_date,
+                final_date,
+
+            }, 
+            {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept-Version': '1.1.0',
+                    'Accept-Version': '1.5.0',
                     'Authorization': `Bearer ${bearerAuth}`,
                 },
             });
@@ -63,72 +78,53 @@ export default function GetProducts() {
         } finally {
         }
     };
-    const updateAvaliable = async (idProduct) => {
-        try {
-            const response3 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Version': '1.2.0',
-                    'Authorization': `Bearer ${bearerAuth}`,
-                },
-            });
-        if (response3.status != 202) {
-            throw new Error('Error en la solicitud');
-        }
-        setIsAvaliable(true)
-        } catch (error) {
-            console.log(error);
-            return alert('error en la consulta');
-        } finally {
-        }
-    };
-    const deleteProduct = async (idProduct) => {
-        
-        try {
-            const response3 = await axios.delete(`http://${backendUrl}/Product/eliminar/producto/${idProduct}`,{
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Version': '1.1.0',
-                    'Authorization': `Bearer ${bearerAuth}`,
-                },
-            });
-        if (response3.status != 202) {
-            throw new Error('Error en la solicitud');
-        }
-        setOpen(true)
-        } catch (error) {
-            console.log(error);
-            return alert('error en la consulta');
-        } finally {
-        }
-    };
     setTimeout(() => {
         setIsTrue(false);
-    }, 11000);
-    setTimeout(() => {
-        setIsAvaliable(false);
-    }, 11000);
+    }, 20000);
+    
     useEffect(() => {
         listar();
     }, []);
+
     return (
     <>
-    { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
-            <Alert  sx={{ zIndex: '999' }} variant="filled" severity="success">
-                producto en estado agotado con exito!
-            </Alert>
-        </Stack>}
-    { isAvaliable  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
-            <Alert  sx={{ zIndex: '999' }} variant="filled" severity="success">
-                producto en estado disponible con exito!
-            </Alert>
-        </Stack>}
-    { open && <Snackbar open={open} onClose={() => setOpen(false)}>
-        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '20%' }}>
-            Producto eliminado con exito
+            <Modal open={open} onClose={() => setOpen(false)}>
+            <ModalDialog>
+            <DialogTitle>Producto </DialogTitle>
+            <DialogContent>Ingresar datos para la solicitud.</DialogContent>
+            <form
+                onSubmit={(event) => {
+                event.preventDefault();
+                setOpen(false);
+                }}
+            >
+                <Stack spacing={2}>
+                <FormControl>
+                    <FormLabel>id product</FormLabel>
+                    <Input  value={productId} onChange={(e) => setIProductId(e.target.value)} autoFocus disabled />
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Identificacion</FormLabel>
+                    <Input value={identification} onChange={(e) => setIdentification(e.target.value)} autoFocus disabled />
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Fecha inicio</FormLabel>
+                    <Input value={start_date} onChange={(e) => setStart(e.target.value)} type='date' required />
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Fecha entrega</FormLabel>
+                    <Input value={final_date} onChange={(e) => setFinal(e.target.value)} type='date' required />
+                </FormControl>
+                <Button onClick={() => reserve(productId, identification)} style={{backgroundColor : "#c0c0c0", color : "#144272"}}>Reservar</Button>
+                </Stack>
+            </form>
+            </ModalDialog>
+        </Modal>
+        { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
+        <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
+            Se ha aceptado la solicitud con exito!
         </Alert>
-        </Snackbar>
-    }
+        </Stack>}
     {showTable && (
             <div className={styleTable.tableContainer}>
                 <table className={styleTable.table}>
@@ -151,10 +147,7 @@ export default function GetProducts() {
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            {product.status !== "disponible" ? <button className={styleTable.buttonOpcion2} onClick={() => updateAvaliable(product._id)}>Disponible</button> : null}
-                            {product.status !=="agotado" ? <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Agotar</button> : null}
-                            
-                            <button className={styleTable.buttonOpcion2} onClick={() => deleteProduct(product._id)}>Eliminar</button>
+                            {product.status === "disponible" ? <button className={styleTable.buttonOpcion2} onClick={() => {setOpen(true), setIProductId(product._id)}} >Reservar</button>: null}
                         </td>
                     </tr>
                     ))}

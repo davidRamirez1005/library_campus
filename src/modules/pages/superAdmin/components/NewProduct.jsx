@@ -13,13 +13,10 @@ let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_B
 export default function NewProduct() {
     const auth = useAuth()
 
-    let[title, setTittle] = useState('libro emprendedor 3')
-    let[description, setDescription] = useState('en excelentes condiciones')
+    let[title, setTittle] = useState('')
+    let[description, setDescription] = useState('')
     let[type, setType] = useState('')
-    let[status, setStatus] = useState('disponible')
-    // let[start_date, setStart] = useState('2023-09-16')
-    // let[final_date, setFinal] = useState('2023-09-20')
-    // let[user_identification, setId] = useState('1098234098')
+    let[status, setStatus] = useState('')
     let [isLoading, setIsLoading] = useState(false);
     let [isError, setIsError] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
@@ -32,9 +29,6 @@ export default function NewProduct() {
                 description,
                 type,
                 status,
-                // start_date,
-                // final_date,
-                // user_identification
             }, 
             {
             headers: {
@@ -54,7 +48,12 @@ export default function NewProduct() {
                 setIsLoading(false);
             }
         };
-
+        setTimeout(() => {
+            setIsTrue(false);
+        }, 2000);
+        setTimeout(() => {
+            setIsError(false);
+        }, 10000);
 
     return (
         <>
@@ -103,30 +102,19 @@ export default function NewProduct() {
                         </div>
                         <div className={style.input_container}>
                             <select className={style.input_pwd}  name="type" placeholder="Ingrese categoria" onChange={(e) => setType(e.target.value)}>
-                                <option value="categoria">categoria</option>
-                                <option value="libros">libros</option>
-                                <option value="audifonos">audifonos</option>
+                                <option value="categoria">Categoria</option>
+                                <option value="libros">Libros</option>
+                                <option value="audifonos">Audifonos</option>
                             </select>
                         </div>  
                         <div className={style.input_container}>
                             <select className={style.input_pwd}  name="status" placeholder="Ingrese estado" onChange={(e) => setStatus(e.target.value)}>
                                 <option value="estado">estado</option>
-                                <option value="disponible">disponible</option>
-                                <option value="agotado">agotado</option>
-                                <option value="proximo">proximo</option>
-
+                                <option value="disponible">Disponible</option>
+                                <option value="agotado">Agotado</option>
+                                <option value="proximo">Proximo</option>
                             </select>
                         </div>  
-                        {/* <div className={style.input_container}>
-                            <input className={style.input_pwd} type="text" value={start_date} placeholder='fecha inicio' onChange={(e) => setStart(e.target.value)}/>
-                        </div>
-                        <div className={style.input_container}>
-                            <input className={style.input_pwd} type="text" value={final_date} placeholder='fecha final' onChange={(e) => setFinal(e.target.value)}/>
-                        </div>
-                        <div className={style.input_container}>
-                            <input className={style.input_pwd} type="text" value={user_identification} placeholder='cedula' onChange={(e) => setId(e.target.value)}/>
-                        </div> */}
-                        {/* <input type="hidden" value={rol} onChange={(e) => setRol(e.target.value)}/> */}
                     </div>
                     <br />
                     <button className={style.submit} value="login" onClick={sesionProduct}>Enviar</button>

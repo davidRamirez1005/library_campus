@@ -1,10 +1,9 @@
 .form {
     position: relative;
-    display: block;
     margin-top: -0.5rem;
     text-align: center;
     padding: 4.2rem;
-    width: 40rem;
+    width: 23rem;
     background: linear-gradient(14deg, rgba(2,0,36, 0.8) 0%, rgb(38 81 108 / 68%) 66%, rgb(20, 76, 99) 100%), radial-gradient(circle, rgba(2,0,36, 0.5) 0%, rgba(32, 15, 53, 0.2) 65%, rgba(14, 29, 28, 0.9) 100%);
     border: 2px solid #fff;
     -webkit-box-shadow: rgba(0,212,255) 0px 0px 50px -15px;
@@ -15,7 +14,7 @@
     top: -3rem;
 }
 .formContainer{
-    display: flex;
+    display: grid;
     justify-content: center;
     flex-wrap: wrap;
 
@@ -33,14 +32,8 @@
 .carga{
     display: flex;
     position: relative;
-    left: 4%;
+    left: 3%;
 }
-/*------input and submit section-------*/
-
-/* .input_container {
-    position: relative;
-} */
-
 .input_container input, .form button {
     outline: none;
     border: 2px solid #ffffff;

@@ -1,0 +1,48 @@
+
+.contentUser{
+    background-color: #144272;
+    color: white ;
+    padding: 1%;
+    border-radius: 27px;
+
+}
+.tools {
+    display: flex;
+    align-items: center;
+    padding: 9px;
+}
+
+.circle {
+    padding: 0 4px;
+}
+
+.red {
+    background-color: #ff605c;
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+}
+
+.yellow {
+    background-color: #ffbd44;
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+}
+
+.green {
+    background-color: #00ca4e;
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+}
+  

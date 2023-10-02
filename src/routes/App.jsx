@@ -66,7 +66,7 @@ function App() {
                 </AuthRoute>
               }
             />
-                        <Route
+            <Route
               path="/RegistrerProduct"
               element={
                 <AuthRoute>

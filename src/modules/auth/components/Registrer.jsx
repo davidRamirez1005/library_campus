@@ -12,11 +12,11 @@ let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_B
 
 export default function Registrer() {
 
-    let [username, setName] = useState('usuario nuevo')
-    let [identification, setIdentification] = useState('44444444')
-    let [email, setEmail] = useState('uevo@example.com')
-    let [password, setPassword] = useState('secreto')
-    let [phone, setPhone] = useState('3214567890')
+    let [username, setName] = useState('')
+    let [identification, setIdentification] = useState('')
+    let [email, setEmail] = useState('')
+    let [password, setPassword] = useState('')
+    let [phone, setPhone] = useState('')
     let [team, setTeam] = useState('')
     let [rol, setRol] = useState(2)
     let [isLoading, setIsLoading] = useState(false);
@@ -53,7 +53,12 @@ export default function Registrer() {
                 setIsLoading(false);
             }
         };
-        
+        setTimeout(() => {
+            setIsTrue(false);
+        }, 20000);
+        setTimeout(() => {
+            setIsError(false);
+        }, 10000);
 return (
     <>
         <Menu />
@@ -70,7 +75,7 @@ return (
         "rol" : 2 
         */}
 
-        <div className={style.title_2}><span>Registrarse</span></div>
+        <div className={style.title_2}><span>REGISTRARSE</span></div>
         <br /><br />
         <div>
         { isError  &&  <Stack sx={{ width: '100%' }} spacing={2}>

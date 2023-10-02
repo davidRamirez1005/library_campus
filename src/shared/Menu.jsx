@@ -170,7 +170,7 @@ p{
 .links.active{
     width: 100%;
     display: block;
-    position: absolute;
+    position: fixed;
     margin-left: auto;
     margin-right: auto;
     top: 30%;
@@ -203,6 +203,7 @@ transition: all .6s ease ;
     left: 0;
     width: 100%;
     height: 100%;
+    position: fixed;
 }
 `
 

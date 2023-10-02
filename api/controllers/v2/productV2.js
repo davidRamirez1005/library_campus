@@ -124,7 +124,7 @@ export const updateStatusAvailable = async (req, res) => {
     }
 }
 /**
- * * actualizar un status de producto de entregado a disponible por medio del _id
+ * * actualizar un status de producto a prestado por medio del _id
  */
 export const updateStatusBorrowed = async (req, res) => {
     if (!req.rateLimit) return;
@@ -148,9 +148,94 @@ export const updateStatusBorrowed = async (req, res) => {
         console.error(err);
 
         console.error('Error al actualizar el estado del producto:', err.message);
-        console.error('Filtro utilizado:', filter);
-        console.error('Actualización utilizada:', update);
 
+        res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+/**
+ * * actualizar un libro a prestado con los datos del usuario
+ */
+export const updateBookUser = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id3 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const identification2 = req.params.identification;
+        const userCollection = await genCollection('User');
+
+        const userDoc = await userCollection.findOne({ identification: identification2 });
+
+        if (!userDoc) {
+            res.status(404).send('Usuario no encontrado');
+            return;
+        }
+
+        const filter = { _id: product_id3 };
+        const update = {
+            $set: {
+                status: "prestado",
+                start_date: req.body.start_date,
+                final_date: req.body.final_date,
+                user_identification: userDoc._id
+            }
+        };
+
+        const result = await coleccion.updateOne(filter, update);
+
+        if (result.modifiedCount === 1) {
+            res.status(202).send({ status: 202, message: 'Estado del producto actualizado con éxito' });
+        } else {
+            res.send('Estado del producto no actualizado');
+        }
+    } catch (err) {
+        console.error('Error al actualizar el estado del producto:', err.message);
+        res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
+    }
+}
+
+/**
+ * * actualizar un libro a reservado con los datos del usuario
+ */
+export const updateBookUserReserved = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    const product_id4 = Number(req.params.product_id);
+
+    try {
+        let coleccion = await genCollection('Product');
+
+        const identification2 = req.params.identification;
+        const userCollection = await genCollection('User');
+
+        const userDoc = await userCollection.findOne({ identification: identification2 });
+
+        if (!userDoc) {
+            res.status(404).send('Usuario no encontrado');
+            return;
+        }
+
+        const filter = { _id: product_id4 };
+        const update = {
+            $set: {
+                status: "reservado",
+                start_date: req.body.start_date,
+                final_date: req.body.final_date,
+                user_identification: userDoc._id
+            }
+        };
+
+        const result = await coleccion.updateOne(filter, update);
+
+        if (result.modifiedCount === 1) {
+            res.status(202).send({ status: 202, message: 'Estado del producto actualizado con éxito' });
+        } else {
+            res.send('Estado del producto no actualizado');
+        }
+    } catch (err) {
+        console.error('Error al actualizar el estado del producto:', err.message);
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
 }
@@ -181,5 +266,34 @@ export const deleteProduct = async (req, res) => {
         console.error('Filtro utilizado:', filter);
 
         res.status(500).send('Error al eliminar el producto en la base de datos.');
+    }
+}
+/**
+ * * insertar un producto a la coleccion history
+ */
+export const aggregateProductHistory = async(req, res) =>{
+    if (!req.rateLimit) return;
+
+    try {
+        let newId = await siguienteId("History");
+
+        await Promise.all(validationProduct.map(rule => rule.run(req)));
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        let coleccion = await genCollection('History')
+        
+        const newDocument = {
+            _id: newId,
+            ...req.body,
+        };
+        let result = await coleccion.insertOne(newDocument);
+        res.status(201).send({ status: 201, message: 'documento creado con exito', "documento" : newDocument });
+    } catch (error) {
+        console.log(error);
+        res.status(406).send('no se ha podido crear el documento');
     }
 }

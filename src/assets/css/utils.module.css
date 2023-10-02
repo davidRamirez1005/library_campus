@@ -1,0 +1,74 @@
+.cardCoding {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+    top: 12vh;
+    left: 10%;
+}
+
+.code_container {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 16px;
+    animation: float 2s ease-in-out infinite;
+
+}
+
+.line {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 4px 0;
+    position: relative;
+}
+.lineIdent {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 4px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.code_comment {
+    color: #5c6370;
+}
+
+.code_keyword {
+    color: #c678dd;
+    margin-right: 4px;
+}
+
+.code_function {
+    color: #61afef;
+}
+
+.code_variable {
+    color: #dcdcaa;
+}
+
+.code_string {
+    color: #98c379;
+}
+
+.indent {
+    padding-left: 20px;
+}
+
+/* Animación */
+@keyframes float {
+    0% {
+    transform: translateY(0);
+    }
+
+    50% {
+    transform: translateY(-10px);
+    }
+
+    100% {
+    transform: translateY(0);
+    }
+}

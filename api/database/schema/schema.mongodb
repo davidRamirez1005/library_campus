@@ -6,7 +6,7 @@ db.counters.insertMany([
     {_id : "AdminId", sequence_value : 0},
     {_id : "Super_AdminId", sequence_value : 0},
     {_id : "RolsId", sequence_value : 0},
-
+    {_id : "HistoryId", sequence_value : 0}
 ]);
 /**
  * ! rols
@@ -206,56 +206,43 @@ db.createCollection("Super_Admin", {
 /**
  * ! Product
  */
-use("db_campus_Library");
-db.createCollection("Product", {
-    capped: true,
-    size: 8000,
-    validator: {
-        $jsonSchema: {
-            bsonType: 'object',
-            additionalProperties: false,
-            required: ['_id', 'title', 'description', 'type', 'status'],
-            properties: {
-                _id: {
-                    bsonType: "int",
-                    description: "ID del producto"
-                },
-                title: {
-                    bsonType: 'string',
-                    minLength: 3,
-                    description: "el titulo debe contener minimo 3 caracteres, y es obligatorio"
-                },
-                description : {
-                    bsonType: 'string',
-                    description: "la descripcion es obligatoria"
-                },
-                type: {
-                    bsonType: "string",
-                    items: {
-                        "enum": ["libros", "audifonos"]
-                    },
-                    description: "El tipo debe ser 'libros' o 'audifonos'"
-                },
-                status: {
-                    bsonType: 'string',
-                    description: "el estado del producto es obligatorio"
-                },
-                start_date : {
-                    bsonType: 'string',
-                    description: 'debe ser en formato fecha'
-                },
-                final_date : {
-                    bsonType: 'string',
-                    description: 'debe ser en formato fecha'
-                },
-                user_identification : {
-                    bsonType: 'int',
-                    description: 'id del usuario referenciado'
-                }
-            }
-        }
-    }
-});
+// use("db_campus_Library");
+// db.createCollection("Product", {
+//     capped: false,
+//     validator: {
+//         $jsonSchema: {
+//             bsonType: 'object',
+//             additionalProperties: false,
+//             required: ['_id', 'title', 'description', 'type', 'status'],
+//             properties: {
+//                 _id: {
+//                     bsonType: "int",
+//                     description: "ID del producto"
+//                 },
+//                 title: {
+//                     bsonType: 'string',
+//                     minLength: 3,
+//                     description: "el titulo debe contener minimo 3 caracteres, y es obligatorio"
+//                 },
+//                 description : {
+//                     bsonType: 'string',
+//                     description: "la descripcion es obligatoria"
+//                 },
+//                 type: {
+//                     bsonType: "string",
+//                     items: {
+//                         "enum": ["libros", "audifonos"]
+//                     },
+//                     description: "El tipo debe ser 'libros' o 'audifonos'"
+//                 },
+//                 status: {
+//                     bsonType: 'string',
+//                     description: "el estado del producto es obligatorio"
+//                 }
+//             }
+//         }
+//     }
+// });
 
 
 

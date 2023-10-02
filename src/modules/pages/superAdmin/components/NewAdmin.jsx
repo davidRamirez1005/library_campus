@@ -13,11 +13,11 @@ let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_B
 export default function NewAdmin() {
     const auth = useAuth();
 
-    let [full_name, setFullName] = useState('nuevo admin')
-    let [identification, setIdentification] = useState('123654788')
-    let [email, setEmail] = useState('nuevo@example.com')
-    let [password, setPassword] = useState('secreto')
-    let [rol, setRol] = useState(1)
+    let [full_name, setFullName] = useState('')
+    let [identification, setIdentification] = useState('')
+    let [email, setEmail] = useState('')
+    let [password, setPassword] = useState('')
+    let [rol, setRol] = useState(3)
     let [isLoading, setIsLoading] = useState(false);
     let [isError, setIsError] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
@@ -63,6 +63,12 @@ export default function NewAdmin() {
                 setIsLoading(false);
             }
         };
+        setTimeout(() => {
+            setIsTrue(false);
+        }, 20000);
+        setTimeout(() => {
+            setIsError(false);
+        }, 10000);
     return (
         <>
             <Menu />

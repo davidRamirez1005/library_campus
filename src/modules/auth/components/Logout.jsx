@@ -20,7 +20,7 @@ function Logout() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         }}>
-            <h1>Cerrar cesión</h1>
+            <h1>Cerrar sesión</h1>
 
             <form onSubmit={logout}>
                 <label>¿Segur@ de que quieras salir?</label>

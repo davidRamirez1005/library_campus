@@ -12,6 +12,28 @@ export const getUsers = async(req, res) =>{
     }).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
 }
+/**
+ * * contar todos los usuarios
+ */
+export const countUsers = async (req, res) => {
+    if (!req.rateLimit) return;
+
+    let coleccion = await genCollection('User');
+    let result = await coleccion.count();
+
+    if (result) {
+        const responseObject = {
+            status: 200,
+            message: 'Cantidad de usuarios contados exitosamente',
+            count: result
+        };
+        res.status(200).send(responseObject);
+    } else {
+        res.status(404).send({ status: 404, message: 'Error en la consulta' });
+    }
+}
+
+
 
 /**
  * * listar user por medio del la cedula

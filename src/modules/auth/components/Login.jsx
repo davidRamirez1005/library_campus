@@ -14,8 +14,8 @@ export default function Login() {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    let [ROL_EMAIL, getMail] = useState('JDavidRamirez@gmail.com');
-    let [ROL_PASSWORD, getCon] = useState('jose@1005');
+    let [ROL_EMAIL, getMail] = useState('juandiegod@example.com');
+    let [ROL_PASSWORD, getCon] = useState('secreto');
     let [token, setToken] = useState('');
     let [isLoading, setIsLoading] = useState(false);
 
@@ -63,11 +63,12 @@ const login = async () => {
         const NAME = data.result.full_name
         const USERNAME = data.result.username
         const ROL = data.result.rol
+        const IDENTIFICATION = data.result.identification
 
         if (!data.Token) {
             console.log('Verifica los datos ingresados');
         } else {
-            auth.logins({ email: ROL_EMAIL, name : NAME , rol : ROL, username : USERNAME, bearer : TOKEN});
+            auth.logins({ email: ROL_EMAIL, name : NAME , rol : ROL, username : USERNAME, bearer : TOKEN, identification : IDENTIFICATION});
             switch (data.result.rol) {
                 case 1:
                     navigate('/Admin');
@@ -83,7 +84,7 @@ const login = async () => {
             }
         }
         } catch (error) {
-            alert('Verifica los datos ingresados');
+            return alert('Verifica los datos ingresados');
             error
         } finally {
             setIsLoading(false);

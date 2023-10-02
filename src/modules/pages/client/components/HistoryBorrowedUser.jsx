@@ -1,0 +1,109 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useAuth } from '../../../auth/context/auth';
+import styleTable from '../../../../assets/css/table.module.css';
+import LoadingQuery from '../../../../shared/LoadingQuery';
+
+let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
+
+export default function HistoryBorrowedUser() {
+    const auth = useAuth();
+
+    let [isLoading, setIsLoading] = useState(false);
+    let [books, setBooks] = useState([]);
+    let [showTable, setShowTable] = useState(false);
+    let [cedula, setCedula] = useState(auth.user.identification);
+    let [userNotFound, setUserNotFound] = useState(false);
+
+    const listar = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get(`http://${backendUrl}/Product/history/${cedula}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.0.0',
+                    'Authorization': `Bearer ${auth.user.bearer}`,
+                }
+            });
+            if (response.status !== 200) {
+                throw new Error("Error en la solicitud");
+            }
+            const booksData = response.data;
+            
+            if (booksData.length === 0) {
+                setUserNotFound(true);
+            } else {
+                setUserNotFound(false);
+                setBooks(booksData);
+            }
+        } catch (error) {
+            console.error(error);
+            return setUserNotFound(true);
+        } finally {
+            setIsLoading(false);
+        }
+        setShowTable(true);
+    }
+    return (
+        <>
+        <input
+            
+            type="text"
+            placeholder="Ingrese la cédula"
+            value={cedula}
+            onChange={(e) => setCedula(e.target.value)}
+            disabled
+            style={{display : "none"}}
+        />
+        <button style={{marginLeft : "1rem"}} className={styleTable.buttonBuscar} onClick={listar}>Buscar prestados</button>
+        
+        {userNotFound && (
+            <div>
+                <br />
+                <h3 style={{ color: 'red', marginLeft : "3rem" }} >Usuario no encontrado</h3>
+            </div>
+            
+        )}
+
+        {showTable && (
+            <div className={styleTable.tableContainer}>
+                <table className={styleTable.table}>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>identificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(books) ? (
+                            books.map((product) => (
+                                <tr key={product._id}>
+                                    <td>{product.title}</td>
+                                    <td>{product.description}</td>
+                                    <td>{product.type}</td>
+                                    <td>{product.start_date}</td>
+                                    <td>{product.final_date}</td>
+                                    <td>{product.user_identification}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="11">No hay resultados disponibles</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        )}
+
+        <div className={styleTable.loadinQuery}>
+            {isLoading && <LoadingQuery />}
+        </div>
+    </>
+);
+}
+

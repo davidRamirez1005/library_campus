@@ -60,7 +60,9 @@ export default function GetBorrowed() {
         } finally {
         }
     };
-
+    setTimeout(() => {
+        setIsTrue(false);
+    }, 12000);
     useEffect(()=>{
         listar()
     }, [])
@@ -76,6 +78,7 @@ export default function GetBorrowed() {
                 <table className={styleTable.table}>
                 <thead>
                     <tr>
+                    <th>ID</th>
                     <th>Título</th>
                     <th>Descripción</th>
                     <th>Tipo</th>
@@ -93,6 +96,7 @@ export default function GetBorrowed() {
                 <tbody>
                     {books.map((product) => (
                     <tr key={product._id}>
+                        <td>{product._id}</td>
                         <td>{product.title}</td>
                         <td>{product.description}</td>
                         <td>{product.type}</td>
@@ -105,7 +109,7 @@ export default function GetBorrowed() {
                         <td>{product.user[0].phone}</td>
                         <td>{product.user[0].team}</td>
                         <td>
-                            <button  style={{padding : "1%"}} onClick={() => update(product._id)}>entregado</button>
+                            <button  className={styleTable.buttonOpcion} onClick={() => update(product._id)}>Entregado</button>
                         </td>
                     </tr>
                     ))}
