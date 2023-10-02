@@ -55,11 +55,17 @@ h3{
 .sectionInfo{
   background-color: #7ea1bf;
   border-radius: 40% 40% 0 0;
-  height: 75vh;
+  height: auto;
+  padding: 2%;
+  padding-bottom: 5% !important;
 }
 .starContainer{
   display: flex;
   justify-content: end;
+}
+.phone{
+  width: 30%;
+  display: flex;
 }
 @media (max-width: 1000px) {
   .imgBook img{
@@ -74,6 +80,13 @@ h3{
   .h3Container{
     flex-wrap: wrap;
     margin-bottom: 5vh;
+  }
+  .sectionInfo{
+    border-radius: 150px 150px 0 0;
+  }
+  .phone{
+    width: 50%;
+    display: flex;
   }
   
 }
