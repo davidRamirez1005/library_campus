@@ -78,6 +78,7 @@ export default function GetBorrowed() {
                 <table className={styleTable.table}>
                 <thead>
                     <tr>
+                    <th>ID</th>
                     <th>Título</th>
                     <th>Descripción</th>
                     <th>Tipo</th>
@@ -95,6 +96,7 @@ export default function GetBorrowed() {
                 <tbody>
                     {books.map((product) => (
                     <tr key={product._id}>
+                        <td>{product._id}</td>
                         <td>{product.title}</td>
                         <td>{product.description}</td>
                         <td>{product.type}</td>

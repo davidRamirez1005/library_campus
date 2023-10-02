@@ -17,7 +17,8 @@ export default function GetProducts() {
     let [products, setProducts] = useState([]);
     let [showTable, setShowTable] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
-    let [open, setOpen] = React.useState(false);
+    let [isAvaliable, setIsAvaliable] = useState(false);
+    let [open, setOpen] = useState(false);
     
 
     let bearerAuth = auth.user.bearer
@@ -62,6 +63,25 @@ export default function GetProducts() {
         } finally {
         }
     };
+    const updateAvaliable = async (idProduct) => {
+        try {
+            const response3 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.2.0',
+                    'Authorization': `Bearer ${bearerAuth}`,
+                },
+            });
+        if (response3.status != 202) {
+            throw new Error('Error en la solicitud');
+        }
+        setIsAvaliable(true)
+        } catch (error) {
+            console.log(error);
+            return alert('error en la consulta');
+        } finally {
+        }
+    };
     const deleteProduct = async (idProduct) => {
         
         try {
@@ -84,18 +104,26 @@ export default function GetProducts() {
     };
     setTimeout(() => {
         setIsTrue(false);
-    }, 10000);
+    }, 11000);
+    setTimeout(() => {
+        setIsAvaliable(false);
+    }, 11000);
     useEffect(() => {
         listar();
     }, []);
     return (
     <>
-    { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} autoHideDuration={6000} spacing={2}>
-            <Alert autoHideDuration={6000}  sx={{ zIndex: '999' }} variant="filled" severity="success">
+    { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
+            <Alert  sx={{ zIndex: '999' }} variant="filled" severity="success">
                 producto en estado agotado con exito!
             </Alert>
         </Stack>}
-    { open && <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+    { isAvaliable  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
+            <Alert  sx={{ zIndex: '999' }} variant="filled" severity="success">
+                producto en estado disponible con exito!
+            </Alert>
+        </Stack>}
+    { open && <Snackbar open={open} onClose={() => setOpen(false)}>
         <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '20%' }}>
             Producto eliminado con exito
         </Alert>
@@ -123,8 +151,9 @@ export default function GetProducts() {
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Actualizar</button>
-                            <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Agotar</button>
+                            {product.status !== "disponible" ? <button className={styleTable.buttonOpcion2} onClick={() => updateAvaliable(product._id)}>Disponible</button> : null}
+                            {product.status !=="agotado" ? <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Agotar</button> : null}
+                            
                             <button className={styleTable.buttonOpcion2} onClick={() => deleteProduct(product._id)}>Eliminar</button>
                         </td>
                     </tr>

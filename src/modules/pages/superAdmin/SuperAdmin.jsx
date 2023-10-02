@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/context/auth';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Menu } from '@/shared/Menu';
 import style from './assets/css/inicio.module.css'
 import styleContext from '../../auth/assets/css/registrer.module.css'
@@ -13,16 +14,42 @@ import GetHistoryUser from './components/GetHistoryUser';
 import GetBooksDelivered from './components/GetBooksDelivered';
 import GetBookReserved from './components/GetBookReserved';
 import GetUsers from './components/GetUsers';
+import ProductFavorite from './components/ProductFavorite';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ProductionQuantityLimitsSharpIcon from '@mui/icons-material/ProductionQuantityLimitsSharp';
+
+let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
 export default function SuperAdmin() {
   const navigate = useNavigate();
   const auth = useAuth();
 
-  const [showGetHistory, setShowGetHistory] = useState(false);
   const [activeComponent, setActiveComponent] = useState(null);
+  const [activeComponentTwo, setActiveComponentTwo] = useState(null);
+  const [value, setValue] = useState(0);
+  let [users, setUsers] = useState([]);
+  const [valueTab, setValueTab] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValueTab(newValue);
+  };
+
+  let bearerAuth = auth.user.bearer
 
   const handleShowProducts = () => {
-    setActiveComponent('products');
+    setActiveComponentTwo('products');
+  };
+  const handleShowHistory = () => {
+    setActiveComponentTwo('history');
+  };
+  const handleShowFavorite = () => {
+    setActiveComponentTwo('favorite');
   };
   
   const handleShowBooks = () => {
@@ -41,10 +68,28 @@ export default function SuperAdmin() {
     setActiveComponent('reserved');
   };
 
-  const handleShowGetHistory = () => {
-    setShowGetHistory(!showGetHistory);
-  };
-
+  const contar = async () => {
+    try {
+    const response = await axios.get(`http://${backendUrl}/User/listar/user`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept-Version': '1.2.0',
+        'Authorization': `Bearer ${bearerAuth}`,
+        },
+    });
+    if (response.status != 200) {
+        throw new Error('Error en la solicitud');
+    }
+    const productsData = response.data;
+    setUsers(productsData);
+    } catch (error) {
+        return alert('error en la consulta para contar los usuarios');
+    } finally {
+    }
+};
+  useEffect(() => {
+    contar();
+  }, []);
   return (
     <>
     <Menu />
@@ -55,6 +100,9 @@ export default function SuperAdmin() {
     <br />
     <div className={styleContext.form_title}><span>Hola, {auth.user.name} 🚀</span></div>
     <br /><br />
+    <hr />
+    <br /><br />
+
     <div className={style.btnRegistrer}>
       <button className={style.button_aggregate} value="registrar" onClick={() => {
               navigate('/RegistrerAdmin')
@@ -81,36 +129,43 @@ export default function SuperAdmin() {
     </div>
 
     <hr />
-
-          {/* <PutProductStatus /> */}
+    <div className="row">
+      <Box sx={{ width: "100%" }}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction onClick={handleShowHistory} label="Historial Usuario" icon={<RestoreIcon />} />
+          <BottomNavigationAction onClick={handleShowFavorite} label="Favorito" icon={<FavoriteIcon />} />
+          <BottomNavigationAction onClick={handleShowProducts} label="Productos" icon={<ProductionQuantityLimitsSharpIcon />} />
+        </BottomNavigation>
+      </Box>
+    </div>
     <br /><br />
+    {activeComponentTwo === 'history' && <GetHistoryUser />}
+    {activeComponentTwo === 'products' && <GetProducts />}
+    {activeComponentTwo === 'favorite' && <ProductFavorite />}
+    <br /><br />
+    <Box sx={{ width: "100%", bgcolor: '#144272', color : "#B1D0E0", display : "flex", justifyContent : "center" }}>
+      <Tabs
+        value={valueTab}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        aria-label="scrollable force tabs example"
+      >
+        <Tab style={{color : "white"}} label=" Listar libros" onClick={handleShowBooks} />
+        <Tab style={{color : "white"}} label="Libros libros prestados" onClick={handleShowBorrowed} />
+        <Tab style={{color : "white"}} label="Libros libros entregados" onClick={handleShowDelivered} />
+        <Tab style={{color : "white"}} label="Libros libros reservados" onClick={handleShowReserved} />
+      </Tabs>
+    </Box>
     <div className="row">
-      <div className="col">
-          <button className={style.btnstyle} onClick={handleShowGetHistory} style={{marginLeft :"2rem"}}>Historal usuario</button> 
-          <br />
-          {showGetHistory && <GetHistoryUser />}
-        <br /><br />
-      </div>
-    </div>
-    <div className={`row ${style.sectionNav}`}>
-      <div className={`col ${style.divButton}`}>
-        <button className={style.btnstyle} onClick={handleShowProducts}>Listar productos</button>
-      </div>
-      <div className={`col ${style.divButton}`}>
-      <button className={style.btnstyle} onClick={handleShowBooks}>Libros</button>
-      </div>
-      <div className={`col ${style.divButton}`}>
-      <button className={style.btnstyle} onClick={handleShowBorrowed}>Libros prestados</button>
-      </div>
-      <div className={`col ${style.divButton}`}>
-        <button className={style.btnstyle} onClick={handleShowDelivered}>Libros entregados</button> 
-      </div>
-      <div className={`col ${style.divButton}`}>
-        <button className={style.btnstyle} onClick={handleShowReserved}>Libros reservados</button> 
-      </div>
-    </div>
-    <div className="row">
-        {activeComponent === 'products' && <GetProducts />}
+      <br /><br />
         {activeComponent === 'books' && <GetBooks />}
         {activeComponent === 'borrowed' && <GetBorrowed />}
         {activeComponent === 'delivered' && <GetBooksDelivered />}
@@ -119,11 +174,13 @@ export default function SuperAdmin() {
     <br /><br />
     <div className="row">
       <div className={style.containerUsers}>
-      <h2>Listar todos los usuarios registrados:</h2> 
-      <span> <GetUsers /> </span>
+      <h2>Usuarios registrados: <span>{users.count}</span></h2> 
+      <div>
+      <GetUsers />
+      </div>
       </div>
     </div>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br />
     </>
   )
 }

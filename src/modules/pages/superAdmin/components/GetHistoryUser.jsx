@@ -54,7 +54,7 @@ export default function GetHistoryUser() {
                 value={cedula}
                 onChange={(e) => setCedula(e.target.value)}
             />
-            <button className={styleTable.buttonBuscar} onClick={listar}>Buscar</button>
+            <button className={styleTable.buttonBuscar} onClick={listar}>Buscar prestados</button>
             
             {userNotFound && (
                 <div>

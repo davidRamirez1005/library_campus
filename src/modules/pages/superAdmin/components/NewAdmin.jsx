@@ -13,10 +13,10 @@ let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_B
 export default function NewAdmin() {
     const auth = useAuth();
 
-    let [full_name, setFullName] = useState('nuevo admin')
-    let [identification, setIdentification] = useState('123654788')
-    let [email, setEmail] = useState('nuevo@example.com')
-    let [password, setPassword] = useState('secreto')
+    let [full_name, setFullName] = useState('')
+    let [identification, setIdentification] = useState('')
+    let [email, setEmail] = useState('')
+    let [password, setPassword] = useState('')
     let [rol, setRol] = useState(3)
     let [isLoading, setIsLoading] = useState(false);
     let [isError, setIsError] = useState(false);
