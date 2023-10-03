@@ -62,8 +62,8 @@ export default function Registrer() {
 return (
     <>
         <Menu />
-        <br /><br />
-        <br /><br />
+        <br /><br /><br />
+        
         
         {/* 
         "username": "usuario nuevo",

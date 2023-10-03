@@ -159,9 +159,9 @@ export default function SuperAdmin() {
         aria-label="scrollable force tabs example"
       >
         <Tab style={{color : "white"}} label=" Listar libros" onClick={handleShowBooks} />
-        <Tab style={{color : "white"}} label="Libros libros prestados" onClick={handleShowBorrowed} />
-        <Tab style={{color : "white"}} label="Libros libros entregados" onClick={handleShowDelivered} />
-        <Tab style={{color : "white"}} label="Libros libros reservados" onClick={handleShowReserved} />
+        <Tab style={{color : "white"}} label="libros prestados" onClick={handleShowBorrowed} />
+        <Tab style={{color : "white"}} label="libros entregados" onClick={handleShowDelivered} />
+        <Tab style={{color : "white"}} label="libros reservados" onClick={handleShowReserved} />
       </Tabs>
     </Box>
     <div className="row">

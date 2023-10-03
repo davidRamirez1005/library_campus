@@ -71,11 +71,11 @@ export default function GetBooks() {
                     'Authorization': `Bearer ${bearerAuth}`,
                 },
             });
-            if (response3.status === 404) {
+            if (response2.status === 404) {
                 return alert('usuario no registrado');
-            } else if (response3.status === 400) {
+            } else if (response2.status === 400) {
                 return alert('la fecha final no puede ser menor a la fecha de inicio');
-            } else if (response3.status !== 202) {
+            } else if (response2.status !== 202) {
                 throw new Error('Error en la solicitud');
             }
             setIsTrue(true)

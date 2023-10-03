@@ -41,23 +41,14 @@ export default function GetProductsUser() {
             'Authorization': `Bearer ${bearerAuth}`,
             },
         });
-        if (response3.status === 404) {
-            return alert('usuario no registrado');
-        } else if (response3.status === 400) {
-            return alert('la fecha final no puede ser menor a la fecha de inicio');
-        } else if (response3.status !== 202) {
+        if (response.status != 200) {
             throw new Error('Error en la solicitud');
         }
-        setIsTrue(true)
-    } catch (error) {
-        if (error.response && error.response.status === 404) {
-            return alert('usuario no registrado');
-        }else if (error.response && error.response.status === 400){
-            return alert('la fecha final no puede ser menor a la fecha de inicio');
-        }
-        console.log(error);
-        return alert('error en la consulta');
-    } finally {
+        const productsData = response.data;
+        setProducts(productsData);
+        } catch (error) {
+            return alert('error en la consulta');
+        } finally {
         setIsLoading(false);
         }
         setShowTable(!showTable);
@@ -65,7 +56,7 @@ export default function GetProductsUser() {
 
     const reserve = async (idProduct, idUser) => {
         try {
-            const response2 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}/${idUser}`, {
+            const response = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}/${idUser}`, {
                 start_date,
                 final_date,
 
@@ -77,14 +68,23 @@ export default function GetProductsUser() {
                     'Authorization': `Bearer ${bearerAuth}`,
                 },
             });
-        if (response2.status != 202) {
-            throw new Error('Error en la solicitud');
-        }
-        setIsTrue(true)
+            if (response.status === 404) {
+                return alert('usuario no registrado');
+            } else if (response.status === 400) {
+                return alert('la fecha final no puede ser menor a la fecha de inicio');
+            } else if (response.status !== 202) {
+                throw new Error('Error en la solicitud');
+            }
+            setIsTrue(true)
         } catch (error) {
+            if (error.response && error.response.status === 404) {
+                return alert('usuario no registrado');
+            }else if (error.response && error.response.status === 400){
+                return alert('la fecha final no puede ser menor a la fecha de inicio');
+            }
             console.log(error);
             return alert('error en la consulta');
-        } finally {
+        }finally {
         }
     };
     setTimeout(() => {
