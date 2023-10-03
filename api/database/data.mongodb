@@ -119,28 +119,20 @@ db.Product.insertMany([
         title: "libro camino al exito",
         description : 'libro nuevo',
         type: "libros",
-        status: "disponible"
-    },
-        {
-        _id: Number(siguienteId("Product")),
-        title: "data base",
-        description : 'libro sobre base de datos',
-        type: "libros",
-        status: "disponible"  
-    },
-    {
-        _id: Number(siguienteId("Product")),
-        title: "emprendedor 2",
-        description : 'libro en excelentes condiciones',
-        type: "libros",
-        status: "disponible" 
+        status: "disponible",
+        author : "sergio cabrera",
+        numberPages : "700",
+        image : 'https://www.libros-mas-vendidos.com/wp-content/uploads/2016/07/P-camino-%C3%A9xito.jpg'
     },
     {
         _id: Number(siguienteId("Product")),
         title: "todo sobre javascript",
         description : 'libro nuevo y conceptos sobre este lenguaje',
         type: "libros",
-        status: "disponible"
+        status: "disponible",
+        author : "campusland",
+        numberPages : "100",
+        image : 'https://banner2.cleanpng.com/20180411/cvq/kisspng-javascript-html-computer-software-web-browser-watermark-5acdbd54ac19f7.4484983215234327887049.jpg'
     }
 ]);
 use("db_campus_Library");
@@ -152,14 +144,14 @@ function siguienteId(coleccion) {
     );
     return sequenceDocument.sequence_value;
 };
-// use("db_campus_Library");
-// db.Product.insertOne({
-//     _id: Number(siguienteId("Product")),
-//     title: "libro sobre php",
-//     description : 'libro en excelentes condiciones',
-//     type: "libros",
-//     status: "reservado",
-//     start_date : '2023-10-26',
-//     final_date : '2023-10-30',
-//     user_identification : 1
-// })
+use("db_campus_Library");
+db.Product.insertOne({
+    _id: Number(siguienteId("Product")),
+    title: "libro sobre el rayo macquin",
+    description : 'libro en excelentes condiciones infantil',
+    type: "libros",
+    status: "disponible",
+    author : "miguel de cervantes saavedra",
+    numberPages : "500",
+    image : 'https://www.eluniversal.com.mx/resizer/walLIwgM7TbS2TW9lQucmGYLquM=/1100x666/cloudfront-us-east-1.images.arcpublishing.com/eluniversal/663SXMJW5BEA7F4QD7TGSLI67A.jpg'
+})
