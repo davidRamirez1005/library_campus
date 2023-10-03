@@ -240,9 +240,10 @@ export const updateBookUserReserved = async (req, res) => {
             return res.status(400).send('La fecha final debe ser mayor a la fecha inicial');
         }
 
-        // Valida que la fecha final no supere 5 días
-        const delta = req.body.final_date - req.body.start_date;
-        if (delta.days > 5) {
+        const deltaInMilliseconds = req.body.final_date - req.body.start_date;
+        const deltaInDays = deltaInMilliseconds / (1000 * 60 * 60 * 24);
+        
+        if (deltaInDays > 5) {
             return res.status(400).send('La reserva no puede ser mayor a 5 días');
         }
 

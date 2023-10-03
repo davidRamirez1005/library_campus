@@ -119,7 +119,49 @@ export const aggregateProduct = (userIdentification) => [
             },
         },
         },
-    ]
+]
+/**
+ * * encontrar los productos que estan proximos a entregar en los siguientes 3 dias
+*/
+export const findProductCloseDateNext = [
+    {
+        $match: {
+            status: "prestado"
+        }
+    },
+    {
+        $sort: {
+            final_date: -1
+        }   
+    },
+    {
+        $lookup: {
+            from: "User",
+            localField: "user_identification",
+            foreignField: "_id",
+            as: "user"
+        }
+    },
+    {
+        $project: {
+            _id: 1,
+            title: 1,
+            description: 1,
+            type: 1,
+            status: 1,
+            user_identification: 1,
+            start_date : 1,
+            final_date : 1,
+            user: {
+            username: 1,
+            identification: 1,
+            email : 1,
+            phone : 1,
+            team : 1
+            }
+        }
+    }
+]
 /**
  * * encontrar los productos con final_date mas cercanos a la fecha actual con la informacion del user
 */
@@ -160,9 +202,6 @@ export const findProductCloseDate = [
             team : 1
             }
         }
-    },
-    {
-        $limit: 30
     }
 ]
 /**
@@ -201,9 +240,6 @@ export const findBooksDelivered = [
             team : 1
             }
         }
-    },
-    {
-        $limit: 30
     }
 ]
 /**
@@ -242,9 +278,6 @@ export const findBooksReserved = [
             team : 1
             }
         }
-    },
-    {
-        $limit: 30
     }
 ]
 /**
@@ -269,12 +302,12 @@ export const userHistoryCompleted = (id_user) => [
 /**
  * * insertar un nuevo producto
 */
-export const insertNewProduct = {
-    title: "libro nuevo",
-    description: "libro en excelentes condiciones",
-    type: "libros",
-    status: "disponible"
-}
+// export const insertNewProduct = {
+//     title: "libro nuevo",
+//     description: "libro en excelentes condiciones",
+//     type: "libros",
+//     status: "disponible"
+// }
 /**
  * * insertar un nuevo producto en condicion de prestado
 */
