@@ -55,7 +55,7 @@ export default function Registrer() {
         };
         setTimeout(() => {
             setIsTrue(false);
-        }, 20000);
+        }, 21000);
         setTimeout(() => {
             setIsError(false);
         }, 10000);

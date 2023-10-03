@@ -13,6 +13,9 @@ import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
 import Stack from '@mui/joy/Stack';
 import Alert from '@mui/material/Alert';
+import { GrCatalogOption } from "react-icons/gr";
+import { GrNorton } from "react-icons/gr";
+import { GrUserExpert } from "react-icons/gr";
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
@@ -30,8 +33,12 @@ export default function GetBooks() {
     let[productId, setIProductId] = useState(0)
     let[productTittle, setIProductTittle] = useState('')
     let[productDescription, setIProductDescription] = useState('')
+    let[productImage, setIProductImage] = useState('')
+    let[author, setIAuthor] = useState('')
+    let[numberPages, setINumberPages] = useState('')
     let[productType, setIProductType] = useState('')
     let[productStatus, setIProductStatus] = useState('')
+    let[descripctionModal, setDescripctionModal] = useState(false)
     let bearerAuth = auth.user.bearer
     
 
@@ -194,11 +201,32 @@ export default function GetBooks() {
                     style={{
                         backgroundColor : "#144272"
                     }}>
-                        Prestar
+                    <GrNorton/>  Prestar
                     </Button>
-                <Button onClick={() => reserve(productId, identification)} style={{backgroundColor : "#c0c0c0", color : "#144272"}}>Reservar</Button>
+                <Button onClick={() => reserve(productId, identification)} style={{backgroundColor : "#c0c0c0", color : "#144272"}}><GrUserExpert />Reservar</Button>
                 </Stack>
             </form>
+            </ModalDialog>
+        </Modal>
+
+        {/* modal descripcion */}
+
+        <Modal open={descripctionModal} onClose={() => setDescripctionModal(false)}>
+            <ModalDialog
+            color="primary"
+            variant="soft"
+            >
+                <div style={{display : "flex", justifyContent : "center", alignContent : "center", flexDirection : "column", width : "30vw", height : "auto", flexWrap : "wrap", overflowY : "auto", rowGap : "1rem"}}>
+                    <img style={{display : "flex", alignSelf : "center", borderRadius : "18px"}} src={productImage} alt="" width={"60%"} />
+                    <h3>Libro:</h3>
+                    <DialogTitle>{productTittle}</DialogTitle>
+                    <h3>Descripcion:</h3>
+                    <DialogContent>{productDescription}</DialogContent>
+                    <h3>Autor:</h3>
+                    <DialogContent>{author}</DialogContent>
+                    <h3>Numero de páginas:</h3>
+                    <DialogContent>{numberPages}</DialogContent>
+                </div>
             </ModalDialog>
         </Modal>
     
@@ -225,7 +253,14 @@ export default function GetBooks() {
                     <tr key={product._id}>
                         <td>{product._id}</td>
                         <td>{product.title}</td>
-                        <td>{product.description}</td>
+                        <td>{product.description} <button style={{borderRadius : "12px", border : "none", cursor : "pointer"}} onClick={() =>{
+                            setIProductTittle(product.title),
+                            setIProductDescription(product.description),
+                            setIProductImage(product.image),
+                            setIAuthor(product.author),
+                            setINumberPages(product.numberPages),
+                            setDescripctionModal(true)
+                        }}>Ver más</button></td>
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
@@ -237,8 +272,8 @@ export default function GetBooks() {
                                 setIProductType(product.type),
                                 setIProductStatus(product.status)
                                 }}>
-                                    Alquilar
-                                </button>
+                                <GrCatalogOption/> Alquilar
+                            </button>
                         </td>
                     </tr>
                     ))}

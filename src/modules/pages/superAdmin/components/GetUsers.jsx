@@ -79,10 +79,15 @@ export default function GetUsers() {
                             </div>
                                 <ul style={{paddingRight : 0}}>
                                     <li style={{display:"grid", rowGap : "1rem", color : "white"}}>
+                                        <h4 style={{color : "#7ea1bf"}}>Nombre:</h4>
                                         <div>{user.username}</div>
+                                        <h4 style={{color : "#7ea1bf"}}>Identificacion:</h4>
                                         <div>{user.identification}</div>
+                                        <h4 style={{color : "#7ea1bf"}}>E-mail:</h4>
                                         <div>{user.email}</div>
+                                        <h4 style={{color : "#7ea1bf"}}>Celular:</h4>
                                         <div>{user.phone}</div>
+                                        <h4 style={{color : "#7ea1bf"}}>Tema:</h4>
                                         <div>{user.team}</div>
                                     </li>
                                 </ul>

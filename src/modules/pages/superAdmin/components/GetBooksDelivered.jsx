@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import Dropdown from '@mui/joy/Dropdown';
 import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
+import { ImUndo2 } from "react-icons/im";
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
@@ -120,7 +121,7 @@ export default function GetBooksDelivered() {
                             </Dropdown>
                         </td>
                         <td>
-                            <button className={styleTable.buttonOpcion} onClick={() => update(product._id)}>Disponible</button>
+                            <button className={styleTable.buttonOpcion} onClick={() => update(product._id)}><ImUndo2 /> Disponible</button>
                         </td>
                     </tr>
                     ))}

@@ -8,6 +8,7 @@ import Dropdown from '@mui/joy/Dropdown';
 import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import Stack from '@mui/material/Stack';
+import { ImCheckmark } from "react-icons/im";
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
@@ -123,7 +124,7 @@ export default function GetBorrowed() {
                             </Dropdown>
                         </td>
                         <td>
-                            <button  className={styleTable.buttonOpcion} onClick={() => update(product._id)}>Entregado</button>
+                            <button  className={styleTable.buttonOpcion} onClick={() => update(product._id)}><ImCheckmark/> Entregado</button>
                         </td>
                     </tr>
                     ))}

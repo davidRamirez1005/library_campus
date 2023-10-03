@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../auth/context/auth';
 import { Menu } from '@/shared/Menu';
 import styleContext from '../../auth/assets/css/registrer.module.css'
@@ -17,8 +17,8 @@ export default function Client() {
 
     const auth = useAuth();
 
-    const [activeComponentTwo, setActiveComponentTwo] = useState(null);
-    const [value, setValue] = useState(0);
+    const [activeComponentTwo, setActiveComponentTwo] = useState('favorite');
+    const [value, setValue] = useState(1);
     
     const handleShowProducts = () => {
         setActiveComponentTwo('products');
@@ -29,14 +29,6 @@ export default function Client() {
     const handleShowFavorite = () => {
         setActiveComponentTwo('favorite');
     };
-
-    useEffect(() => {
-        const storedToken = localStorage.getItem('token');
-        if (storedToken) {
-            // Hacer algo con el token si es necesario
-            console.log('Token almacenado en localStorage:', storedToken);
-        }
-    }, []);
 
 return (
     <>
