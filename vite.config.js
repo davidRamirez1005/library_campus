@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const env = loadEnv("development", process.cwd(), 'VITE')
 
-console.log(env);
+// console.log(env);
 export default defineConfig({
   plugins: [react()],
   'react-bootstrap': 'react-bootstrap/esm',
