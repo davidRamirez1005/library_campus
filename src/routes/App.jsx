@@ -5,7 +5,6 @@ import { Logout } from '@/modules/auth/components/Logout';
 import Home from '../modules/home/Home';
 import SuperAdmin from '../modules/pages/superAdmin/SuperAdmin';
 import Index from '../modules/auth/Index';
-import Admin from '../modules/pages/admin/Admin';
 import Client from '../modules/pages/client/Client';
 import Registrer from '../modules/auth/components/Registrer';
 import NewAdmin from '../modules/pages/superAdmin/components/NewAdmin';
@@ -25,14 +24,6 @@ function App() {
               element={
                 <AuthRoute>
                   <SuperAdmin />
-                </AuthRoute>
-              }
-            />
-            <Route
-              path="/Admin"
-              element={
-                <AuthRoute>
-                  <Admin />
                 </AuthRoute>
               }
             />
