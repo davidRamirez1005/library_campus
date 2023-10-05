@@ -23,7 +23,7 @@ const generateToken = async(req, res) => {
     const coleccionAdmin = await genCollection("Admin")
 
     const result = await coleccionSuper.findOne({"email":email, "password": psw }) || await coleccionUser.findOne({"email":email, "password": psw }) || await coleccionAdmin.findOne({"email":email, "password": psw }) 
-    console.log({"result": result});
+    // console.log({"result": result});
     if(!result){return res.send({"status": 404, "message":`Usuario no encontrado en la base de datos: ${coleccion_name}`})}
     const datauser = {
         "id":result.rol
@@ -49,7 +49,7 @@ const validateToken = async (token) => {
         const coleccion = await genCollection("Rols")
         return await coleccion.findOne({"_id": jwtData.payload.id});
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return false;
     }
 }

@@ -7,7 +7,7 @@ const genCollection = async (coleccion) => {
         return newCollection;
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 

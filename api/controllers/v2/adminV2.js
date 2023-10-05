@@ -30,7 +30,7 @@ export const aggregateNewAdmin = async(req, res) =>{
         let result = await coleccion.insertOne(newDocument);
         res.status(201).send({ status: 201, message: 'documento creado con exito', "documento" : newDocument});
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(406).send('no se ha podido crear el documento');
     }
 }

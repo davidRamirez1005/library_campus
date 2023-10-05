@@ -28,7 +28,7 @@ export const aggregateNewProduct = async(req, res) =>{
         let result = await coleccion.insertOne(newDocument);
         res.status(201).send({ status: 201, message: 'documento creado con exito', "documento" : newDocument });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(406).send('no se ha podido crear el documento');
     }
 }
@@ -54,9 +54,9 @@ export const updateStatusDelivery = async (req, res) => {
             res.send('Estado del producto no actualizado');
         }
     } catch (err) {
-        console.error(err);
+        // console.error(err);
 
-        console.error('Error al actualizar el estado del producto:', err.message);
+        // console.error('Error al actualizar el estado del producto:', err.message);
 
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
@@ -83,11 +83,11 @@ export const updateStatusSpend = async (req, res) => {
             res.send('Estado del producto no actualizado');
         }
     } catch (err) {
-        console.error(err);
+        // console.error(err);
 
-        console.error('Error al actualizar el estado del producto:', err.message);
-        console.error('Filtro utilizado:', filter);
-        console.error('Actualización utilizada:', update);
+        // console.error('Error al actualizar el estado del producto:', err.message);
+        // console.error('Filtro utilizado:', filter);
+        // console.error('Actualización utilizada:', update);
 
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
@@ -114,11 +114,11 @@ export const updateStatusAvailable = async (req, res) => {
             res.send('Estado del producto no actualizado');
         }
     } catch (err) {
-        console.error(err);
+        // console.error(err);
 
-        console.error('Error al actualizar el estado del producto:', err.message);
-        console.error('Filtro utilizado:', filter);
-        console.error('Actualización utilizada:', update);
+        // console.error('Error al actualizar el estado del producto:', err.message);
+        // console.error('Filtro utilizado:', filter);
+        // console.error('Actualización utilizada:', update);
 
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
@@ -145,9 +145,9 @@ export const updateStatusBorrowed = async (req, res) => {
             res.send('Estado del producto no actualizado');
         }
     } catch (err) {
-        console.error(err);
+        // console.error(err);
 
-        console.error('Error al actualizar el estado del producto:', err.message);
+        // console.error('Error al actualizar el estado del producto:', err.message);
 
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
@@ -200,7 +200,7 @@ export const updateBookUser = async (req, res) => {
             res.send('Estado del producto no actualizado');
         }
     } catch (err) {
-        console.error('Error al actualizar el estado del producto:', err.message);
+        // console.error('Error al actualizar el estado del producto:', err.message);
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
 }
@@ -255,7 +255,7 @@ export const updateBookUserReserved = async (req, res) => {
             res.send('Estado del producto no actualizado');
         }
     } catch (err) {
-        console.error('Error al actualizar el estado del producto:', err.message);
+        // console.error('Error al actualizar el estado del producto:', err.message);
         res.status(500).send('Error al actualizar el estado del producto en la base de datos.');
     }
 }
@@ -280,10 +280,10 @@ export const deleteProduct = async (req, res) => {
             res.send('Producto no eliminado');
         }
     } catch (err) {
-        console.error(err);
+        // console.error(err);
 
-        console.error('Error al eliminar el producto:', err.message);
-        console.error('Filtro utilizado:', filter);
+        // console.error('Error al eliminar el producto:', err.message);
+        // console.error('Filtro utilizado:', filter);
 
         res.status(500).send('Error al eliminar el producto en la base de datos.');
     }
@@ -313,7 +313,7 @@ export const aggregateProductHistory = async(req, res) =>{
         let result = await coleccion.insertOne(newDocument);
         res.status(201).send({ status: 201, message: 'documento creado con exito', "documento" : newDocument });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(406).send('no se ha podido crear el documento');
     }
 }
