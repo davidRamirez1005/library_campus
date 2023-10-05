@@ -39,6 +39,7 @@ export default function GetBooks() {
     let[productType, setIProductType] = useState('')
     let[productStatus, setIProductStatus] = useState('')
     let[descripctionModal, setDescripctionModal] = useState(false)
+    let [reload, setReload] = useState(0);
     let bearerAuth = auth.user.bearer
     
 
@@ -62,7 +63,7 @@ export default function GetBooks() {
         } finally {
         setIsLoading(false);
         }
-        setShowTable(!showTable);
+        setShowTable(true);
     };
 
     const lend = async (idProduct, idUser) => {
@@ -95,6 +96,7 @@ export default function GetBooks() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setReload(reload + 1)
         }
     };
     const reserve = async (idProduct, idUser) => {
@@ -128,6 +130,7 @@ export default function GetBooks() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setReload(reload + 1)
         }
     };
     const postHistory = async () => {
@@ -166,7 +169,7 @@ export default function GetBooks() {
     }, 10000);
     useEffect(() => {
         listar();
-    }, []);
+    }, [reload]);
 
     return (
     <>

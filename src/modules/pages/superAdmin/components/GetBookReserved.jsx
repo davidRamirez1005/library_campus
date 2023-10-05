@@ -18,6 +18,7 @@ export default function GetBookReserved() {
     let[books, setBooks] = useState(false)
     let [showTable, setShowTable] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
+    let [reload, setReload] = useState(0);
     
     let bearerAuth = auth.user.bearer
 
@@ -41,7 +42,7 @@ export default function GetBookReserved() {
         } finally{
             setIsloading(false)
         }
-        setShowTable(!showTable)
+        setShowTable(true)
     }
 
     const update = async (idProduct) => {
@@ -61,6 +62,7 @@ export default function GetBookReserved() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setReload(reload + 1)
         }
     };
 
@@ -81,6 +83,7 @@ export default function GetBookReserved() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setReload(reload + 1)
         }
     };
 
@@ -117,7 +120,7 @@ export default function GetBookReserved() {
     }, 10000);
     useEffect(()=>{
         listar()
-    }, [])
+    }, [reload])
     return (
         <>
             { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>

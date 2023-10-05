@@ -36,6 +36,7 @@ export default function GetProductsUser() {
     let[descripctionModal, setDescripctionModal] = useState(false)
     let[identification, setIdentification] = useState(auth.user.identification)
     let[productId, setIProductId] = useState(0)
+    let [reload, setReload] = useState(0);
     let bearerAuth = auth.user.bearer
     
 
@@ -59,7 +60,7 @@ export default function GetProductsUser() {
         } finally {
         setIsLoading(false);
         }
-        setShowTable(!showTable);
+        setShowTable(true);
     };
 
     const reserve = async (idProduct, idUser) => {
@@ -93,6 +94,7 @@ export default function GetProductsUser() {
             console.log(error);
             return alert('error en la consulta');
         }finally {
+            setReload(reload + 1)
         }
     };
     setTimeout(() => {
@@ -101,7 +103,7 @@ export default function GetProductsUser() {
     
     useEffect(() => {
         listar();
-    }, []);
+    }, [reload]);
 
     return (
     <>

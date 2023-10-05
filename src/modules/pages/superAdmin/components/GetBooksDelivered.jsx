@@ -19,6 +19,8 @@ export default function GetBooksDelivered() {
     let[books, setBooks] = useState(false)
     let [showTable, setShowTable] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
+    let [reload, setReload] = useState(0);
+
     let bearerAuth = auth.user.bearer
 
     const listar = async () => {
@@ -41,7 +43,7 @@ export default function GetBooksDelivered() {
         } finally{
             setIsloading(false)
         }
-        setShowTable(!showTable)
+        setShowTable(true)
     }
 
     const update = async (idProduct) => {
@@ -61,6 +63,7 @@ export default function GetBooksDelivered() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setReload(reload + 1)
         }
     };
     setTimeout(() => {
@@ -68,7 +71,7 @@ export default function GetBooksDelivered() {
     }, 10000);
     useEffect(()=>{
         listar()
-    }, [])
+    }, [reload])
     return (
         <>
         { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>

@@ -23,6 +23,7 @@ export default function GetProducts() {
     let [isTrue, setIsTrue] = useState(false);
     let [isAvaliable, setIsAvaliable] = useState(false);
     let [open, setOpen] = useState(false);
+    let [a, setA] = useState(0);
     
 
     let bearerAuth = auth.user.bearer
@@ -46,7 +47,7 @@ export default function GetProducts() {
         } finally {
         setIsLoading(false);
         }
-        setShowTable(!showTable);
+        setShowTable(true);
     };
     const updateExhaust = async (idProduct) => {
         try {
@@ -65,6 +66,7 @@ export default function GetProducts() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setA(a + 1)
         }
     };
     const updateAvaliable = async (idProduct) => {
@@ -84,6 +86,7 @@ export default function GetProducts() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setA(a + 1)
         }
     };
     const deleteProduct = async (idProduct) => {
@@ -104,6 +107,7 @@ export default function GetProducts() {
             console.log(error);
             return alert('error en la consulta');
         } finally {
+            setA(a + 1)
         }
     };
     setTimeout(() => {
@@ -114,7 +118,7 @@ export default function GetProducts() {
     }, 11000);
     useEffect(() => {
         listar();
-    }, []);
+    }, [a]);
     return (
     <>
     { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
