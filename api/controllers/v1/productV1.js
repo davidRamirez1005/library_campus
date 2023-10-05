@@ -125,5 +125,6 @@ export const favoriteProduct = async(req, res) =>{
     let coleccion = await genCollection('History')
     let result = await coleccion.aggregate(productFavorite).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+    console.log(result)
 }
 

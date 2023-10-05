@@ -338,27 +338,35 @@ export const insertNewAdmin = {
 */
 export const productFavorite = [
     {
-    $match: {
-        type: "libros"
-    }
-    },
-    {
-    $group: {
+        $group: {
         _id: {
-        title: "$title"
+            title: "$title",
+            description: "$description",
+            image: "$image",
+            author : "$author",
+            type : "$type",
+            numberPages : "$numberPages"
         },
-        count: {
-        $sum: 1
+        count: { $sum: 1 }
         }
-    }
     },
     {
-    $sort: {
-        count: -1
-    }
+        $sort: { count: -1 }
     },
     {
-    $limit: 1
+        $limit: 1
+    },
+    {
+        $project: {
+        _id: 1,
+        title: "$_id.title",
+        description: "$_id.description",
+        image: "$_id.image",
+        type : "$_id.type",
+        author : "$_id.author",
+        numberPages : "$_id.numberPages",
+        count: 1
+        }
     }
 ]
 /**
