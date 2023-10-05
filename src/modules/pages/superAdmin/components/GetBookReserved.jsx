@@ -6,6 +6,8 @@ import LoadingQuery from '../../../../shared/LoadingQuery';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { ImBook } from "react-icons/im";
+import { ImUndo2 } from "react-icons/im";
+
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
 
@@ -16,13 +18,6 @@ export default function GetBookReserved() {
     let[books, setBooks] = useState(false)
     let [showTable, setShowTable] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
-    // let[identification, setIdentification] = useState('')
-    // let[productType, setIProductType] = useState('')
-    // let[start_date, setStart] = useState('')
-    // let[final_date, setFinal] = useState('')
-    // let[productStatus, setIProductStatus] = useState('')
-    // let[productTittle, setIProductTittle] = useState('')
-    // let[productDescription, setIProductDescription] = useState('')
     
     let bearerAuth = auth.user.bearer
 
@@ -62,7 +57,6 @@ export default function GetBookReserved() {
             throw new Error('Error en la solicitud');
         }
         setIsTrue(true)
-        // postHistory()
         } catch (error) {
             console.log(error);
             return alert('error en la consulta');
@@ -70,34 +64,53 @@ export default function GetBookReserved() {
         }
     };
 
-    // const postHistory = async () => {
-    //     try {
-    //         const response4 = await axios.post(`http://${backendUrl}/Product/agregar/producto`, {
-    //         title: productTittle,
-    //         description: productDescription,
-    //         type: productType,
-    //         status: productStatus,
-    //         start_date,
-    //         final_date,
-    //         user_identification: identification
-    //         }, 
-    //         {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Accept-Version': '1.1.0',
-    //                 'Authorization': `Bearer ${bearerAuth}`,
-    //             },
-    //         });
-    //         if (response4.status !== 201) {
-    //             throw new Error('Error en la solicitud');
-    //         }
-    //         setIsTrue(true)
-    //     } catch (error) {
-    //         console.log(error);
-    //         return alert('error en la consulta');
-    //     } finally {
-    //     }
-    // };
+    const updateDelivery = async (idProduct) => {
+        try {
+            const response2 = await axios.put(`http://${backendUrl}/Product/actualizar/producto/${idProduct}`, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.2.0',
+                    'Authorization': `Bearer ${bearerAuth}`,
+                },
+            });
+        if (response2.status != 202) {
+            throw new Error('Error en la solicitud');
+        }
+        setIsTrue(true)
+        } catch (error) {
+            console.log(error);
+            return alert('error en la consulta');
+        } finally {
+        }
+    };
+
+    const postHistory = async (productTittle,productDescription, productType, productStatus, start_date, final_date, identification ) => {
+        try {
+            const response4 = await axios.post(`http://${backendUrl}/Product/agregar/producto`, {
+            title: productTittle,
+            description: productDescription,
+            type: productType,
+            status: productStatus,
+            start_date,
+            final_date,
+            user_identification: identification
+            }, 
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Version': '1.1.0',
+                    'Authorization': `Bearer ${bearerAuth}`,
+                },
+            });
+            if (response4.status !== 201) {
+                throw new Error('Error en la solicitud');
+            }
+        } catch (error) {
+            console.log(error);
+            return alert('error en la consulta agregar al historial');
+        } finally {
+        }
+    };
 
     setTimeout(() => {
         setIsTrue(false);
@@ -109,7 +122,7 @@ export default function GetBookReserved() {
         <>
             { isTrue  &&  <Stack sx={{ width: '100%', marginBottom : "2rem" }} spacing={2}>
             <Alert sx={{ zIndex: '999' }} variant="filled" severity="success">
-                producto en estado prestado con exito!
+                solicitud procesada con exito!
             </Alert>
             </Stack>}
             {showTable && (
@@ -146,16 +159,10 @@ export default function GetBookReserved() {
                         <td>{product.user[0].phone}</td>
                         <td>{product.user[0].team}</td>
                         <td>
-                            <button className={styleTable.buttonOpcion} onClick={() => update(product._id) }><ImBook/>Prestado</button>
-                            {/* <button className={styleTable.buttonOpcion} onClick={() => {update(product._id), 
-                            setIProductTittle(product.title),
-                            setIProductDescription(product.description),
-                            setStart(product.start_date),
-                            setFinal(product.final_date),
-                            setIdentification(product.user[0].identification),
-                            setIProductType(product.type),
-                            setIProductStatus(product.status)
-                            }}><ImBook/>Prestado</button> */}
+                            <button className={styleTable.buttonOpcion2} onClick={() => {update(product._id), 
+                            postHistory(product.title, product.description, product.type, product.status, product.start_date, product.final_date, product.user[0].identification )
+                            }}><ImBook/>Prestado</button>
+                            <button className={styleTable.buttonOpcion2} onClick={() => updateDelivery(product._id)}><ImUndo2 /> Disponible</button>
                         </td>
                     </tr>
                     ))}

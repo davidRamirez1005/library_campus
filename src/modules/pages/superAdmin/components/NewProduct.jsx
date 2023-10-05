@@ -65,7 +65,7 @@ export default function NewProduct() {
         <>
             <Menu />
             <br /><br />
-            <br /><br />
+            <br />
             
             {/* 
                 "title": "libro emprendedor 3",

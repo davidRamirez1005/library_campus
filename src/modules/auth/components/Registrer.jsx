@@ -6,6 +6,7 @@ import style from '../assets/css/registrer.module.css'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
+import planet from '../assets/img/planet4.png'
 
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
@@ -62,7 +63,7 @@ export default function Registrer() {
 return (
     <>
         <Menu />
-        <br /><br /><br />
+        <br /><br /><br /><br />
         
         
         {/* 
@@ -128,6 +129,9 @@ return (
         <br />
         <button className={style.submit} value="login" onClick={sesion}>Enviar</button>
         </div>
+        <div className={style.planet}>
+                        <img src={planet} alt=""  style={{ width: 400 }}/>
+                    </div>
         <br /><br />
         {isLoading && <Loading />}
         </div>

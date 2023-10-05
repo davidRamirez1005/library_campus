@@ -56,7 +56,7 @@ export default function ProductFavorite() {
                 </Stack>
             </div>
         )}
-        {!isLoading && <div style={{ display: 'flex', justifyContent: "center" }}>
+        {!isLoading && <div style={{ display: 'flex', justifyContent: "center", overflow: "auto" }}>
                 <div className={style.contentUser}>
                     <div className={style.tools}>
                         <span className={style.red}></span>
@@ -69,10 +69,23 @@ export default function ProductFavorite() {
                     </div>
                     <ul style={{ paddingRight: 0 }}>
                         {product.map((producto) => (
-                            <li key={producto._id.title} style={{ display: "grid", rowGap: "1rem", color: "white" }}>
-                                <h2>Nombre: {producto._id.title}</h2>
-                                <h2>Veces prestrado: {producto.count}</h2>
-                                <img src={imagen} alt="" width={200 } />
+                            <li key={producto._id} style={{ display: "grid", rowGap: "1rem", color: "white" }}>
+                                <div className="row" style={{alignItems : "center"}}>
+                                    <div className="col">
+                                        <h3 style={{color : "#5a5b5c"}} >Veces prestrado: <span style={{color : "#B1D0E0"}}>{producto.count}</span></h3>
+                                    </div>
+                                    <div className="col" style={{display : "flex", justifyContent : "end"}}>
+                                        <img style={{display : "flex", alignSelf : "center"}} src={imagen} alt="" width={130 } />
+                                    </div>
+                                </div>
+                                <h2><span style={{color : "#B1D0E0"}}>Nombre:</span> {producto._id.title}</h2>
+                                <div style={{display : "flex", justifyContent : "center"}}>
+                                <img style={{display : "flex", alignSelf : "center", borderRadius : "18px", maxWidth : "500px"}} src={producto.image} alt="" width={"40%"} />
+                                </div>
+                                <h4><span style={{color : "#B1D0E0"}} >Descripción:</span> {producto._id.description}</h4>
+                                <h4><span style={{color : "#B1D0E0"}} >Tipo:</span> {producto._id.type}</h4>
+                                <h4><span style={{color : "#B1D0E0"}} >Autor:</span> {producto._id.author}</h4>
+                                <h4><span style={{color : "#B1D0E0"}} >Num Páginas:</span> {producto._id.numberPages}</h4>
                             </li>
                         ))}
                     </ul>

@@ -87,7 +87,7 @@ export default function GetUsers() {
                                         <div>{user.email}</div>
                                         <h4 style={{color : "#7ea1bf"}}>Celular:</h4>
                                         <div>{user.phone}</div>
-                                        <h4 style={{color : "#7ea1bf"}}>Tema:</h4>
+                                        <h4 style={{color : "#7ea1bf"}}>Team:</h4>
                                         <div>{user.team}</div>
                                     </li>
                                 </ul>

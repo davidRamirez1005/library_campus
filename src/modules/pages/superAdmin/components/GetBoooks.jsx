@@ -136,7 +136,10 @@ export default function GetBooks() {
             title: productTittle,
             description: productDescription,
             type: productType,
-            status: productStatus,
+            status : productStatus,
+            author: author,
+            numberPages: numberPages,
+            image: productImage,
             start_date,
             final_date,
             user_identification: identification
@@ -212,12 +215,13 @@ export default function GetBooks() {
         {/* modal descripcion */}
 
         <Modal open={descripctionModal} onClose={() => setDescripctionModal(false)}>
+            
             <ModalDialog
-            color="primary"
             variant="soft"
+            sx={{overflow: "auto", borderRadius : "27px", backgroundColor : "#B1D0E0"}}
             >
-                <div style={{display : "flex", justifyContent : "center", alignContent : "center", flexDirection : "column", width : "30vw", height : "auto", flexWrap : "wrap", overflowY : "auto", rowGap : "1rem"}}>
-                    <img style={{display : "flex", alignSelf : "center", borderRadius : "18px"}} src={productImage} alt="" width={"60%"} />
+                <div style={{display : "flex", justifyContent : "center", alignContent : "center", flexDirection : "column", height : "auto", flexWrap : "wrap", rowGap : "1rem"}}>
+                    <img style={{display : "flex", alignSelf : "center", borderRadius : "18px", maxWidth : "500px"}} src={productImage} alt="" width={"60%"} />
                     <h3>Libro:</h3>
                     <DialogTitle>{productTittle}</DialogTitle>
                     <h3>Descripcion:</h3>
@@ -270,7 +274,10 @@ export default function GetBooks() {
                                 setIProductTittle(product.title),
                                 setIProductDescription(product.description),
                                 setIProductType(product.type),
-                                setIProductStatus(product.status)
+                                setIProductStatus(product.status),
+                                setIProductImage(product.image),
+                                setIAuthor(product.author),
+                                setINumberPages(product.numberPages)
                                 }}>
                                 <GrCatalogOption/> Alquilar
                             </button>
