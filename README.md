@@ -72,7 +72,7 @@ https://github.com/davidRamirez1005/library_campus.git
 
    
 
-3. iniciar nodemon para backend : `npm run star`
+3. iniciar nodemon para backend : `npm run start`
 
 4. iniciar vite para frontend :  `npm run dev`
 
