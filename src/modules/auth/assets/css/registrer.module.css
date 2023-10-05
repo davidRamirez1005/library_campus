@@ -17,7 +17,7 @@
     display: grid;
     justify-content: center;
     flex-wrap: wrap;
-
+    width: 100%;
 }
 .inputsContainer{
     display: flex;
@@ -326,9 +326,13 @@
     animation-delay: 1.6s;
     animation-duration: 1.6s;
 }
-
-
-
+.planet{
+    display: flex;
+    position: absolute;
+    bottom: -6rem;
+    opacity: 0.7;
+    left : 1rem
+}
 
 
 
