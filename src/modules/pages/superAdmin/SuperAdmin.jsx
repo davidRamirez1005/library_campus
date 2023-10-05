@@ -31,8 +31,8 @@ export default function SuperAdmin() {
   const auth = useAuth();
 
   const [activeComponent, setActiveComponent] = useState(null);
-  const [activeComponentTwo, setActiveComponentTwo] = useState(null);
-  const [value, setValue] = useState(0);
+  const [activeComponentTwo, setActiveComponentTwo] = useState('favorite');
+  const [value, setValue] = useState(1);
   let [users, setUsers] = useState([]);
   const [valueTab, setValueTab] = useState(0);
 
@@ -129,8 +129,8 @@ export default function SuperAdmin() {
     </div>
 
     <hr />
-    <div className="row">
-      <Box sx={{ width: "100%" }}>
+    <div className="row" >
+      <Box sx={{ width: "100%",  marginBottom : "2rem"}}>
         <BottomNavigation
           showLabels
           value={value}
@@ -144,12 +144,10 @@ export default function SuperAdmin() {
         </BottomNavigation>
       </Box>
     </div>
-    <br /><br />
     {activeComponentTwo === 'history' && <GetHistoryUser />}
     {activeComponentTwo === 'products' && <GetProducts />}
     {activeComponentTwo === 'favorite' && <ProductFavorite />}
-    <br /><br />
-    <Box sx={{ width: "100%", bgcolor: '#144272', color : "#B1D0E0", display : "flex", justifyContent : "center" }}>
+    <Box sx={{ width: "100%", bgcolor: '#144272', color : "#B1D0E0", display : "flex", justifyContent : "center", marginTop : "2rem" }}>
       <Tabs
         value={valueTab}
         onChange={handleChange}
@@ -159,9 +157,9 @@ export default function SuperAdmin() {
         aria-label="scrollable force tabs example"
       >
         <Tab style={{color : "white"}} label=" Listar libros" onClick={handleShowBooks} />
-        <Tab style={{color : "white"}} label="Libros libros prestados" onClick={handleShowBorrowed} />
-        <Tab style={{color : "white"}} label="Libros libros entregados" onClick={handleShowDelivered} />
-        <Tab style={{color : "white"}} label="Libros libros reservados" onClick={handleShowReserved} />
+        <Tab style={{color : "white"}} label="libros prestados" onClick={handleShowBorrowed} />
+        <Tab style={{color : "white"}} label="libros entregados" onClick={handleShowDelivered} />
+        <Tab style={{color : "white"}} label="libros reservados" onClick={handleShowReserved} />
       </Tabs>
     </Box>
     <div className="row">

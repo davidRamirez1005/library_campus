@@ -7,18 +7,18 @@ const AuthContext = React.createContext();
 function AuthProvider({ children }) {
     const navigate = useNavigate();
     const [user, setUser] = React.useState(null);
-
     const logins = ({ email, name, rol, username, bearer, identification}) => {
-        setUser({ email, name, rol, username, bearer, identification });
-};
-const logout = () => {
-    setUser(null);
-    navigate("/");
-};
-
-const auth = { user, logins, logout };
-
-return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+        setUser({ email, name, rol, username, bearer, identification })
+    };
+    const logout = () => {
+        localStorage.removeItem('token');
+        setUser(null);
+        navigate("/");
+    };
+    
+    const auth = { user, logins, logout };
+    
+    return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
 function useAuth() {
@@ -28,12 +28,11 @@ function useAuth() {
 
 function AuthRoute(props) {
     const auth = useAuth();
+    if (!auth.user) {
+        return <Navigate to="/Login" />;
+    }
 
-if (!auth.user) {
-    return <Navigate to="/Login" />;
-}
-
-return props.children;
+    return props.children;
 }
 
 export { AuthProvider, AuthRoute, useAuth };

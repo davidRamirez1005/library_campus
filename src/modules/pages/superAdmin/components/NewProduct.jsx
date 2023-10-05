@@ -17,6 +17,9 @@ export default function NewProduct() {
     let[description, setDescription] = useState('')
     let[type, setType] = useState('')
     let[status, setStatus] = useState('')
+    let[author, setAuthor] = useState('')
+    let[numberPages, setNumberPages] = useState('')
+    let[image, setImage] = useState('')
     let [isLoading, setIsLoading] = useState(false);
     let [isError, setIsError] = useState(false);
     let [isTrue, setIsTrue] = useState(false);
@@ -29,6 +32,9 @@ export default function NewProduct() {
                 description,
                 type,
                 status,
+                author,
+                numberPages,
+                image
             }, 
             {
             headers: {
@@ -59,7 +65,7 @@ export default function NewProduct() {
         <>
             <Menu />
             <br /><br />
-            <br /><br />
+            <br />
             
             {/* 
                 "title": "libro emprendedor 3",
@@ -99,6 +105,15 @@ export default function NewProduct() {
                         </div>
                         <div className={style.input_container}>
                             <input className={style.input_pwd}  type="text" value={description} placeholder='descripción' onChange={(e) => setDescription(e.target.value)} />
+                        </div>
+                        <div className={style.input_container}>
+                            <input className={style.input_pwd}  type="text" value={author} placeholder='autor' onChange={(e) => setAuthor(e.target.value)} />
+                        </div>
+                        <div className={style.input_container}>
+                            <input className={style.input_pwd}  type="text" value={numberPages} placeholder='Número de páginas' onChange={(e) => setNumberPages(e.target.value)} />
+                        </div>
+                        <div className={style.input_container}>
+                            <input className={style.input_pwd}  type="text" value={image} placeholder='url de imagen' onChange={(e) => setImage(e.target.value)} />
                         </div>
                         <div className={style.input_container}>
                             <select className={style.input_pwd}  name="type" placeholder="Ingrese categoria" onChange={(e) => setType(e.target.value)}>

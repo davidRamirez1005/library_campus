@@ -6,6 +6,10 @@ import LoadingQuery from '../../../../shared/LoadingQuery';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
+import { ImBin } from "react-icons/im";
+import { ImHourGlass } from "react-icons/im";
+import { ImSpinner10 } from "react-icons/im";
+
 
 
 let backendUrl = `${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}`;
@@ -124,7 +128,7 @@ export default function GetProducts() {
             </Alert>
         </Stack>}
     { open && <Snackbar open={open} onClose={() => setOpen(false)}>
-        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '20%' }}>
+        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '30%' }}>
             Producto eliminado con exito
         </Alert>
         </Snackbar>
@@ -151,10 +155,10 @@ export default function GetProducts() {
                         <td>{product.type}</td>
                         <td>{product.status}</td>
                         <td>
-                            {product.status !== "disponible" ? <button className={styleTable.buttonOpcion2} onClick={() => updateAvaliable(product._id)}>Disponible</button> : null}
-                            {product.status !=="agotado" ? <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}>Agotar</button> : null}
+                            {product.status !== "disponible" ? <button className={styleTable.buttonOpcion2} onClick={() => updateAvaliable(product._id)}><ImSpinner10 /> Disponible</button> : null}
+                            {product.status !=="agotado" ? <button className={styleTable.buttonOpcion2} onClick={() => updateExhaust(product._id)}><ImHourGlass/> Agotar</button> : null}
                             
-                            <button className={styleTable.buttonOpcion2} onClick={() => deleteProduct(product._id)}>Eliminar</button>
+                            <button className={styleTable.buttonOpcion2} onClick={() => deleteProduct(product._id)}><ImBin/> Eliminar</button>
                         </td>
                     </tr>
                     ))}

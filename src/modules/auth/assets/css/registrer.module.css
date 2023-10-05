@@ -2,7 +2,7 @@
     position: relative;
     margin-top: -0.5rem;
     text-align: center;
-    padding: 4.2rem;
+    padding: 3.2rem;
     width: 23rem;
     background: linear-gradient(14deg, rgba(2,0,36, 0.8) 0%, rgb(38 81 108 / 68%) 66%, rgb(20, 76, 99) 100%), radial-gradient(circle, rgba(2,0,36, 0.5) 0%, rgba(32, 15, 53, 0.2) 65%, rgba(14, 29, 28, 0.9) 100%);
     border: 2px solid #fff;
@@ -17,7 +17,7 @@
     display: grid;
     justify-content: center;
     flex-wrap: wrap;
-
+    width: 100%;
 }
 .inputsContainer{
     display: flex;
@@ -326,9 +326,13 @@
     animation-delay: 1.6s;
     animation-duration: 1.6s;
 }
-
-
-
+.planet{
+    display: flex;
+    position: absolute;
+    bottom: -6rem;
+    opacity: 0.7;
+    left : 1rem
+}
 
 
 

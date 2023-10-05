@@ -76,6 +76,16 @@ export const getProductCloseDate = async(req, res) =>{
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
 }
 /**
+ * * encontrar los productos que estan proximos a entregar en los siguientes 3 dias
+ */
+export const getProductsNextDate = async(req, res) =>{
+    if(!req.rateLimit) return;
+
+    let coleccion = await genCollection('Product')
+    let result = await coleccion.aggregate(findProductCloseDateNext).toArray();
+    (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+}
+/**
  * * listar los productos libros con status entregado
  */
 export const getBooksDelivered = async(req, res) =>{
@@ -115,5 +125,6 @@ export const favoriteProduct = async(req, res) =>{
     let coleccion = await genCollection('History')
     let result = await coleccion.aggregate(productFavorite).toArray();
     (result) ? res.send(result) : res.status(404).send({"status": 404, "message": `error en la consulta`});
+    console.log(result)
 }
 

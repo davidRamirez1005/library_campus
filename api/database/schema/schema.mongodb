@@ -61,50 +61,6 @@ db.createCollection("Rols", {
     }
 })
 /**
- * ! admin
- */
-use("db_campus_Library");
-db.createCollection("Admin", {
-    capped: true,
-    size: 4000,
-    validator: {
-        $jsonSchema: {
-            bsonType: 'object',
-            additionalProperties: false,
-            required: ['_id', 'full_name', 'identification', 'email', 'password'],
-            properties: {
-                _id: {
-                    bsonType: "int",
-                    description: "ID del admin"
-                },
-                full_name: {
-                    bsonType: 'string',
-                    minLength: 3,
-                    description: "el nombre debe contener minimo 3 caracteres, y es obligatorio"
-                },
-                identification: {
-                    bsonType: 'string',
-                    description: "la identificacion es obligatoria"
-                },
-                email: {
-                    bsonType: 'string',
-                    description: 'El email es obligatorio y debe ser válido',
-                    pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-                },
-                password: {
-                    bsonType: 'string',
-                    minLength: 5,
-                    description: "la contraseña debe contener minimo 5 caracteres, y es obligatorio"
-                },
-                rol : {
-                    bsonType: 'number',
-                    description: 'el rol es obligatorio'
-                }
-            }
-        }
-    }
-})
-/**
  * ! User
  */
 use("db_campus_Library");
@@ -204,45 +160,69 @@ db.createCollection("Super_Admin", {
     }
 });
 /**
- * ! Product
+ * ! History
  */
-// use("db_campus_Library");
-// db.createCollection("Product", {
-//     capped: false,
-//     validator: {
-//         $jsonSchema: {
-//             bsonType: 'object',
-//             additionalProperties: false,
-//             required: ['_id', 'title', 'description', 'type', 'status'],
-//             properties: {
-//                 _id: {
-//                     bsonType: "int",
-//                     description: "ID del producto"
-//                 },
-//                 title: {
-//                     bsonType: 'string',
-//                     minLength: 3,
-//                     description: "el titulo debe contener minimo 3 caracteres, y es obligatorio"
-//                 },
-//                 description : {
-//                     bsonType: 'string',
-//                     description: "la descripcion es obligatoria"
-//                 },
-//                 type: {
-//                     bsonType: "string",
-//                     items: {
-//                         "enum": ["libros", "audifonos"]
-//                     },
-//                     description: "El tipo debe ser 'libros' o 'audifonos'"
-//                 },
-//                 status: {
-//                     bsonType: 'string',
-//                     description: "el estado del producto es obligatorio"
-//                 }
-//             }
-//         }
-//     }
-// });
+use("db_campus_Library");
+db.createCollection("History", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['_id', 'title', 'description', 'type', 'status'],
+            properties: {
+                _id: {
+                    bsonType: "int",
+                    description: "ID del producto"
+                },
+                title: {
+                    bsonType: 'string',
+                    minLength: 3,
+                    description: "el titulo debe contener minimo 3 caracteres, y es obligatorio"
+                },
+                description : {
+                    bsonType: 'string',
+                    description: "la descripcion es obligatoria"
+                },
+                type: {
+                    bsonType: "string",
+                    items: {
+                        "enum": ["libros", "audifonos"]
+                    },
+                    description: "El tipo debe ser 'libros' o 'audifonos'"
+                },
+                status: {
+                    bsonType: 'string',
+                    description: "el estado del producto es obligatorio"
+                },
+                start_date: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                },
+                final_date: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                },
+                user_identification: {
+                    bsonType: 'string',
+                    description: "el numero de identificacion debe ser  string"
+                },
+                author: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                },
+                image: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                },
+                numberPages: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                }
+            }
+        }
+    }
+});
 
 
 
@@ -503,3 +483,38 @@ db.User.find().projection({
  */
 use("db_campus_Library");
 db.User.find({ identification: "1096065071" });
+
+use("db_campus_Library");
+db.Product.aggregate([
+    {
+        $group: {
+        _id: {
+            title: "$title",
+            description: "$description",
+            image: "$image",
+            type : "$type",
+            author : "$author",
+            numberPages : "$numberPages"
+        },
+        count: { $sum: 1 }
+        }
+    },
+    {
+        $sort: { count: -1 }
+    },
+    {
+        $limit: 1
+    },
+    {
+        $project: {
+        _id: 0,
+        title: "$_id.title",
+        description: "$_id.description",
+        image: "$_id.image",
+        type : "$_id.type",
+        author : "$_id.author",
+        numberPages : "$_id.numberPages",
+        count: 1
+        }
+    }
+]);

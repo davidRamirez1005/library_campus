@@ -17,8 +17,8 @@ export default function Client() {
 
     const auth = useAuth();
 
-    const [activeComponentTwo, setActiveComponentTwo] = useState(null);
-    const [value, setValue] = useState(0);
+    const [activeComponentTwo, setActiveComponentTwo] = useState('favorite');
+    const [value, setValue] = useState(1);
     
     const handleShowProducts = () => {
         setActiveComponentTwo('products');
@@ -30,18 +30,17 @@ export default function Client() {
         setActiveComponentTwo('favorite');
     };
 
-
 return (
     <>
         <Menu />
-        <br /><br /><br /><br />
+        <br /><br /><br />
 
         <div className={styleContext.title_2}><span>Perfil Camper</ span></  div>
         <br />
         <div className={styleContext.form_title}><span>Hola, {auth.user.username} 🚀</span></div>
         <br /><br />
         <hr />
-        <br /><br />
+        <br />
         <div className="row">
             <Box sx={{ width: "100%" }}>
                 <BottomNavigation

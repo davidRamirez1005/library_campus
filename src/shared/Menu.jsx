@@ -28,12 +28,6 @@ function Menu() {
                 text: 'Administracion',
                 private: true,
             });
-        } else if (auth.user.rol === 1) {
-            routes.push({
-                to: '/Admin',
-                text: 'Empleado',
-                private: true,
-            });
         } else if (auth.user.rol === 2) {
             routes.push({
                 to: '/Client',

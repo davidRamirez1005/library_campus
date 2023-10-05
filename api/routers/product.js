@@ -1,9 +1,8 @@
 import {limitget} from '../config/configLimit.js'
 import Routes from 'express';
 import routesVersioning  from 'express-routes-versioning';
-import {getProductAvailable, getAvaliableBooks, getBorrowed, getHistoryUser, getProductCloseDate, getBooksDelivered, getBooksReserved, historyUser, favoriteProduct} from '../controllers/v1/productV1.js'
+import {getProductAvailable, getAvaliableBooks, getBorrowed, getHistoryUser, getProductCloseDate, getBooksDelivered, getBooksReserved, historyUser, favoriteProduct, getProductsNextDate} from '../controllers/v1/productV1.js'
 import {aggregateNewProduct, updateStatusDelivery, updateStatusSpend, updateStatusAvailable, updateStatusBorrowed, deleteProduct, updateBookUser, updateBookUserReserved, aggregateProductHistory} from '../controllers/v2/productV2.js'
-// import {aggregateNewAdmin, deleteAdmin} from '../controllers/v2/adminV2.js'
 
 const appProduct = Routes();
 const version = routesVersioning();
@@ -17,7 +16,8 @@ appProduct.get('/listar',  version({
 appProduct.get('/listar/prestados/:user_id2?',  version({
     "1.0.1": getBorrowed,
     "1.1.0": getHistoryUser,
-    "~1.2.0": getProductCloseDate
+    "~1.2.0": getProductCloseDate,
+    "~1.3.0": getProductsNextDate
 }))
 appProduct.get('/listar/entregados',  version({
     "1.0.0": getBooksDelivered,

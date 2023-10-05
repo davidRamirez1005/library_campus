@@ -11,6 +11,7 @@ function Logout() {
         e.preventDefault();
         auth.logout();
     };
+    
 
     return (
         <>
@@ -32,7 +33,8 @@ function Logout() {
                 }}>
                     <button className={style.btnstyle} style={{backgroundColor :"#2a5e83"}} type="submit">Salir</button>
                     <button className={style.btnstyle} value="volver" onClick={() => {
-                        navigate('/')
+                        navigate('/'),
+                        localStorage.removeItem('token');
                         }}>
                         Volver
                     </button>

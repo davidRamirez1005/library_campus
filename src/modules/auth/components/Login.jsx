@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
 import Loading from '@/shared/Loading';
@@ -14,8 +14,8 @@ export default function Login() {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    let [ROL_EMAIL, getMail] = useState('juandiegod@example.com');
-    let [ROL_PASSWORD, getCon] = useState('secreto');
+    let [ROL_EMAIL, getMail] = useState('jdramirez1005@gmail.com');
+    let [ROL_PASSWORD, getCon] = useState('secreto1005');
     let [token, setToken] = useState('');
     let [isLoading, setIsLoading] = useState(false);
 
@@ -53,18 +53,21 @@ const login = async () => {
             'Authorization': `Bearer ${token}`,
         },
         });
+
+        
+        
         if (response.status != 200) {
             throw new Error('Error en la solicitud');
         }
         const data = response.data;
         setToken(data.Token);
-        console.log(data.Token)
         const TOKEN = data.Token
         const NAME = data.result.full_name
         const USERNAME = data.result.username
         const ROL = data.result.rol
         const IDENTIFICATION = data.result.identification
-
+        localStorage.setItem('token', TOKEN, { expires: 1 }); 
+        
         if (!data.Token) {
             console.log('Verifica los datos ingresados');
         } else {
@@ -85,17 +88,15 @@ const login = async () => {
         }
         } catch (error) {
             return alert('Verifica los datos ingresados');
-            error
         } finally {
             setIsLoading(false);
         }
     };
-    // if (!auth.user) {
-    //     return <Navigate to='/Login' />
-    // }
     const handleRegisterClick = () => {
         navigate('/Registrer');
     };
+
+    
 return (
 <div>
     <br />

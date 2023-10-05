@@ -38,7 +38,7 @@ db.Rols.insertMany([{
             "post": ["1.0.0"]
         },
         "Product": {
-            "get": ["1.1.0","1.0.0"],
+            "get": ["1.1.0","1.0.0","1.3.0"],
             "post": ["1.0.0"],
             "put" : ["1.5.0"]
         }
@@ -69,51 +69,21 @@ db.Rols.insertMany([{
  * ! Super Admin
  */
 use("db_campus_Library");
-db.Super_Admin.insertMany([
+db.Super_Admin.insertOne(
     {
         _id: Number(siguienteId("Super_Admin")),
         full_name: "jose david ramirez",
         identification : "1097910199",
-        email: "JDavidRamirez@gmail.com",
-        password: "jose@1005",
-        rol : 3
-    },
-    {
-        _id: Number(siguienteId("Super_Admin")),
-        full_name: "Campuslands",
-        identification : "123456789",
-        email: "campusland@gmail.com",
-        password: "campus2023",
+        email: "jdramirez1005@gmail.com",
+        password: "secreto1005",
         rol : 3
     }
-]);
-/**
- * ! admin
- */
-use("db_campus_Library");
-db.Admin.insertMany([
-    {
-        _id: Number(siguienteId("Admin")),
-        full_name: "miguel",
-        identification : "98765432",
-        email: "miguel@gmail.com",
-        password: "admin1",
-        rol : 1
-    },
-    {
-        _id: Number(siguienteId("Admin")),
-        full_name: "pedro",
-        identification : "109890890",
-        email: "pedro@gmail.com",
-        password: "admin2",
-        rol : 1
-    }
-]);
+);
 /**
  * ! User
  */
 use("db_campus_Library");
-db.User.insertMany([
+db.User.insertOne(
     {
         _id: Number(siguienteId("User")),
         username: "juan diego ramirez",
@@ -123,41 +93,21 @@ db.User.insertMany([
         phone: "306051789",
         team: "M3",
         rol : 2
-    },
-        {
-        _id: Number(siguienteId("User")),
-        username: "pepito perez",
-        identification : "1098234098",
-        email: "pepito@example.com",
-        password: "pepito123",
-        phone: "314051789",
-        team: "M3",
-        rol : 2
-    },
-    {
-        _id: Number(siguienteId("User")),
-        username: "maria gonzalez",
-        identification : "1097890678",
-        email: "maria@example.com",
-        password: "contraseña123",
-        phone: "310051789",
-        team: "M1",
-        rol : 2
     }
-]);
+);
 /**
  * ! History
  */
 use("db_campus_Library");
 db.History.insertOne({
     _id: Number(siguienteId("History")),
-    title: "libro sobre mongo",
-    description : 'libro en excelentes condiciones',
+    title: "libro sobre el rayo macquin",
+    description : 'libro en excelentes condiciones infantil',
     type: "libros",
-    status: "entregado",
-    start_date : '2023-10-26',
-    final_date : '2023-10-30',
-    user_identification : 1
+    status: "disponible",
+    author : "miguel de cervantes saavedra",
+    numberPages : "500",
+    image : 'https://pictures.abebooks.com/isbn/9788444142098-es.jpg'
 })
 /**
  * ! Product
@@ -169,34 +119,20 @@ db.Product.insertMany([
         title: "libro camino al exito",
         description : 'libro nuevo',
         type: "libros",
-        status: "disponible"
-    },
-        {
-        _id: Number(siguienteId("Product")),
-        title: "libro emprendedor",
-        description : 'libro en excelentes condiciones',
-        type: "libros",
-        status: "prestado",
-        start_date : '2023-09-16',
-        final_date : '2023-09-20',
-        user_identification : 1   
+        status: "disponible",
+        author : "sergio cabrera",
+        numberPages : "700",
+        image : 'https://www.libros-mas-vendidos.com/wp-content/uploads/2016/07/P-camino-%C3%A9xito.jpg'
     },
     {
         _id: Number(siguienteId("Product")),
-        title: "libro emprendedor 2",
-        description : 'libro en excelentes condiciones',
+        title: "todo sobre javascript",
+        description : 'libro nuevo y conceptos sobre este lenguaje',
         type: "libros",
-        status: "reservado",
-        start_date : '2023-09-18',
-        final_date : '2023-09-23',
-        user_identification : 3   
-    },
-    {
-        _id: Number(siguienteId("Product")),
-        title: "libro camino al exito 2",
-        description : 'libro nuevo 2',
-        type: "libros",
-        status: "disponible"
+        status: "disponible",
+        author : "campusland",
+        numberPages : "100",
+        image : 'https://0.academia-photos.com/attachment_thumbnails/55938070/mini_magick20190113-6826-14k967.png?1547410141'
     }
 ]);
 use("db_campus_Library");
@@ -211,11 +147,11 @@ function siguienteId(coleccion) {
 use("db_campus_Library");
 db.Product.insertOne({
     _id: Number(siguienteId("Product")),
-    title: "libro sobre php",
-    description : 'libro en excelentes condiciones',
+    title: "libro sobre el rayo macquin",
+    description : 'libro en excelentes condiciones infantil',
     type: "libros",
-    status: "reservado",
-    start_date : '2023-10-26',
-    final_date : '2023-10-30',
-    user_identification : 1
+    status: "disponible",
+    author : "miguel de cervantes saavedra",
+    numberPages : "500",
+    image : 'https://pictures.abebooks.com/isbn/9788444142098-es.jpg'
 })
