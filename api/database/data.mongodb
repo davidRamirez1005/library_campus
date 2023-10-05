@@ -101,13 +101,13 @@ db.User.insertOne(
 use("db_campus_Library");
 db.History.insertOne({
     _id: Number(siguienteId("History")),
-    title: "libro sobre mongo",
-    description : 'libro en excelentes condiciones',
+    title: "libro sobre el rayo macquin",
+    description : 'libro en excelentes condiciones infantil',
     type: "libros",
-    status: "entregado",
-    start_date : '2023-09-26',
-    final_date : '2023-09-30',
-    user_identification : "1096065071"
+    status: "disponible",
+    author : "miguel de cervantes saavedra",
+    numberPages : "500",
+    image : 'https://pictures.abebooks.com/isbn/9788444142098-es.jpg'
 })
 /**
  * ! Product
@@ -132,7 +132,7 @@ db.Product.insertMany([
         status: "disponible",
         author : "campusland",
         numberPages : "100",
-        image : 'https://banner2.cleanpng.com/20180411/cvq/kisspng-javascript-html-computer-software-web-browser-watermark-5acdbd54ac19f7.4484983215234327887049.jpg'
+        image : 'https://0.academia-photos.com/attachment_thumbnails/55938070/mini_magick20190113-6826-14k967.png?1547410141'
     }
 ]);
 use("db_campus_Library");
@@ -153,5 +153,5 @@ db.Product.insertOne({
     status: "disponible",
     author : "miguel de cervantes saavedra",
     numberPages : "500",
-    image : 'https://www.eluniversal.com.mx/resizer/walLIwgM7TbS2TW9lQucmGYLquM=/1100x666/cloudfront-us-east-1.images.arcpublishing.com/eluniversal/663SXMJW5BEA7F4QD7TGSLI67A.jpg'
+    image : 'https://pictures.abebooks.com/isbn/9788444142098-es.jpg'
 })

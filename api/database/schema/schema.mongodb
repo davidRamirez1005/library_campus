@@ -206,6 +206,18 @@ db.createCollection("History", {
                 user_identification: {
                     bsonType: 'string',
                     description: "el numero de identificacion debe ser  string"
+                },
+                author: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                },
+                image: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
+                },
+                numberPages: {
+                    bsonType: 'string',
+                    description: "debe ser  string"
                 }
             }
         }
@@ -472,3 +484,37 @@ db.User.find().projection({
 use("db_campus_Library");
 db.User.find({ identification: "1096065071" });
 
+use("db_campus_Library");
+db.Product.aggregate([
+    {
+        $group: {
+        _id: {
+            title: "$title",
+            description: "$description",
+            image: "$image",
+            type : "$type",
+            author : "$author",
+            numberPages : "$numberPages"
+        },
+        count: { $sum: 1 }
+        }
+    },
+    {
+        $sort: { count: -1 }
+    },
+    {
+        $limit: 1
+    },
+    {
+        $project: {
+        _id: 0,
+        title: "$_id.title",
+        description: "$_id.description",
+        image: "$_id.image",
+        type : "$_id.type",
+        author : "$_id.author",
+        numberPages : "$_id.numberPages",
+        count: 1
+        }
+    }
+]);
