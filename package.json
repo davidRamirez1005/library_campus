@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "star": "nodemon --quiet ./api/app.js"
+    "start": "nodemon --quiet ./api/app.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -24,6 +24,7 @@
     "express-rate-limit": "^6.8.0",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
+    "js-cookie": "^3.0.5",
     "mongodb": "^6.1.0",
     "passport": "0.6.0",
     "passport-http-bearer": "1.0.1",
