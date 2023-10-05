@@ -1,6 +1,5 @@
 .tableContainer{
     margin: 1%;
-    width: max-content;
     overflow: auto;
 }
 .table {
