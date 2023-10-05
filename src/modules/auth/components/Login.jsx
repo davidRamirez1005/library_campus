@@ -14,8 +14,8 @@ export default function Login() {
     const navigate = useNavigate();
     const auth = useAuth();
 
-    let [ROL_EMAIL, getMail] = useState('jdramirez1005@gmail.com');
-    let [ROL_PASSWORD, getCon] = useState('secreto1005');
+    let [ROL_EMAIL, getMail] = useState('');
+    let [ROL_PASSWORD, getCon] = useState('');
     let [token, setToken] = useState('');
     let [isLoading, setIsLoading] = useState(false);
 
