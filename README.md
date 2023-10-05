@@ -94,6 +94,10 @@ Al iniciar se dirige por defecto a la pagina de inicio, sigue los pasos para usa
 
 ### *Iniciar sesión como Administrador:*
 
+#### Nota => credenciales para ingresar como administrador:
+- Email = jdramirez1005@gmail.com
+- contraseña = secreto1005
+
 1. Digirirse por medio de la barra navegadora a la pagina de "Entrar", diligenciar el formulario de inicio de sesión con los datos requeridos, si no está registrado no lo dejará seguir
 
 <img src="./src/assets/imgReadme/login.png" alt="" width = 300/>
