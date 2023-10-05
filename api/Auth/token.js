@@ -28,7 +28,7 @@ const generateToken = async(req, res) => {
     const datauser = {
         "id":result.rol
     }
-    console.log({"datauser": datauser});
+    // console.log({"datauser": datauser});
     //crecion del token
     const encoder = new TextEncoder();
     const jwtConstructor = await new SignJWT(datauser)
